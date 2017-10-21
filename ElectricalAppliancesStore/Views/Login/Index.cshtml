@@ -1,0 +1,20 @@
+﻿@model ElectricalAppliancesStore.Models.User
+
+@{
+    ViewBag.Title = "Login";
+}
+
+<h2>Login</h2>
+
+@using (Html.BeginForm("Login", "Login", FormMethod.Post))
+{
+<div>
+    <label for="username">Username:</label>
+    @Html.TextBoxFor(model => model.UserName)
+    <label for="password">Password:</label>
+    @Html.PasswordFor(model => model.Password)
+    <input type="submit" value="Submit" />
+</div>
+    <div>
+    </div>
+}
