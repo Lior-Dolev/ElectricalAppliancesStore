@@ -1,0 +1,70 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+
+namespace ElectricalAppliancesStore.Models.Stubs
+{
+    public static class ClientsStub
+    {
+        public static List<Client> GetClients()
+        {
+            List<User> users = UsersStub.GetUsers();
+            List<Client> clients = new List<Client>() {
+                new Client() {
+                    ID = 1,
+                    FullName = "Lior Dolev",
+                    Email = "liordolev@gmail.com",
+                    PhoneNumber = "0502279233",
+                    User = users.Single(user => user.Username == "Lior"),
+                    Address = new Address()
+                    {
+                        ID = 1,
+                        Country = "Israel",
+                        City = "Hod Hasharon",
+                        Street = "Zakif",
+                        HouseNumber = 4,
+                        AppartmentNumber = 19,
+                        ZipCode = "45284"
+                    }
+                },
+                new Client() {
+                    ID = 2,
+                    FullName = "Ravid Batat",
+                    Email = "ravidbatat@gmail.com",
+                    PhoneNumber = "0545949311",
+                    User = users.Single(user => user.Username == "Ravid"),
+                    Address = new Address()
+                    {
+                        ID = 2,
+                        Country = "Israel",
+                        City = "Holon",
+                        Street = "Herzel",
+                        HouseNumber = 9,
+                        AppartmentNumber = 1,
+                        ZipCode = "55555"
+                    }
+                },
+                new Client() {
+                    ID = 3,
+                    FullName = "Idan Sinibar",
+                    Email = "idansinibar@gmail.com",
+                    PhoneNumber = "0544933682",
+                    User = users.Single(user => user.Username == "Idan"),
+                    Address = new Address()
+                    {
+                        ID = 3,
+                        Country = "Israel",
+                        City = "Rishon LeZion",
+                        Street = "Karl Neter",
+                        HouseNumber = 20,
+                        AppartmentNumber = 3,
+                        ZipCode = "66666"
+                    }
+                }
+            };
+
+            return clients;
+        }
+    }
+}

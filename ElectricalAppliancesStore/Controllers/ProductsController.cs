@@ -1,4 +1,6 @@
-﻿using System;
+﻿using ElectricalAppliancesStore.Models;
+using ElectricalAppliancesStore.Models.Stubs;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -11,7 +13,9 @@ namespace ElectricalAppliancesStore.Controllers
         // GET: Products
         public ActionResult Index()
         {
-            return View();
+            List<Product> products = ProductsStub.GetProducts();
+
+            return View(products);
         }
     }
 }

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace ElectricalAppliancesStore.Models.Shared
+namespace ElectricalAppliancesStore.Models
 {
     public class Address
     {
@@ -15,9 +15,9 @@ namespace ElectricalAppliancesStore.Models.Shared
 
         public string Street { get; set; }
 
-        public string HouseNumber { get; set; }
+        public int HouseNumber { get; set; }
 
-        public string AppartmentNumber { get; set; }
+        public int AppartmentNumber { get; set; }
 
         public string ZipCode { get; set; }
     }

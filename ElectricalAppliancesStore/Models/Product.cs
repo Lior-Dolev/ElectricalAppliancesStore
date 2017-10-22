@@ -7,12 +7,24 @@ namespace ElectricalAppliancesStore.Models
 {
     public enum Brand
     {
-
+        Electra,
+        Samsung,
+        LG,
+        Sony,
+        Toshiba,
+        Panasonic
     }
 
     public enum Category
     {
-
+        Refrigerators,
+        Freezers,
+        Dishwashers,
+        BakingOvens,
+        Microwaves,
+        Mixers,
+        Blenders,
+        CoffeeMachines
     }
 
     public class Product
@@ -21,8 +33,12 @@ namespace ElectricalAppliancesStore.Models
         public string Title { get; set; }
         public Brand Brand { get; set; }
         public Category Category { get; set; }
-        public int Amount { get; set; }
+        public int Quantity { get; set; }
         public int SoldCounter { get; set; }
         public Provider Provider { get; set; }
+        public String PicturePath { get; set; }
+        public String Description { get; set; }
+        public double SalePrice { get; set; }
+        public double BuyPrice { get; set; }
     }
 }

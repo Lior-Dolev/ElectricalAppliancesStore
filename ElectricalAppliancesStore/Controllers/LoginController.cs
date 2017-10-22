@@ -1,4 +1,6 @@
-﻿using System;
+﻿using ElectricalAppliancesStore.Models;
+using ElectricalAppliancesStore.Models.Stubs;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -25,7 +27,9 @@ namespace ElectricalAppliancesStore.Controllers
 
         public bool validate(Models.User user)
         {
-            if(!string.IsNullOrEmpty(user.UserName) && !string.IsNullOrEmpty(user.Password))
+            List<User> users = UsersStub.GetUsers();
+
+            if(users.Exists(stubUser => (stubUser.Username == user.Username) && (stubUser.Password == user.Password)))
             {
                 return true;
             }

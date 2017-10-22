@@ -15,7 +15,7 @@ namespace ElectricalAppliancesStore.Models
     {
         public int ID { get; set; }
         public PermissionType PermissionType { get; set; }
-        public string UserName { get; set; }
+        public string Username { get; set; }
         public string Password { get; set; }
     }
 }
