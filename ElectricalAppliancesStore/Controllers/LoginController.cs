@@ -10,6 +10,7 @@ namespace ElectricalAppliancesStore.Controllers
 {
     public class LoginController : Controller
     {
+        
         // GET: Login
         public ActionResult Index()
         {
@@ -18,22 +19,28 @@ namespace ElectricalAppliancesStore.Controllers
 
         public ActionResult Login(Models.User user)
         {
-            if (validate(user))
+            PermissionType permission = 0;
+            if (validate(user, ref permission))
             {
+                if ( PermissionType.Manager == permission)
+                {
+                    return RedirectToAction("Index", "Manager");
+                } 
                 return RedirectToAction("Index", "Products");
             }
             return View("Index",user);
         }
 
-        public bool validate(Models.User user)
+        public bool validate(Models.User user, ref PermissionType permission)
         {
             List<User> users = UsersStub.GetUsers();
-
-            if(users.Exists(stubUser => (stubUser.Username == user.Username) && (stubUser.Password == user.Password)))
+            foreach ( Models.User u in users)
             {
-                return true;
+                if ( (u.Username == user.Username) && (u.Password == user.Password)) {
+                    permission = u.PermissionType;
+                    return true;
+                }
             }
-
             return false;
         }
     }
