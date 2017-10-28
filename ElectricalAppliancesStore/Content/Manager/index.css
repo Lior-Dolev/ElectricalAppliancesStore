@@ -2,31 +2,33 @@
  .twitterborder {
     width:400px;
     height:400px;
-    margin-top:20px;
-    margin-left:720px;
-    /*float:right;*/
     border-radius: 3px;
     border: #ccc solid 1px;
-    /*padding-left:1000px;*/
     position:sticky;
-    /*position: relative;*/
-    /*text-align: center;*/
+
+    margin-top:20px;
+    margin-left:720px;
+}
+
+.twitterpost {
+    width: 10px;
+    height: 10px;
+    position: sticky;
+
+    margin-top:20px;
+    margin-left:720px;
 }
 
 @media screen and (max-width: 800px)  {
 
-    .twitterborder {
-        width: 400px;
-        height: 400px;
+    .twitterborder {     
         margin-top: 20px;
         margin-left: 10px;
-        /*float:right;*/
-        border-radius: 3px;
-        border: #ccc solid 1px;
-        /*padding-left:1000px;*/
-        position: sticky;
-        /*position: relative;*/
-        /*text-align: center;*/
+    }
+
+    .twitterpost { 
+        margin-top: 20px;
+        margin-left: 10px;
     }
 }
    
