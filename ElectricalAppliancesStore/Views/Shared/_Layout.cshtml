@@ -7,29 +7,25 @@
 
 <html>
 <head>
-    <link href="~/Content/bootstrap.css" rel="stylesheet" />
-    <link href="~/Content/Site.css" rel="stylesheet" />
+    @*<link href="~/Content/bootstrap.css" rel="stylesheet" />*@
+    <link href="~/Content/Master.css" rel="stylesheet" />
+    <link href="~/Content/ControlsStyle/itembox.css" rel="stylesheet"/>
+    @*<link href="~/Content/Site.css" rel="stylesheet" />*@
     <meta name="viewport" content="width=device-width" />
     <title>_Layout</title>
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-            </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    @*<li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>*@
-                </ul>-
-            </div>
+    <header></header>
+    <div>
+        <div class="navbar">
+            <div>@Html.ActionLink("Home", "Index", "Home", new { @class = "navbar-button" })</div>
+            <div> @Html.ActionLink("Shopping Cart", "Index", "Home", new { @class = "navbar-button" })</div>
+            <div> @Html.ActionLink("Branches", "Index", "Home", new { @class = "navbar-button" })</div>
+            <div> @Html.ActionLink("Products", "Index", "Home", new { @class = "navbar-button" })</div>
+            <div> @Html.ActionLink("Suppliers", "Index", "Home", new { @class = "navbar-button" })</div>
+            <div> @Html.ActionLink("Customers", "Index", "Home", new { @class = "navbar-button" })</div>
+            <div> @Html.ActionLink("Management", "Index", "Home", new { @class = "navbar-button" })</div>
+            <div> @Html.ActionLink("Inventory", "Index", "Home", new { @class = "navbar-button" })</div>
         </div>
     </div>
     <br />
@@ -37,7 +33,8 @@
         @RenderBody()
         <hr />
         <footer>
-            <p>&copy; @DateTime.Now.Year - ElectricalAppliancesStore</p>
+            <br/>
+            <p>&copy; @DateTime.Now.Year - FoodAndStuffStore</p>
         </footer>
     </div>
 </body>
