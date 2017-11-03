@@ -6,14 +6,6 @@
 </head>
 
 
-
-
-
-
-
-
-
-
 <div id="map_wrapper">
     <div id="map_canvas" class="mapping"></div>
 </div>
@@ -56,12 +48,6 @@
         // Display a map on the page
         map = new google.maps.Map(document.getElementById("map_canvas"), mapOptions);
         map.setTilt(45);
-
-        // Multiple Markers
-        var markers = [
-            ['London Eye, London', 51.503454, -0.119562],
-            ['Palace of Westminster, London', 51.499633, -0.124755]
-        ];
 
         // Info Window Content
         var infoWindowContent = [];
