@@ -65,7 +65,7 @@ namespace ElectricalAppliancesStore.Models.Stubs
                     Category = Category.Dishwashers,
                     Brand = Brand.Panasonic,
                     Quantity = 5,
-                    Provider = providers.Single(provider => provider.ID == 5),
+                    Provider = providers.Single(provider => provider.ID == 4),
                     SoldCounter = 20,
                     BuyPrice = 2500,
                     SalePrice = 3000,
