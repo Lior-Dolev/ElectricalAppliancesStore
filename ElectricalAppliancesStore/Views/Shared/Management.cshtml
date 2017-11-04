@@ -11,7 +11,6 @@
     <link href="~/Content/Master.css" rel="stylesheet" />
     <link href="~/Content/ControlsStyle/product.css" rel="stylesheet" />
     <link href="~/Content/ControlsStyle/search.css" rel="stylesheet" />
-    @*<link href="~/Content/Site.css" rel="stylesheet" />*@
     <meta name="viewport" content="width=device-width" />
     <title>_Layout</title>
 </head>
@@ -20,20 +19,23 @@
     <div class="navbar_r navbar-default">
         <div class="container">
             <div class="navbar-header">
-                @*@Html.ActionLink("Home", "Index", "Home", new { @class = "navbar-brand navbar-button_r" })
-                @Html.ActionLink("Shopping Cart", "Index", "Home", new { @class = "navbar-brand navbar-button_r" })
+                @Html.ActionLink("Home", "Index", "Home", new { @class = "navbar-brand navbar-button_r" })
                 @Html.ActionLink("Branches", "Index", "Home", new { @class = "navbar-brand navbar-button_r" })
-                @Html.ActionLink("Products", "Index", "Home", new { @class = "navbar-brand navbar-button_r" })
                 @Html.ActionLink("Suppliers", "Index", "Home", new { @class = "navbar-brand navbar-button_r" })
                 @Html.ActionLink("Customers", "Index", "Home", new { @class = "navbar-brand navbar-button_r" })
                 @Html.ActionLink("Management", "Index", "Home", new { @class = "navbar-brand navbar-button_r" })
-                @Html.ActionLink("Inventory", "Index", "Home", new { @class = "navbar-brand navbar-button_r" })*@
+                @Html.ActionLink("Inventory", "Index", "Home", new { @class = "navbar-brand navbar-button_r" })
             </div>
         </div>
     </div>
     <br />
     <div class="container body-content">
         @RenderBody()
+        <hr />
+        <footer>
+            <br />
+            <p>&copy; @DateTime.Now.Year - FoodAndStuffStore</p>
+        </footer>
     </div>
 </body>
 </html>

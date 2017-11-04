@@ -17,5 +17,11 @@ namespace ElectricalAppliancesStore.Controllers
 
             return View(products);
         }
+        [HttpPost]
+        public ActionResult Index(Product model)
+        {
+            return View();
+        }
+
     }
 }
