@@ -1,6 +1,10 @@
 ﻿
 <h2>Manager</h2>
 
+@{
+    Layout = "~/Views/Shared/Management.cshtml";
+}
+
 <head>
     <link href="~/Content/Manager/index.css" rel="stylesheet" />
 </head>
@@ -10,16 +14,6 @@
     <div id="map_canvas" class="mapping"></div>
 </div>
 
-<style>
-    #map_wrapper {
-        height: 400px;
-    }
-
-    #map_canvas {
-        width: 100%;
-        height: 100%;
-    }
-</style>
 
 <script>
     jQuery(function ($) {
@@ -94,11 +88,6 @@
 
     }
 </script>
-
-
-
-
-
 
 
 <div class="twitterborder">

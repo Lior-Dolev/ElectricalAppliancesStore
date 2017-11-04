@@ -13,7 +13,7 @@
     border: 1px solid #c4c4c4;
     /*overflow:hidden;*/
     background-position-x:center;
-    display:inline-block;
+    /*display:inline-block;*/
 }
 
 .itembox .selectionbar:hover{
