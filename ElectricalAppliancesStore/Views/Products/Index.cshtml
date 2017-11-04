@@ -1,30 +1,73 @@
 ﻿@model List<ElectricalAppliancesStore.Models.Product>
-
 @{
+    Layout = "~/Views/Shared/Customers.cshtml";
     ViewBag.Title = "Products";
 }
-
-<h2>Products</h2>
-
-<div class="jumbotron text-center">
-    <h1> Wellcome to our store!</h1>
-    <br />
-    <p class="lead">
-        We are selling everything you need, from food, to stuff!! E-V-E-R-Y-T-H-I-N-G! buy here more, and remember:
-        <br /><br />
-
-        <h3>
-            <b>The more you buy, The happier you are</b>
-        </h3>
-    </p>
+<div class="container">
+    <div class="container col-sm-2">
+        <h2 style="margin-left: 15px;">Products</h2>
+    </div>
+    
+    <div class="container col-sm-8" style="margin-top:20px;float:left;">
+        <div class="zoomGlass">
+            <input name="search" id="search" type="search" placeholder="Search">
+            <div class="zoomStick">/</div>
+        </div>
+    </div>
+    <div class="container col-sm-2" style="margin-top:20px;float:left;">
+        <input type="submit" value="Advanced Search >>" class="btn btn-info my-2 my-sm-0" />
+    </div>
 </div>
 <div class="container">
-    
-    @if (Model.Count > 0)
-    {
-        foreach (ElectricalAppliancesStore.Models.Product currProduct in Model)
+    <div class="container col-sm-8">
+
+        @if (Model.Count > 0)
         {
-            <p>@Html.DisplayFor(modelItem => currProduct.Title)</p>
+            foreach (ElectricalAppliancesStore.Models.Product currProduct in Model)
+            {
+                <div class="itemContainer">
+                    <div class="itembox" style="background-image:url(@currProduct.PicturePath)">
+                        <div class="selectionbar">
+                            <input type="button" class="control plus" value="+" />
+                            <input type="text" class="control number" value="0" />
+                            <input type="button" class="control minus" value="-" />
+                        </div>
+                    </div>
+                    <br />
+                    <p>@Html.DisplayFor(modelItem => currProduct.Title)</p>
+                </div>
+            }
         }
-    }
+    </div>
+    <h4 class="text-center">Shopping Curt:</h4>
+    <div class="shoppingList container col-sm-3">
+        <div class="container col-sm-9 text-info">
+            Product
+        </div>
+        <div class="container col-sm-3 text-info">
+            Quantity
+        </div>
+        <br /><br />
+        @{
+            foreach (ElectricalAppliancesStore.Models.Product currProduct in Model)
+            {
+                if (currProduct.orderQuantity > 0)
+                {
+                    <div class="container col-sm-10">
+                        @currProduct.Title
+                    </div>
+                    <div class="container col-sm-2">
+                        @currProduct.orderQuantity
+                    </div>
+                }
+            }
+        }
+    </div>
+    <div class="container col-sm-3">
+        <br />
+        <input type="submit" value="Procced To Checkout" class="btn btn-success my-2 my-sm-0" />
+    </div>
+</div>
+<div class="container col-md-12">
+
 </div>

@@ -154,6 +154,17 @@
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\Media\products\eggs.jpg" />
+    <Content Include="Content\Media\products\fan.jpg" />
+    <Content Include="Content\Media\products\fridge.jpg" />
+    <Content Include="Content\Media\products\milk.jpg" />
+    <Content Include="Content\Media\products\oven.jpg" />
+    <Content Include="Content\Media\products\pumpkin.jpg" />
+    <Content Include="Content\Media\products\toaster.jpg" />
+    <Content Include="Content\ControlsStyle\product.css" />
+    <Content Include="Content\Master.css" />
+    <Content Include="Content\Media\site_header.png" />
+    <Content Include="Content\ControlsStyle\search.css" />
     <Content Include="Content\Manager\index.css" />
     <Content Include="Content\Site.css" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -208,6 +219,8 @@
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
+    <Content Include="Views\Shared\Management.cshtml" />
+    <Content Include="Views\Shared\Customers.cshtml" />
     <Content Include="Views\Manager\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

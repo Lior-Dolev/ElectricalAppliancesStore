@@ -1,0 +1,86 @@
+﻿.itemContainer {
+    margin: 20px;
+    font-family: 'Berlin Sans FB';
+    float:left;
+}
+.itembox {
+    height: 150px;
+    width:180px;
+    border-radius: 10px;
+    background-color: #fff; 
+    background-size:80% 80%;
+    background-repeat:no-repeat;
+    border: 1px solid #c4c4c4;
+    /*overflow:hidden;*/
+    background-position-x:center;
+    /*display:inline-block;*/
+}
+
+.itembox .selectionbar:hover{
+    height: 40px;
+    overflow: auto;
+    top: 73%;
+}
+
+.itembox .selectionbar {
+
+    width: 178.6px;
+    height: 30px;
+    /*left: 0px; 
+    right: 0px;*/ 
+    top: 80%;
+    border-bottom-left-radius: 9px;
+    border-bottom-right-radius: 9px;
+    position: relative;
+    background: #5bcfd6;
+
+    text-align: center;
+    text-shadow: 2px;
+    /*margin: 0px 0px 0px 0px;*/
+    /*float: left;*/
+    font-weight:bold;
+    border: 1px solid #49b5bb;
+    font-size:16px;
+    background-color: #5bcfd6;
+    -webkit-transition:  height .5s, width .5s; 
+    transition: height .5s, width .5s , top .5s;
+    white-space: nowrap;
+}
+
+.plus{
+    float: right;
+    text-align: center;
+    background-color: #5bcfd6  !important;
+    height:98%;
+    width:30%;
+    border-radius:8px;
+    /*margin: 0px 0px 0px 0px;*/
+    border:none;
+    font-size:24px;
+    font-family: 'Berlin Sans FB';
+}
+.plus:hover, .minus:hover {
+    background: #10a3ad !important;
+}
+
+.minus{
+    float: left;
+    text-align: center;
+    background-color: #5bcfd6  !important;
+    height:98%;
+    width:30%;
+    border-radius:8px;
+    /*margin: 0px 0px 0px 0px;*/
+    border:none;
+    font-size:24px;
+    font-family: 'Berlin Sans FB';
+}
+
+.number{
+    text-align: center;
+    background:white !important;
+    height:98%;
+    width:40%;
+    border-radius:4px;
+    /*margin: 0px 0px 0px 0px;*/
+}

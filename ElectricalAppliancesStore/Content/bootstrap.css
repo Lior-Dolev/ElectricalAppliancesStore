@@ -4196,6 +4196,19 @@ textarea.input-group-sm > .input-group-btn > .btn {
   padding: 15px 15px;
   font-size: 18px;
   line-height: 20px;
+
+  /*font-family: 'Berlin Sans FB';
+    font-size: 20px;
+    width: 160px;
+    text-align: center;
+    float: left;
+    color: #808080;
+    text-decoration: none;
+    line-height: 40px;
+    margin-right: 5px;
+    border-radius: 5px;
+    border-right: 1px inset #efefef;
+    background-color:  #ffffff;*/
 }
 
 .navbar-brand:hover,
@@ -4395,7 +4408,7 @@ textarea.input-group-sm > .input-group-btn > .btn {
 .navbar-default .navbar-brand:hover,
 .navbar-default .navbar-brand:focus {
   color: #5e5e5e;
-  background-color: transparent;
+  background-color: #dcdcdc;
 }
 
 .navbar-default .navbar-text {
@@ -4493,11 +4506,12 @@ textarea.input-group-sm > .input-group-btn > .btn {
 }
 
 .navbar-default .navbar-link {
-  color: #777777;
+  color: #808080;
 }
 
 .navbar-default .navbar-link:hover {
   color: #333333;
+  background-color: #efefef
 }
 
 .navbar-inverse {

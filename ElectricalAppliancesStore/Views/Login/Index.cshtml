@@ -4,17 +4,32 @@
     ViewBag.Title = "Login";
 }
 
-<h2>Login</h2>
 
 @using (Html.BeginForm("Login", "Login", FormMethod.Post))
 {
-    <div>
+    <div style="width:25%; float:left;">
+        <h2>Login</h2>
         <label for="username">Username:</label>
-        @Html.TextBoxFor(model => model.Username)
+        @Html.TextBoxFor(model => model.Username, new { @class = "form-control mr-sm-2", placeholder ="user name" })
+        <br/>
         <label for="password">Password:</label>
-        @Html.PasswordFor(model => model.Password)
-        <input type="submit" value="Submit" />
+        @Html.PasswordFor(model => model.Password, new { @class = "form-control mr-sm-2" , placeholder ="password" })
+        <br/>
+        <input type="submit" value="Sign In" class="btn btn-success my-2 my-sm-0"/>
     </div>
-    <div>
+    <div style="width:70%; float:right;">
+        <div class="jumbotron text-center">
+            <h1> Wellcome to our store!</h1>
+            <br />
+            <p class="lead">
+                We are selling everything you need, from food, to stuff!! E-V-E-R-Y-T-H-I-N-G! buy here more, and remember:
+                <br /><br />
+
+                <h3>
+                    <b>The more you buy, The happier you are</b>
+                </h3>
+            </p>
+        </div>
     </div>
 }
+

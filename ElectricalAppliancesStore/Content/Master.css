@@ -1,0 +1,60 @@
+﻿header {
+    background-image: url(/Content/Media/site_header.png);
+    background-repeat: no-repeat;
+    height: 170px;
+    background-size: 100% 150px;
+    margin: -10px -10px -10px -10px;
+    background-size:cover;
+    overflow-x:hidden;
+    background-position-x:center;
+}
+
+.navbar_r {
+    border-top: 1px solid #d4d4d4;
+    border-bottom: 1px solid #259599;
+    padding-left: 20px;
+    padding-right: 20px;
+    border-bottom-width:120%;
+    border-top-width:120%;
+    background-color:white;
+}
+
+.navbar-button_r {
+    height: 40px;
+    font-family: 'Berlin Sans FB';
+    font-size: 20px;
+    text-align: center;
+    color: #808080;
+    text-decoration: none;
+    border-radius: 5px;
+    border-right: 1px inset #efefef;
+}
+
+.navbar-button_r:hover {
+    background-color: #ff0000;
+}
+body {
+    font-family:"Berlin Sans FB";
+}
+h2 {
+    font-family:"Berlin Sans FB";
+    font-weight:300;
+}
+h4 {
+    font-family:"Berlin Sans FB";
+    font-weight:300;
+}
+.shoppingList {
+    border: 1px solid #c4c4c4;
+    background-color:#efefef;
+    border-radius:10px;
+    padding:15px 15px 15px 15px;
+    width: 30%;
+    margin: 10px;
+    position:relative;
+    display:inline-block;
+}
+.left-main-content {
+    /*width: 80%;*/
+    display:inline-block;
+}
