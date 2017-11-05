@@ -22,10 +22,10 @@ namespace ElectricalAppliancesStore.Models.Stubs
             Order ord = new Order()
             {
                 ID = 32,
-                Client = new Client()
+                /*Client = new Client()
                 {
                     ID = 12,
-                    User = user.Last(),
+                    UserID = user.Last().ID,
                     Address = new Address()
                     {
                         Street = "HaTamar",
@@ -36,7 +36,8 @@ namespace ElectricalAppliancesStore.Models.Stubs
                     Email = "junkMail132@walla.co.il",
                     FullName = "Mr. Spider Pig",
                     PhoneNumber = "0987655333"
-                },
+                },*/
+                ClientID = 2,
                 Items = orItms,
                 PurchaseDate = DateTime.Now,
                 CurrencyPurchase = "ILS"
