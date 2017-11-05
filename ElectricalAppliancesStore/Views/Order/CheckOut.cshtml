@@ -1,0 +1,85 @@
+﻿@model ElectricalAppliancesStore.Models.Order
+@{
+    Layout = "~/Views/Shared/Customers.cshtml";
+    ViewBag.Title = "CheckOut";
+}
+<h2 style="margin-left: 15px;">Check Out</h2>
+<div class="container">
+    <div class="container  container col-sm-6 left-main-content">
+        <label>Full Name</label>
+        @Html.TextBoxFor(model => model.Client.FullName, new { @class = "form-control mr-sm-2", placeholder = "your name" })
+        <br />
+        <label>Phone Number</label>
+        @Html.TextBoxFor(model => model.Client.PhoneNumber, new { @class = "form-control mr-sm-2", placeholder = "phone number" })
+        <br />
+        <br />
+        <label>Address:</label>
+        <br />
+        <label>Country</label>
+        @Html.TextBoxFor(model => model.Client.Address.Country, new { @class = "form-control mr-sm-2", placeholder = "coutry" })
+        <br />
+        <label>City</label>
+        @Html.TextBoxFor(model => model.Client.Address.City, new { @class = "form-control mr-sm-2", placeholder = "city" })
+        <br />
+        <label>Street</label>
+        @Html.TextBoxFor(model => model.Client.Address.Street, new { @class = "form-control mr-sm-2", placeholder = "street" })
+        <br />
+        <label>House Number</label>
+        @Html.TextBoxFor(model => model.Client.Address.HouseNumber, new { @class = "form-control mr-sm-2", placeholder = "house number" })
+        <br />
+        <br />
+        <label>Payment: </label>
+        <br />
+        <label>CreditCard Number:</label>
+        @Html.TextBoxFor(model => model.creditCardNum, new { @class = "form-control mr-sm-2", placeholder = "credit card number" })
+        <br />
+        <label>Password:</label>
+        @Html.TextBoxFor(model => model.cartSafeNum, new { @class = "form-control mr-sm-2", placeholder = "password" })
+        <br />
+        <input type="submit" value="Confirm & Pay" class="btn btn-success my-2 my-sm-0" />
+    </div>
+    <div>
+        <h4 class="text-center">Shopping Cart:</h4>
+        <div class="shoppingList container col-sm-5" style="width:40%; margin-left:5%">
+            <div class="container col-sm-7 text-info">
+                Product
+            </div>
+            <div class="container col-sm-3 text-info">
+                Quantity
+            </div>
+            <div class="container col-sm-1 text-info">
+                Price
+            </div>
+            <br /><br />
+            @{
+                double sum = Model.PriceSum();
+                foreach (ElectricalAppliancesStore.Models.OrderItem currItem in Model.Items)
+                {
+                    if (currItem.Quantity > 0)
+                    {
+                        <div class="container col-sm-8">
+                            @currItem.Product.Title
+                        </div>
+                        <div class="container col-sm-2">
+                            @currItem.Quantity
+                        </div>
+                        <div class="container col-sm-2">
+                            @(currItem.Product.SalePrice * currItem.Quantity)
+                        </div>
+                    }
+                }
+            }
+            <br />
+            <div style="margin-top:20px;margin-left:30%">
+                <div class="container col-sm-3 text-info">
+                    Total:
+                </div>
+                <div class="container col-sm-3">
+                    @sum
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container col-md-12">
+</div>

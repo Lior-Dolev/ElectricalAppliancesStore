@@ -40,6 +40,5 @@ namespace ElectricalAppliancesStore.Models
         public String Description { get; set; }
         public double SalePrice { get; set; }
         public double BuyPrice { get; set; }
-        public int orderQuantity { get; set; }
     }
 }

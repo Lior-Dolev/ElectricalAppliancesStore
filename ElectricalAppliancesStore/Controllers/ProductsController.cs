@@ -10,13 +10,22 @@ namespace ElectricalAppliancesStore.Controllers
 {
     public class ProductsController : Controller
     {
-        // GET: Products
-        public ActionResult Index()
-        {
+        private ActionResult getViewStart(){
             List<Product> products = ProductsStub.GetProducts();
 
             return View(products);
         }
+        // GET: Products
+        public ActionResult Index()
+        {
+            return getViewStart();
+        }
+        // GET: Products for inventory view
+        public ActionResult Inventory()
+        {
+            return getViewStart();
+        }
+
         [HttpPost]
         public ActionResult Index(Product model)
         {

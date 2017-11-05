@@ -126,7 +126,9 @@
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\LoginController.cs" />
+    <Compile Include="Controllers\OrderController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
+    <Compile Include="Controllers\ProductViewController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -136,8 +138,10 @@
     <Compile Include="Models\Order.cs" />
     <Compile Include="Models\OrderItem.cs" />
     <Compile Include="Models\Product.cs" />
+    <Compile Include="Models\ProductView.cs" />
     <Compile Include="Models\Provider.cs" />
     <Compile Include="Models\Stubs\ClientsStub.cs" />
+    <Compile Include="Models\Stubs\OrderStub.cs" />
     <Compile Include="Models\Stubs\ProductsStub.cs" />
     <Compile Include="Models\Stubs\ProvidersStub.cs" />
     <Compile Include="Models\Stubs\UsersStub.cs" />
@@ -156,6 +160,9 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
     <Content Include="Views\Shared\Management.cshtml" />
     <Content Include="Views\Shared\Customers.cshtml" />
+    <Content Include="Views\Products\Inventory.cshtml" />
+    <Content Include="Views\Order\CheckOut.cshtml" />
+    <Content Include="Views\ProductView\Products.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

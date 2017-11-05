@@ -25,8 +25,7 @@ namespace ElectricalAppliancesStore.Models.Stubs
                     BuyPrice = 10000,
                     SalePrice = 13000,
                     Description = "Realy good refrigerator",
-                    PicturePath = "../Content/Media/products/fridge.jpg",
-                    orderQuantity = 2
+                    PicturePath = "../Content/Media/products/fridge.jpg"
                 },
                 new Product()
                 {
@@ -40,8 +39,7 @@ namespace ElectricalAppliancesStore.Models.Stubs
                     BuyPrice = 5000,
                     SalePrice = 7000,
                     Description = "Newest Freezer!",
-                    PicturePath = "../Content/Media/products/toaster.jpg",
-                    orderQuantity = 5
+                    PicturePath = "../Content/Media/products/toaster.jpg"
                 },
                 new Product()
                 {
@@ -55,8 +53,7 @@ namespace ElectricalAppliancesStore.Models.Stubs
                     BuyPrice = 6000,
                     SalePrice = 10000,
                     Description = "The best freezer ever",
-                    PicturePath = "../Content/Media/products/fan.jpg",
-                    orderQuantity = 1
+                    PicturePath = "../Content/Media/products/fan.jpg"
                 },
                 new Product()
                 {
@@ -70,8 +67,7 @@ namespace ElectricalAppliancesStore.Models.Stubs
                     BuyPrice = 2500,
                     SalePrice = 3000,
                     Description = "Washes your dishes like crazy",
-                    PicturePath = "../Content/Media/products/oven.jpg",
-                    orderQuantity = 0
+                    PicturePath = "../Content/Media/products/oven.jpg"
         }
             };
 
