@@ -152,10 +152,13 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\bootstrap-theme.css" />
+    <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Manager\GoogleMaps.js" />
     <Content Include="Content\Manager\GraphD3-1.js" />
+    <Content Include="Content\Manager\GraphD3-2.js" />
     <Content Include="Content\Media\products\eggs.jpg" />
     <Content Include="Content\Media\products\fan.jpg" />
     <Content Include="Content\Media\products\fridge.jpg" />
