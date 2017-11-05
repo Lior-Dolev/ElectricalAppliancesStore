@@ -5,28 +5,6 @@ $.ajax({
     }
 });
 
-//var data = [
-//    {
-//        Product: "Shoes",
-//        Count: 5
-//    }, {
-//        Product: "Shirts",
-//        Count: 9
-//    }, {
-//        Product: "Pants",
-//        Count: 3
-//    }, {
-//        Product: "Ties",
-//        Count: 1
-//    }, {
-//        Product: "Socks",
-//        Count: 7
-//    }, {
-//        Product: "Jackets",
-//        Count: 2
-//    }];
-
-
 function drawGraph(data) {
 
     var margin = {
@@ -61,7 +39,7 @@ function drawGraph(data) {
        .tickSubdivide(0);
 
 
-    var svg = d3.select("svg#barChart")
+    var svg = d3.select("svg#barChart1")
       .attr("width", width + margin.left + margin.right)
       .attr("height", height + margin.top + margin.bottom)
       .append("g")

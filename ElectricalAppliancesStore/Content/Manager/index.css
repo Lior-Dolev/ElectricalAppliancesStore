@@ -57,6 +57,12 @@
     margin-top: 20px;
 }
 
+#barChart2 {
+    font-size: 14px;
+    position: sticky;
+    margin-top: 20px;
+}
+
 .bar {
     fill: steelblue;
 }
