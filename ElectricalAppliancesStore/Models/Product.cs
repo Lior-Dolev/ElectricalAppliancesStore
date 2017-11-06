@@ -35,7 +35,7 @@ namespace ElectricalAppliancesStore.Models
         public Category Category { get; set; }
         public int Quantity { get; set; }
         public int SoldCounter { get; set; }
-        public Provider Provider { get; set; }
+        public int ProviderID { get; set; }
         public String PicturePath { get; set; }
         public String Description { get; set; }
         public double SalePrice { get; set; }

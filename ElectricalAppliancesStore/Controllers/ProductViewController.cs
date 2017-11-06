@@ -5,68 +5,77 @@ using System.Web;
 using System.Web.Mvc;
 using ElectricalAppliancesStore.Models;
 using ElectricalAppliancesStore.Models.Stubs;
+using ElectricalAppliancesStore.DAL;
+using ElectricalAppliancesStore.Managers;
 
 namespace ElectricalAppliancesStore.Controllers
 {
     public class ProductViewController : Controller
     {
-        private ProductView pv;
-        private List<Product> products;
+        ClientsContext dbClients = new ClientsContext();
+        ProductsContext dbProducts = new ProductsContext();
+
         // GET: ProductView
-        public ActionResult Products()
+        public ActionResult Products(int userID)
         {
-            this.products = ProductsStub.GetProducts();
-            this.pv = new ProductView()
+            // TODO: Remove when there'll be an option to add products
+            AddMocks();
+
+            ProductView view = new ProductView()
             {
-                products = products,
-                currOrder = OrderStub.GetOrder()
-                //currOrder = new Order()
-            };
-            return View(pv);
-        }
-
-        public bool UpdateOrder(int itemID, int Quantity)
-        {
-
-            try
-            {
-                // check if such item exist
-                Product prod = this.products.First<Product>(p => (p.ID == itemID));
-
-                // if so- check if this id is allready in the order's item-list
-                if (prod != null)
+                currOrder = new Order()
                 {
-                    OrderItem oit = this.pv.currOrder.Items.First<OrderItem>(o => o.Product.ID == itemID);
+                    ClientID = UserManager.GetClientIdByUserId(userID, dbClients),
+                    Items = new List<OrderItem>()
+                },
+                products = ProductsManager.GetProducts(dbProducts)
+            };
 
-                    if (oit == null)
-                    {
-                        // if not - add the item with the given amount (if amount is not 0)
-                        if (Quantity != 0)
-                        {
-                            this.pv.currOrder.Items.Add(new OrderItem() { ID = itemID, Quantity = Quantity, Product = prod });
-                        }
-                    }
-                    //if item is allready in the order 
-                    else
-                    {
-                        // check if given amount is 0 - and if so - remove the item from the order
-                        if (Quantity == 0)
-                        {
-                            this.pv.currOrder.Items.Remove(oit);
-                        }
-                        // otherwise - update the item's amount in the order
-                        else
-                        {
-                            oit.Quantity = Quantity;
-                        }
-                    }
-                }
-                return true;
-            }
-            catch (Exception e)
-            {
-                return false;
-            }
+            return View(view);
         }
+
+        public ActionResult(ProductView view, int productID, double quantity)
+        {
+
+            // check if such item exist
+            if (!view.currOrder.Items.Exists(item => item.ProductID == productID))
+            {
+                // If not - add it to the order with the given qty
+                view.currOrder.Items.Add(new OrderItem()
+                {
+                    ProductID = productID,
+                    Quantity = quantity
+                });
+            }
+            else
+            { // Item exist in current order
+                // check if given amount is 0 - and if so - remove the item from the order
+                if (Quantity == 0)
+                {
+                    view.currOrder.Items.Remove(item => item.ProductID == productID)
+                }
+                else
+                { //Update item's qty 
+                    view.currOrder.Items.Find(item => item.ProductID == productID).Quantity = quantity;
+                }
+            }
+            return View("Products", view);
+        }
+
+        #region Mocks
+        public void AddMocks()
+        {
+            dbProducts.Database.Delete();
+
+            List<Product> products = ProductsStub.GetProducts();
+
+            foreach (Product p in products)
+            {
+                dbProducts.Products.Add(p);
+            }
+
+            dbProducts.SaveChanges();
+        }
+        #endregion
     }
 }

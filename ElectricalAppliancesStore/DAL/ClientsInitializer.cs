@@ -1,22 +1,50 @@
-﻿using System;
+﻿using ElectricalAppliancesStore.Models;
+using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 
-namespace ElectricalAppliancesStore.Models.Stubs
+namespace ElectricalAppliancesStore.DAL
 {
-    public static class ClientsStub
+    public class ClientsInitializer : DropCreateDatabaseAlways<ClientContext>
     {
-        public static List<Client> GetClients()
+        protected override void Seed(ClientContext context)
         {
-            List<User> users = UsersStub.GetUsers();
-            List<Client> clients = new List<Client>() {
+            List<User> users = new UserContext().Users.ToList();
+
+            User liorUser = users.First(a=> a.Username == "Lior");
+            User ravidUser = users.First(a => a.Username == "Ravid");
+            User idanUser = users.First(a => a.Username == "Idan");
+
+            Client Lior = new Client()
+            {
+                ID = 1,
+                FullName = "Lior Dolev",
+                Email = "liordolev@gmail.com",
+                PhoneNumber = "0502279233",
+                User = liorUser,
+                UserID = liorUser.ID,
+                Address = new Address()
+                {
+                    ID = 1,
+                    Country = "Israel",
+                    City = "Hod Hasharon",
+                    Street = "Zakif",
+                    HouseNumber = 4,
+                    AppartmentNumber = 19,
+                    ZipCode = "45284"
+                }
+            };
+
+            IList<Client> defualtClients = new List<Client>() {
                 new Client() {
                     ID = 1,
                     FullName = "Lior Dolev",
                     Email = "liordolev@gmail.com",
                     PhoneNumber = "0502279233",
-                    UserID = users.Single(user => user.Username == "Lior").ID,
+                    User = liorUser,
+                    UserID = ravidUser.ID,
                     Address = new Address()
                     {
                         ID = 1,
@@ -33,7 +61,8 @@ namespace ElectricalAppliancesStore.Models.Stubs
                     FullName = "Ravid Batat",
                     Email = "ravidbatat@gmail.com",
                     PhoneNumber = "0545949311",
-                    UserID = users.Single(user => user.Username == "Ravid").ID,
+                    User = ravidUser,
+                    UserID = ravidUser.ID,
                     Address = new Address()
                     {
                         ID = 2,
@@ -50,7 +79,7 @@ namespace ElectricalAppliancesStore.Models.Stubs
                     FullName = "Idan Sinibar",
                     Email = "idansinibar@gmail.com",
                     PhoneNumber = "0544933682",
-                    UserID = users.Single(user => user.Username == "Idan").ID,
+                    User = idanUser,
                     Address = new Address()
                     {
                         ID = 3,
@@ -63,8 +92,13 @@ namespace ElectricalAppliancesStore.Models.Stubs
                     }
                 }
             };
+            
+            foreach (Client currClient in defualtClients)
+            {
+                context.Clients.Add(currClient);
+            }
 
-            return clients;
+            base.Seed(context);
         }
     }
 }

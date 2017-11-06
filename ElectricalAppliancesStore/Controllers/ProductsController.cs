@@ -1,4 +1,6 @@
-﻿using ElectricalAppliancesStore.Models;
+﻿using ElectricalAppliancesStore.DAL;
+using ElectricalAppliancesStore.Managers;
+using ElectricalAppliancesStore.Models;
 using ElectricalAppliancesStore.Models.Stubs;
 using System;
 using System.Collections.Generic;
@@ -10,27 +12,33 @@ namespace ElectricalAppliancesStore.Controllers
 {
     public class ProductsController : Controller
     {
-        private ActionResult getViewStart(){
-            List<Product> products = ProductsStub.GetProducts();
+        ClientsContext dbClients = new ClientsContext();
+        ProductsContext dbProducts = new ProductsContext();
+        
 
-            return View(products);
-        }
-        // GET: Products
-        public ActionResult Index()
-        {
-            return getViewStart();
-        }
         // GET: Products for inventory view
         public ActionResult Inventory()
         {
-            return getViewStart();
+            // TODO: Remove when there'll be an option to add products
+            AddMocks();
+            
+            return View(ProductsManager.GetProducts(dbProducts));
         }
-
-        [HttpPost]
-        public ActionResult Index(Product model)
+        
+        #region Mocks
+        public void AddMocks()
         {
-            return View();
-        }
+            dbProducts.Database.Delete();
 
+            List<Product> products = ProductsStub.GetProducts();
+
+            foreach(Product p in products)
+            {
+                dbProducts.Products.Add(p);
+            }
+
+            dbProducts.SaveChanges();
+        }
+        #endregion
     }
 }
