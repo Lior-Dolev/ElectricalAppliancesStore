@@ -29,17 +29,18 @@ namespace ElectricalAppliancesStore.Controllers
             Tweet.PublishTweet(text);
         }
 
-        public void CurrencyRate()
+        public decimal CurrencyRate()
         {
             WebClient web = new WebClient();
-            var fromCurrency = "USD";
-            var toCurrency = "ILS";
+            var fromCurrency = "ILS";
+            var toCurrency = "USD";
             var amount = 1;
             string url = string.Format("https://finance.google.com/finance/converter?a={2}&from={0}&to={1}&meta=ei%3DNqL8WbiQLIOWUq6Bv_gH", fromCurrency.ToUpper(), toCurrency.ToUpper(), amount);
             string response = web.DownloadString(url);
             Regex regex = new Regex("<span class=bld>(\\d*.\\d*) ");
             decimal rate = System.Convert.ToDecimal(regex.Match(response).Groups[1].Value);
-            Tweet.PublishTweet(rate.ToString());
+            return rate;
+            //Tweet.PublishTweet(rate.ToString());
         }
 
         public JsonResult GetProviders()
