@@ -34,7 +34,7 @@ namespace ElectricalAppliancesStore.Controllers
             return View(view);
         }
 
-        public ActionResult(ProductView view, int productID, double quantity)
+        public ActionResult UpdateOrder(ProductView view, int productID, double quantity)
         {
 
             // check if such item exist
@@ -52,7 +52,7 @@ namespace ElectricalAppliancesStore.Controllers
                 // check if given amount is 0 - and if so - remove the item from the order
                 if (Quantity == 0)
                 {
-                    view.currOrder.Items.Remove(item => item.ProductID == productID)
+                    view.currOrder.Items.Remove(item => item.ProductID == productID);
                 }
                 else
                 { //Update item's qty 
