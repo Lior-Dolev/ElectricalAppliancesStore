@@ -35,8 +35,8 @@ namespace ElectricalAppliancesStore.Models.Stubs
                 {
                     ID = 4,
                     PermissionType = PermissionType.Client,
-                    Username = "Idan",
-                    Password = "Sinibar"
+                    Username = "Eidan",
+                    Password = "Siniver"
                 }
             };
 

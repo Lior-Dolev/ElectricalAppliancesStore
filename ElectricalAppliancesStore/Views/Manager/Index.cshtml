@@ -1,0 +1,52 @@
+﻿
+<h2>Manager</h2>
+
+@{
+    Layout = "~/Views/Shared/Management.cshtml";
+}
+
+<head>
+    <link href="~/Content/Manager/index.css" rel="stylesheet" />
+    <script src="~/Scripts/d3/d3.js"></script>
+ </head>
+
+
+<div id="map_wrapper">
+    <div id="map_canvas" class="mapping"></div>
+</div>
+<script src="~/Content/Manager/GoogleMaps.js"></script>
+
+<svg id="barChart1"></svg>
+<script src="~/Content/Manager/GraphD3-1.js"></script>
+
+<div id="barChart2"></div>
+<script src="~/Content/Manager/GraphD3-2.js"></script>
+
+<div class="twitterborder">
+    <div class="table">
+        <div class="table-cell">
+            <a class="twitter-timeline" data-width="400" data-height="400" href="https://twitter.com/awesomelectric?ref_src=twsrc%5Etfw">Tweets by awesomelectric</a>
+            <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+        </div>
+    </div>
+</div>
+
+<div class="twitterpost">
+    <input type="text" class="form-control" placeholder="Tweet..." id="tweet-input"> <br />
+    <button id="tweet-button" class="btn btn-default" type="button">Go!</button>
+</div>
+
+<script>
+    $(document).ready(function () {
+
+        $("#tweet-button").click(function () {
+            var text = $('#tweet-input').val()
+
+            $.ajax({
+                url: "/Manager/PostTweet", data: { text: text }, success: function (result) {
+                    $('#tweet-input').val("")
+                }
+            });
+        });
+    });
+</script>

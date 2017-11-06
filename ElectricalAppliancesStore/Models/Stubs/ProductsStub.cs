@@ -62,7 +62,7 @@ namespace ElectricalAppliancesStore.Models.Stubs
                     Category = Category.Dishwashers,
                     Brand = Brand.Panasonic,
                     Quantity = 5,
-                    ProviderID = 5,
+                    ProviderID = 4,
                     SoldCounter = 20,
                     BuyPrice = 2500,
                     SalePrice = 3000,

@@ -26,7 +26,8 @@ namespace ElectricalAppliancesStore.Controllers
         
         public ActionResult Login(Models.User user)
         {
-            if (validate(user))
+            PermissionType permission = 0;
+            if (validate(user, ref permission))
             {
                 User dbUser = UserManager.GetUsers(dbUsers).Find(stubUser => (stubUser.Username == user.Username) && (stubUser.Password == user.Password));
 
@@ -46,15 +47,17 @@ namespace ElectricalAppliancesStore.Controllers
             return View("Index",user);
         }
 
-        public bool validate(Models.User user)
+        public bool validate(Models.User user, ref PermissionType permission)
         {
             List<User> users = UserManager.GetUsers(dbUsers);
 
             if(users.Exists(stubUser => (stubUser.Username == user.Username) && (stubUser.Password == user.Password)))
             {
-                return true;
+                if ( (u.Username == user.Username) && (u.Password == user.Password)) {
+                    permission = u.PermissionType;
+                    return true;
+                }
             }
-
             return false;
         }
 

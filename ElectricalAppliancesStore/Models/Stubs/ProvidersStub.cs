@@ -17,7 +17,10 @@ namespace ElectricalAppliancesStore.Models.Stubs
                     CompanyName = "Sale Electric",
                     ContactPerson = "Oren",
                     PhoneNumber = "0502233447",
-                    Email = "SaleElectric@gmail.com"
+                    Email = "SaleElectric@gmail.com",
+                    LocationCoordinates = new double[] { 51.503454,-0.119562 },
+                    LocationDescription = "London Eye, London"
+
                 },
                 new Provider()
                 {
@@ -25,7 +28,9 @@ namespace ElectricalAppliancesStore.Models.Stubs
                     CompanyName = "Last Price",
                     ContactPerson = "Lola",
                     PhoneNumber = "0547782135",
-                    Email = "LastPrice@gmail.com"
+                    Email = "LastPrice@gmail.com",
+                    LocationCoordinates = new double[] { 51.499633,-0.124755 },
+                    LocationDescription = "Palace of Westminster, London"
                 },
                 new Provider()
                 {
@@ -33,7 +38,9 @@ namespace ElectricalAppliancesStore.Models.Stubs
                     CompanyName = "Time2Buy",
                     ContactPerson = "Menashe",
                     PhoneNumber = "0533332783",
-                    Email = "Time2Buy@gmail.com"
+                    Email = "Time2Buy@gmail.com",
+                    LocationCoordinates = new double[] { 51.5008636,-0.1241971 },
+                    LocationDescription = "Westminster Bridge, London"
                 },
                 new Provider()
                 {
@@ -41,16 +48,11 @@ namespace ElectricalAppliancesStore.Models.Stubs
                     CompanyName = "City Deal",
                     ContactPerson = "Nisim",
                     PhoneNumber = "0544443322",
-                    Email = "CityDeal@gmail.com"
+                    Email = "CityDeal@gmail.com",
+                    LocationCoordinates = new double[] {51.5007292,-0.1246254 },
+                    LocationDescription = "Big Ben, London"
                 },
-                new Provider()
-                {
-                    ID = 5,
-                    CompanyName = "Best Electric",
-                    ContactPerson = "Sarit",
-                    PhoneNumber = "0502932455",
-                    Email = "BestElectric@gmail.com"
-                }
+   
             };
 
             return providers;
