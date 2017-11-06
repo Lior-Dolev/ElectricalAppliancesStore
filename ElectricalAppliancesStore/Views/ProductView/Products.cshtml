@@ -28,9 +28,9 @@
                 <div class="itemContainer">
                     <div class="itembox" style="background-image:url(@currProduct.PicturePath)">
                         <div class="selectionbar">
-                            <input type="button" class="control plus" value="+" />
-                            <input type="text" class="control number" value="0" />
-                            <input type="button" class="control minus" value="-" />
+                            <input type="button" class="control plus" value="+" onclick="updateItemAmount(@currProduct.ID, 'Add')">
+                            <input type="text" id="@(currProduct.ID)_amount" class="control number" value="0" onchange="updateItemAmount(@currProduct.ID, 'Change')" />
+                            <input type="button" class="control minus" value="-" onclick="updateItemAmount(@currProduct.ID, 'Sub')" />
                         </div>
                     </div>
                     <br />
@@ -64,9 +64,9 @@
                     <div class="container col-sm-2">
                         @currItem.Quantity
                     </div>
-                        <div class="container col-sm-2">
-                            @(currItem.Product.SalePrice * currItem.Quantity)
-                        </div>
+                    <div class="container col-sm-2">
+                        @(currItem.Product.SalePrice * currItem.Quantity)
+                    </div>
                 }
             }
         }
@@ -78,3 +78,50 @@
 </div>
 <div class="container col-md-12">
 </div>
+<script type="text/javascript">
+    function updateItemAmount(itemId, action) {
+        // Get curr item amount
+        var currAmount = Number(document.getElementById(itemId + '_amount').value);
+
+        // update amount based on action clicked
+        if (action == "Add") {
+            currAmount++;
+        }
+        else if (action == "Sub") {
+            currAmount--;
+        }
+
+        // validate amount before updateing order amount
+        if (currAmount < 0) {
+            alert("Amount for order cannot be less the zero.");
+
+            // chenge amount to zero
+            currAmount = 0;
+        }
+        else if (currAmount > 5) {
+            alert("You are allowed to order up to 5 items, of the type, in one order.");
+
+            // change amount to 5
+            currAmount = 5;
+        }
+
+        // Update item amount in the order
+        UpdateItemOrderAmount(itemId, currAmount);
+
+        // Update display
+        document.getElementById(itemId + '_amount').value = currAmount;
+
+    }
+    function UpdateItemOrderAmount(itemID, Quantity) {
+        debugger;
+        var url = '@Url.Action("UpdateOrder","ProductView")';
+        $.ajax({
+            url: url,
+            data: { itemID: itemID, Quantity: Quantity }
+        }).fail(function (res) {
+            if (!res) {
+                alert("The System is unable to process orders at the moment. Please try again later.");
+            }
+        });
+    }
+</script>
