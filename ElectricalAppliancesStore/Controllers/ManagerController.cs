@@ -47,5 +47,12 @@ namespace ElectricalAppliancesStore.Controllers
             var data = Models.Stubs.ProvidersStub.GetProviders();
             return Json(data, JsonRequestBehavior.AllowGet);
         }
+
+
+        public JsonResult GetProducts()
+        {
+            var data = Models.Stubs.ProductsStub.GetProducts();
+            return Json(data, JsonRequestBehavior.AllowGet);
+        }
     }
 }
