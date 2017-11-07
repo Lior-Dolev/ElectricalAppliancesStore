@@ -124,7 +124,10 @@
 
             $.ajax({
                 url: "/Manager/CurrencyRate", success: function (result) {
-                    $("#total-sum").html(parseInt($("#total-sum").html(), 10) / result + " NIS");
+                    //$("#total-sum").html(parseInt($("#total-sum").html(), 10) / result + " NIS");
+                    var sum_in_nis = @Html.Raw(Json.Encode(Model.PriceSum()));
+                    $("#total-sum").html(sum_in_nis + " NIS");
+
                     $('#option1').data("checked", true);
                     $('#option2').data("checked", false);
                 }
