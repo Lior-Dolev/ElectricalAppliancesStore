@@ -20,5 +20,15 @@ namespace ElectricalAppliancesStore.Models
         public int AppartmentNumber { get; set; }
 
         public string ZipCode { get; set; }
+
+        public override string ToString() {
+
+            return (this.Street + " "+
+                    this.HouseNumber + ", "+
+                    ((this.AppartmentNumber!= 0) ?", Apt:" + this.AppartmentNumber +", ": "" )+ 
+                    this.City + ", " + 
+                    this.Country + 
+                    ((this.ZipCode != null)?", " + this.ZipCode: ""));
+        }
     }
 }
