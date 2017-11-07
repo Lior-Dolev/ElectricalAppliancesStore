@@ -1,0 +1,31 @@
+﻿@model ElectricalAppliancesStore.Models.EditProductView
+
+@{
+    ViewBag.Title = "AddProduct";
+}
+
+<h2>AddProduct</h2>
+@using (Html.BeginForm("Add", "Products", Model, FormMethod.Post))
+{
+@Html.TextBoxFor(model => model.Title)
+@Html.TextBoxFor(model => model.BuyPrice)
+@Html.TextBoxFor(model => model.SalePrice)
+@Html.DropDownListFor(model => model.SelectedProviderId, Model.ProviderItems)
+@Html.DropDownListFor(model => model.SelectedBrandId, Model.BrandItems)
+@Html.DropDownListFor(model => model.SelectedCategoryId, Model.CategoryItems)
+
+@Html.TextBoxFor(model => model.Description)
+@Html.TextBoxFor(model => model.Quantity)
+
+@Html.HiddenFor(model => model.SelectedPicturePath)
+
+<p>Choose a picture: (Click)</p>
+if(Model.PicturesPaths.Count > 0)
+{
+    foreach(string path in Model.PicturesPaths)
+    {
+        <img src="@path" class="pictures" />
+    }
+}
+    <input type="submit" value="submit"/>
+}
