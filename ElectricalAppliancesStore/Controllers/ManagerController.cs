@@ -16,7 +16,11 @@ namespace ElectricalAppliancesStore.Controllers
 {
     public class ManagerController : Controller
     {
-        public static ITwitterCredentials auth = Auth.SetUserCredentials("pQJn6sjNxuivMZMlRz6aGIqSk", "hRchrNrU8pv10e5HIu4eag5ZQz1J2jYPZuwv7ME6mMEnns6503", "924214133867806720-2LCmCadngZ8HU7FedaBRDF3qPBZKm39", "vDdph6vAYdW41Xq95G6MR3fuRvC8xLw6MxuZwt49XnGef");
+        public static ITwitterCredentials auth = 
+            Auth.SetUserCredentials("pQJn6sjNxuivMZMlRz6aGIqSk", 
+                                    "hRchrNrU8pv10e5HIu4eag5ZQz1J2jYPZuwv7ME6mMEnns6503", 
+                                    "924214133867806720-2LCmCadngZ8HU7FedaBRDF3qPBZKm39", 
+                                    "vDdph6vAYdW41Xq95G6MR3fuRvC8xLw6MxuZwt49XnGef");
 
         // GET: Manager
         public ActionResult Index()
@@ -29,17 +33,18 @@ namespace ElectricalAppliancesStore.Controllers
             Tweet.PublishTweet(text);
         }
 
-        public void CurrencyRate()
+        public decimal CurrencyRate()
         {
             WebClient web = new WebClient();
-            var fromCurrency = "USD";
-            var toCurrency = "ILS";
+            var fromCurrency = "ILS";
+            var toCurrency = "USD";
             var amount = 1;
             string url = string.Format("https://finance.google.com/finance/converter?a={2}&from={0}&to={1}&meta=ei%3DNqL8WbiQLIOWUq6Bv_gH", fromCurrency.ToUpper(), toCurrency.ToUpper(), amount);
             string response = web.DownloadString(url);
             Regex regex = new Regex("<span class=bld>(\\d*.\\d*) ");
             decimal rate = System.Convert.ToDecimal(regex.Match(response).Groups[1].Value);
-            Tweet.PublishTweet(rate.ToString());
+            return rate;
+            //Tweet.PublishTweet(rate.ToString());
         }
 
         public JsonResult GetProviders()

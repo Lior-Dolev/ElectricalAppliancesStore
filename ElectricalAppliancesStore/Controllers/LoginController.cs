@@ -51,12 +51,16 @@ namespace ElectricalAppliancesStore.Controllers
         {
             List<User> users = UserManager.GetUsers(dbUsers);
 
-            if(users.Exists(stubUser => (stubUser.Username == user.Username) && (stubUser.Password == user.Password)))
+            if (users.Exists(stubUser => (stubUser.Username == user.Username) && (stubUser.Password == user.Password)))
             {
+<<<<<<< HEAD
                 //if ( (u.Username == user.Username) && (u.Password == user.Password)) {
                     permission = user.PermissionType;
                     return true;
                 //}
+=======
+                return true;
+>>>>>>> origin/master
             }
             return false;
         }

@@ -14,6 +14,7 @@ namespace ElectricalAppliancesStore.Models
         public List<OrderItem> Items { get; set; }
         public string CreditCardNum { get; set; }
         public int CartSafeNum { get; set; }
+        public Client client { get; set; }
 
         public double PriceSum()
         {

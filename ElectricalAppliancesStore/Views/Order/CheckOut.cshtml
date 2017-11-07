@@ -7,34 +7,34 @@
 <div class="container">
     <div class="container  container col-sm-6 left-main-content">
         <label>Full Name</label>
-        @Html.TextBoxFor(model => model.Client.FullName, new { @class = "form-control mr-sm-2", placeholder = "your name" })
+        @Html.TextBoxFor(model => model.client.FullName, new { @class = "form-control mr-sm-2", placeholder = "your name" })
         <br />
         <label>Phone Number</label>
-        @Html.TextBoxFor(model => model.Client.PhoneNumber, new { @class = "form-control mr-sm-2", placeholder = "phone number" })
+        @Html.TextBoxFor(model => model.client.PhoneNumber, new { @class = "form-control mr-sm-2", placeholder = "phone number" })
         <br />
         <br />
         <label>Address:</label>
         <br />
         <label>Country</label>
-        @Html.TextBoxFor(model => model.Client.Address.Country, new { @class = "form-control mr-sm-2", placeholder = "coutry" })
+        @Html.TextBoxFor(model => model.client.Address.Country, new { @class = "form-control mr-sm-2", placeholder = "coutry" })
         <br />
         <label>City</label>
-        @Html.TextBoxFor(model => model.Client.Address.City, new { @class = "form-control mr-sm-2", placeholder = "city" })
+        @Html.TextBoxFor(model => model.client.Address.City, new { @class = "form-control mr-sm-2", placeholder = "city" })
         <br />
         <label>Street</label>
-        @Html.TextBoxFor(model => model.Client.Address.Street, new { @class = "form-control mr-sm-2", placeholder = "street" })
+        @Html.TextBoxFor(model => model.client.Address.Street, new { @class = "form-control mr-sm-2", placeholder = "street" })
         <br />
         <label>House Number</label>
-        @Html.TextBoxFor(model => model.Client.Address.HouseNumber, new { @class = "form-control mr-sm-2", placeholder = "house number" })
+        @Html.TextBoxFor(model => model.client.Address.HouseNumber, new { @class = "form-control mr-sm-2", placeholder = "house number" })
         <br />
         <br />
         <label>Payment: </label>
         <br />
         <label>CreditCard Number:</label>
-        @Html.TextBoxFor(model => model.creditCardNum, new { @class = "form-control mr-sm-2", placeholder = "credit card number" })
+        @Html.TextBoxFor(model => model.CreditCardNum, new { @class = "form-control mr-sm-2", placeholder = "credit card number" })
         <br />
         <label>Password:</label>
-        @Html.TextBoxFor(model => model.cartSafeNum, new { @class = "form-control mr-sm-2", placeholder = "password" })
+        @Html.TextBoxFor(model => model.CreditCardNum, new { @class = "form-control mr-sm-2", placeholder = "password" })
         <br />
         <input type="submit" value="Confirm & Pay" class="btn btn-success my-2 my-sm-0" />
     </div>
@@ -64,7 +64,7 @@
                             @currItem.Quantity
                         </div>
                         <div class="container col-sm-2">
-                            @(currItem.Product.SalePrice * currItem.Quantity)
+                            @(currItem.Product.SalePrice * currItem.Quantity) NIS
                         </div>
                     }
                 }
@@ -74,12 +74,63 @@
                 <div class="container col-sm-3 text-info">
                     Total:
                 </div>
-                <div class="container col-sm-3">
-                    @sum
+                <div class="container col-sm-5">
+                    <div id="total-sum">
+                        @sum NIS
+                    </div>
                 </div>
             </div>
         </div>
+
+        <div class="btn-group" data-toggle="buttons" style="margin-left:5%;">
+            <label class="btn btn-primary">
+                <input type="checkbox" autocomplete="off" checked data-checked=true name="options" id="option1"> Pay in NIS
+            </label>
+            <label class="btn btn-primary">
+                <input type="checkbox" autocomplete="off" data-checked=false name="options" id="option2"> Pay in $
+            </label>
+        </div>
+      
+        </div>
     </div>
-</div>
+
+<script>
+    $(document).ready(function () {
+
+        $("#option2").click(function () {
+
+            var isAlreadyChecked = $('#option2').data("checked")
+            if (isAlreadyChecked) {
+                return;
+            }
+
+            $.ajax({
+                url: "/Manager/CurrencyRate", success: function (result) {
+                    $("#total-sum").html(parseInt($("#total-sum").html(), 10) * result + " $");
+                    $('#option2').data("checked", true);
+                    $('#option1').data("checked", false);
+                }
+            });
+
+
+        });
+
+        $("#option1").click(function () {
+
+            var isAlreadyChecked = $('#option1').data("checked")
+            if (isAlreadyChecked) {
+                return;
+            }
+
+            var sum_in_nis = @Html.Raw(Json.Encode(Model.PriceSum()));
+            $("#total-sum").html(sum_in_nis + " NIS");
+
+            $('#option1').data("checked", true);
+            $('#option2').data("checked", false);
+ 
+        });
+    });
+</script>
+
 <div class="container col-md-12">
 </div>

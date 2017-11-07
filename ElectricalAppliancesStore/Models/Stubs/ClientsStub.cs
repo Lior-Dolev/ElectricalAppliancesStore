@@ -47,10 +47,10 @@ namespace ElectricalAppliancesStore.Models.Stubs
                 },
                 new Client() {
                     ID = 3,
-                    FullName = "Idan Sinibar",
-                    Email = "idansinibar@gmail.com",
+                    FullName = "Eidan Siniver",
+                    Email = "eidans@gmail.com",
                     PhoneNumber = "0544933682",
-                    UserID = users.Single(user => user.Username == "Idan").ID,
+                    UserID = users.Single(user => user.Username == "Eidan").ID,
                     Address = new Address()
                     {
                         ID = 3,
