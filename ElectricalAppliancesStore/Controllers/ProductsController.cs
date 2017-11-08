@@ -38,7 +38,21 @@ namespace ElectricalAppliancesStore.Controllers
             
             return View("AddProduct", fullProduct);
         }
-        
+
+        public ActionResult EditProduct(int productID)
+        {
+            EditProductView view = ProductsManager.GetProductByID(productID, dbProducts, dbProviders);
+            return View("EditProduct", view);
+        }
+
+        public ActionResult Edit(EditProductView product)
+        {
+            ProductsManager.EditProduct(product, dbProducts, Server);
+            EditProductView fullProduct = ProductsManager.FillSelectLists(product, dbProviders);
+
+            return View("AddProduct", fullProduct);
+        }
+
         #region Mocks
         public void AddMocks()
         {

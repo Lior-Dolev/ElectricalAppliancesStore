@@ -1,11 +1,11 @@
 ﻿@model ElectricalAppliancesStore.Models.EditProductView
 
 @{
-    ViewBag.Title = "AddProduct";
+    ViewBag.Title = "Edit Product";
 }
 
 <h2>AddProduct</h2>
-@using (Html.BeginForm("Add", "Products", Model, FormMethod.Post, new { enctype = "multipart/form-data" }))
+@using (Html.BeginForm("Edit", "Products", Model, FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
 @Html.LabelFor(model => model.Title)
 @Html.TextBoxFor(model => model.Title)
@@ -27,8 +27,8 @@
 
 @Html.HiddenFor(model => model.SelectedPicturePath)
 
-<p>Choose a picture: </p>
-<input type="file" name="uploadImages" class="input-files" />
+    <p>Choose a picture: </p>
+    <input type="file" name="uploadImages" class="input-files" />
 
     <input type="submit" value="submit"/>
 }

@@ -767,7 +767,7 @@
     </Compile>
     <Compile Include="Managers\OrderManager.cs" />
     <Compile Include="Managers\ProductsManager.cs" />
-    <Compile Include="Managers\ProvidersManager.cs" />
+    <Compile Include="Controllers\ProvidersManager.cs" />
     <Compile Include="Models\Address.cs" />
     <Compile Include="Models\Branch.cs" />
     <Compile Include="Models\BrandView.cs" />
@@ -799,6 +799,7 @@
     <Content Include="Views\ProductView\Products.cshtml" />
     <Content Include="Views\Manager\Index.cshtml" />
     <Content Include="Views\Products\AddProduct.cshtml" />
+    <Content Include="Views\Products\EditProduct.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

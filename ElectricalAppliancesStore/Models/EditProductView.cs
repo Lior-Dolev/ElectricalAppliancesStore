@@ -10,6 +10,7 @@ namespace ElectricalAppliancesStore.Models
 {
     public class EditProductView
     {
+        public int ProductID { get; set; }
         public string Title { get; set; }
         public int Quantity { get; set; }
         public int SoldCounter { get; set; }
