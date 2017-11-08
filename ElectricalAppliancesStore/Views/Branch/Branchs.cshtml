@@ -5,26 +5,35 @@
 }
 
 <h2>Branchs</h2>
-<div class="container">
 
-    @if (Model.Count > 0)
-    {
-        foreach (ElectricalAppliancesStore.Models.Branch currBranch in Model)
-        {
-            <div class="itemContainer">
-                <div class="itembox" style="background-image:url(@currBranch.PicturePath);background-size:cover">
-                </div><br/>
-                <h4><u>@currBranch.Name Branch </u></h4>
-                <label>Opening Hours : </label><p>@currBranch.OpeningHours</p>
-                <label>Phone Number : </label><p>@currBranch.PhoneNumber</p>
-                <label>Email : </label><p>@currBranch.Email</p>
-                <label>Address : </label><p>@(currBranch.Address.ToString())</p>
-            </div>
-        }
-    }
-    <div style="border: 1px solid #4ed7d2; border-radius:12px; width:33%; height:400px; float:right; margin-top:18px;">
-        @*MAP CONTAINER*@<p class="text-center text-danger">THIS IS A MAP!</p>
-    </div>
-    <div class="container col-md-12">
-    </div>
+<div class="container" >
+    <table style="width:100%">
+        <tr>
+            <td colspan="2" valign="top">
+                @if (Model.Count > 0)
+            {
+                foreach (ElectricalAppliancesStore.Models.Branch currBranch in Model)
+                {
+                        <div class="itemContainer">
+                            <div class="itembox" style="background-image:url(@currBranch.PicturePath);background-size:cover">
+                            </div><br />
+                            <h4><u>@currBranch.Name Branch </u></h4>
+                            <label>Opening Hours : </label><p>@currBranch.OpeningHours</p>
+                            <label>Phone Number : </label><p>@currBranch.PhoneNumber</p>
+                            <label>Email : </label><p>@currBranch.Email</p>
+                            <label>Address : </label><p>@(currBranch.Address.ToString())</p>
+                        </div>
+                    }
+                }
+            </td>
+            <td colspan="1" valign="top">
+                <div id="map_wrapper">
+                    <div id="map_canvas" style="border: 1px solid #4ed7d2;width:350px;height:420px; border-radius:12px; margin-top:18px;"></div>
+                </div>
+                <script src="~/Content/Manager/GoogleMaps.js"></script>
+            </td>
+        </tr>
+    </table>
+</div>
+<div class="container col-md-12">
 </div>

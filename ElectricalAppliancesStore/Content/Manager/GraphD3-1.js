@@ -8,14 +8,14 @@ $.ajax({
 function drawGraph(data) {
 
     var margin = {
-        top: 20,
-        right: 20,
-        bottom: 50,
-        left: 40
+        top: 10,
+        right: 30,
+        bottom: 200,
+        left: 90
     },
 
-    width = 400 - margin.left - margin.right,
-    height = 400 - margin.top - margin.bottom;
+    width = 450 - margin.left - margin.right,
+    height = 500 - margin.top - margin.bottom;
 
     //An ordinal scale, to support the bars, we choose 
     var x = d3.scale.ordinal()

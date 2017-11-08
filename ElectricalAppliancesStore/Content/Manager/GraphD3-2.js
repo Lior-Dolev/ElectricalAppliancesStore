@@ -14,13 +14,13 @@ function drawGraph1(data) {
     //set up svg using margin conventions - we'll need plenty of room on the left for labels
     var margin = {
         top: 15,
-        right: 25,
+        right: 50,
         bottom: 15,
-        left: 60
+        left: 250
     };
 
-    var width  = 400 - margin.left - margin.right,
-        height = 400 - margin.top - margin.bottom;
+    var width  = 630 - margin.left - margin.right,
+        height = 230 - margin.top - margin.bottom;
 
     var svg = d3.select("#barChart2").append("svg")
         .attr("width", width + margin.left + margin.right)

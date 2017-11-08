@@ -1,29 +1,35 @@
 ﻿
 
 #barChart {
-    font-size: 14px;
+    font-size: 16px;
+    font-family:Calibri;
     position: sticky;
-    margin-top: 20px;
+    margin-top: 10px;
 }
 
 #barChart2 {
-    font-size: 14px;
+    font-size: 16px;
+    font-family:'Calibri';
     position: sticky;
-    margin-top: 20px;
+    margin-top: 10px;
 }
 
 .bar {
-    fill: steelblue;
+    fill: #d9f7fc;
+    /*fill: #efefef;*/
+    stroke:#808080;
+    /*stroke:#808080;*/
 }
 
 .bar:hover {
-    fill: brown;
+    fill: #dcff4f;
+    stroke: #000000;
 }
 
 .axis path,
 .axis line {
     fill: none;
-    stroke: #000;
+    stroke: #1f8fa1;
     shape-rendering: crispEdges;
 }
 

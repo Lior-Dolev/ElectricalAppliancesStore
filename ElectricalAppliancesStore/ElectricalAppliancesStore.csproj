@@ -758,6 +758,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\BranchController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\OrderController.cs" />
     <Compile Include="Controllers\ManagerController.cs" />
@@ -780,6 +781,7 @@
     <Compile Include="Models\Product.cs" />
     <Compile Include="Models\ProductView.cs" />
     <Compile Include="Models\Provider.cs" />
+    <Compile Include="Models\Stubs\BranchesStub.cs" />
     <Compile Include="Models\Stubs\ClientsStub.cs" />
     <Compile Include="Models\Stubs\OrderStub.cs" />
     <Compile Include="Models\Stubs\ProductsStub.cs" />
@@ -800,6 +802,7 @@
     <Content Include="Views\Order\CheckOut.cshtml" />
     <Content Include="Views\ProductView\Products.cshtml" />
     <Content Include="Views\Manager\Index.cshtml" />
+    <Content Include="Views\Branch\Branchs.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
