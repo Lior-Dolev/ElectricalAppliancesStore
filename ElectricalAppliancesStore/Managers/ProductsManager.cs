@@ -15,8 +15,14 @@ namespace ElectricalAppliancesStore.Managers
             return pContext.Products.ToList();
         }
 
-        public static void AddProduct(EditProductView product, ProductsContext pContext)
+        public static void AddProduct(EditProductView product, 
+                                      ProductsContext pContext,
+                                      HttpServerUtilityBase server)
         {
+            string pic = System.IO.Path.GetFileName(product.UploadImages.FileName);
+            string path = System.IO.Path.Combine(server.MapPath("~/Content/Media/products/"), pic);
+            product.UploadImages.SaveAs(path);
+
             Product newProduct = new Product() {
                 Title = product.Title,
                 BuyPrice = product.BuyPrice,
@@ -27,7 +33,7 @@ namespace ElectricalAppliancesStore.Managers
                 ProviderID = product.SelectedProviderId,
                 Brand = GetBrandById(product.SelectedBrandId),
                 Category = GetCategoryById(product.SelectedCategoryId),
-                PicturePath = "../Content/Media/products/eggs.jpg"
+                PicturePath = path
             };
 
             pContext.Products.Add(newProduct);

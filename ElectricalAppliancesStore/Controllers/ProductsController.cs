@@ -21,8 +21,8 @@ namespace ElectricalAppliancesStore.Controllers
         {
             // TODO: Remove when there'll be an option to add providers
             AddMocks();
-            
-            return View(ProductsManager.GetProducts(dbProducts));
+            List<Product> products = ProductsManager.GetProducts(dbProducts);
+            return View(products);
         }
 
         public ActionResult AddProduct()
@@ -32,9 +32,10 @@ namespace ElectricalAppliancesStore.Controllers
 
         [HttpPost]
         public ActionResult Add(EditProductView product)
-        {
-            ProductsManager.AddProduct(product, dbProducts);
+        {   
+            ProductsManager.AddProduct(product, dbProducts, Server);
             EditProductView fullProduct = ProductsManager.FillSelectLists(product, dbProviders);
+            
             return View("AddProduct", fullProduct);
         }
         

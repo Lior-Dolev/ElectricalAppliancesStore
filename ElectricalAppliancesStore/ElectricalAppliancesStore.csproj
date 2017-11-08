@@ -276,14 +276,16 @@
     <Content Include="Content\Manager\GraphD3-2.js" />
     <Content Include="Content\Media\products\eggs.jpg" />
     <Content Include="Content\Media\products\fan.jpg" />
+    <Content Include="Content\Media\products\flower.jpg" />
     <Content Include="Content\Media\products\fridge.jpg" />
     <Content Include="Content\Media\products\milk.jpg" />
+    <Content Include="Content\Media\products\mini.jpg" />
     <Content Include="Content\Media\products\oven.jpg" />
     <Content Include="Content\Media\products\pumpkin.jpg" />
+    <Content Include="Content\Media\site_header.png" />
     <Content Include="Content\Media\products\toaster.jpg" />
     <Content Include="Content\ControlsStyle\product.css" />
     <Content Include="Content\Master.css" />
-    <Content Include="Content\Media\site_header.png" />
     <Content Include="Content\ControlsStyle\search.css" />
     <Content Include="Content\Manager\index.css" />
     <Content Include="Content\Site.css" />
