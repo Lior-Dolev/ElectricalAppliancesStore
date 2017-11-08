@@ -30,8 +30,5 @@ namespace ElectricalAppliancesStore.Models
         [Display(Name = "Provider")]
         public int SelectedProviderId { get; set; }
         public IEnumerable<SelectListItem> ProviderItems { get; set; }
-
-        public string SelectedPicturePath { get; set; }
-        public List<string> PicturesPaths { get; set; }
     }
 }

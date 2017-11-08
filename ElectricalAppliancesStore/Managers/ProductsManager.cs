@@ -34,7 +34,7 @@ namespace ElectricalAppliancesStore.Managers
                 ProviderID = product.SelectedProviderId,
                 Brand = GetBrandById(product.SelectedBrandId),
                 Category = GetCategoryById(product.SelectedCategoryId),
-                PicturePath = path
+                PicturePath = ("../Content/Media/products/" + pic)
             };
 
             pContext.Products.Add(newProduct);
@@ -76,7 +76,7 @@ namespace ElectricalAppliancesStore.Managers
                 string pic = System.IO.Path.GetFileName(product.UploadImages.FileName);
                 string path = System.IO.Path.Combine(server.MapPath("~/Content/Media/products/"), pic);
                 product.UploadImages.SaveAs(path);
-                fromDB.PicturePath = path;
+                fromDB.PicturePath = ("../Content/Media/products/" + pic);
             }
             
             fromDB.Title = product.Title;
@@ -117,17 +117,7 @@ namespace ElectricalAppliancesStore.Managers
             view.ProviderItems = new SelectList(pContext.Providers.ToList(), "ID", "CompanyName");
             view.BrandItems = new SelectList(GetBrands(), "Id", "Name");
             view.CategoryItems = new SelectList(GetCategories(), "Id", "Name");
-
-            view.PicturesPaths = new List<string>() {
-                "../Content/Media/products/eggs.jpg",
-                "../Content/Media/products/fan.jpg",
-                "../Content/Media/products/fridge.jpg",
-                "../Content/Media/products/milk.jpg",
-                "../Content/Media/products/oven.jpg",
-                "../Content/Media/products/pumpkin.jpg",
-                "../Content/Media/products/toaster.jpg"
-            };
-
+            
             return view;
         }
 
