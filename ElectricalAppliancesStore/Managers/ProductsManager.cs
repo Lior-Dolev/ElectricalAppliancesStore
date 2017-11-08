@@ -52,6 +52,11 @@ namespace ElectricalAppliancesStore.Managers
         public static EditProductView CreateEditProductView(ProvidersContext pContext)
         {
             EditProductView view = new EditProductView();
+            return FillSelectLists(view, pContext);
+        }
+
+        public static EditProductView FillSelectLists(EditProductView view, ProvidersContext pContext)
+        {
             view.ProviderItems = new SelectList(pContext.Providers.ToList(), "ID", "CompanyName");
             view.BrandItems = new SelectList(GetBrands(), "Id", "Name");
             view.CategoryItems = new SelectList(GetCategories(), "Id", "Name");

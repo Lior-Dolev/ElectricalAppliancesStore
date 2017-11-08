@@ -16,7 +16,11 @@ namespace ElectricalAppliancesStore.Controllers
 {
     public class ManagerController : Controller
     {
-        public static ITwitterCredentials auth = Auth.SetUserCredentials("pQJn6sjNxuivMZMlRz6aGIqSk", "hRchrNrU8pv10e5HIu4eag5ZQz1J2jYPZuwv7ME6mMEnns6503", "924214133867806720-2LCmCadngZ8HU7FedaBRDF3qPBZKm39", "vDdph6vAYdW41Xq95G6MR3fuRvC8xLw6MxuZwt49XnGef");
+        public static ITwitterCredentials auth = 
+            Auth.SetUserCredentials("pQJn6sjNxuivMZMlRz6aGIqSk", 
+                                    "hRchrNrU8pv10e5HIu4eag5ZQz1J2jYPZuwv7ME6mMEnns6503", 
+                                    "924214133867806720-2LCmCadngZ8HU7FedaBRDF3qPBZKm39", 
+                                    "vDdph6vAYdW41Xq95G6MR3fuRvC8xLw6MxuZwt49XnGef");
 
         // GET: Manager
         public ActionResult Index()
@@ -40,7 +44,6 @@ namespace ElectricalAppliancesStore.Controllers
             Regex regex = new Regex("<span class=bld>(\\d*.\\d*) ");
             decimal rate = System.Convert.ToDecimal(regex.Match(response).Groups[1].Value);
             return rate;
-            //Tweet.PublishTweet(rate.ToString());
         }
 
         public JsonResult GetProviders()

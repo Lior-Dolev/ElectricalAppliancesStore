@@ -19,7 +19,7 @@ namespace ElectricalAppliancesStore.Controllers
         // GET: Products for inventory view
         public ActionResult Inventory()
         {
-            // TODO: Remove when there'll be an option to add products
+            // TODO: Remove when there'll be an option to add providers
             AddMocks();
             
             return View(ProductsManager.GetProducts(dbProducts));
@@ -34,24 +34,14 @@ namespace ElectricalAppliancesStore.Controllers
         public ActionResult Add(EditProductView product)
         {
             ProductsManager.AddProduct(product, dbProducts);
-            return View("AddProduct", product);
+            EditProductView fullProduct = ProductsManager.FillSelectLists(product, dbProviders);
+            return View("AddProduct", fullProduct);
         }
         
         #region Mocks
         public void AddMocks()
         {
-            dbProducts.Database.Delete();
             dbProviders.Database.Delete();
-
-            List<Product> products = ProductsStub.GetProducts();
-           
-            foreach(Product p in products)
-            {
-                dbProducts.Products.Add(p);
-            }
-
-            dbProducts.SaveChanges();
-
             List<Provider> providers = ProvidersStub.GetProviders();
 
             foreach(Provider p in providers)
