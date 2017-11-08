@@ -53,13 +53,10 @@ namespace ElectricalAppliancesStore.Controllers
 
             if (users.Exists(stubUser => (stubUser.Username == user.Username) && (stubUser.Password == user.Password)))
             {
-                //if ( (u.Username == user.Username) && (u.Password == user.Password)) {
                     permission = user.PermissionType;
                     return true;
-                //}
-
-                return true;
             }
+
             return false;
         }
 

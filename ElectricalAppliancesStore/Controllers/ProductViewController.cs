@@ -18,9 +18,6 @@ namespace ElectricalAppliancesStore.Controllers
         // GET: ProductView
         public ActionResult Products(int userID)
         {
-            // TODO: Remove when there'll be an option to add products
-            AddMocks();
-
             ProductView view = new ProductView()
             {
                 currOrder = new Order()
@@ -62,21 +59,5 @@ namespace ElectricalAppliancesStore.Controllers
             }
             return View("Products", view);
         }
-
-        #region Mocks
-        public void AddMocks()
-        {
-            dbProducts.Database.Delete();
-
-            List<Product> products = ProductsStub.GetProducts();
-
-            foreach (Product p in products)
-            {
-                dbProducts.Products.Add(p);
-            }
-
-            dbProducts.SaveChanges();
-        }
-        #endregion
     }
 }

@@ -44,7 +44,6 @@ namespace ElectricalAppliancesStore.Controllers
             Regex regex = new Regex("<span class=bld>(\\d*.\\d*) ");
             decimal rate = System.Convert.ToDecimal(regex.Match(response).Groups[1].Value);
             return rate;
-            //Tweet.PublishTweet(rate.ToString());
         }
 
         public JsonResult GetProviders()

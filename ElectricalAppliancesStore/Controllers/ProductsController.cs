@@ -14,30 +14,57 @@ namespace ElectricalAppliancesStore.Controllers
     {
         ClientsContext dbClients = new ClientsContext();
         ProductsContext dbProducts = new ProductsContext();
-        
+        ProvidersContext dbProviders = new ProvidersContext();
 
         // GET: Products for inventory view
         public ActionResult Inventory()
         {
-            // TODO: Remove when there'll be an option to add products
+            // TODO: Remove when there'll be an option to add providers
             AddMocks();
-            
-            return View(ProductsManager.GetProducts(dbProducts));
+            List<Product> products = ProductsManager.GetProducts(dbProducts);
+            return View(products);
         }
-        
+
+        public ActionResult AddProduct()
+        {
+            return View(ProductsManager.CreateEditProductView(dbProviders));
+        }
+
+        [HttpPost]
+        public ActionResult Add(EditProductView product)
+        {   
+            ProductsManager.AddProduct(product, dbProducts, Server);
+            EditProductView fullProduct = ProductsManager.FillSelectLists(product, dbProviders);
+            
+            return View("AddProduct", fullProduct);
+        }
+
+        public ActionResult EditProduct(int productID)
+        {
+            EditProductView view = ProductsManager.GetProductByID(productID, dbProducts, dbProviders);
+            return View("EditProduct", view);
+        }
+
+        public ActionResult Edit(EditProductView product)
+        {
+            ProductsManager.EditProduct(product, dbProducts, Server);
+            EditProductView fullProduct = ProductsManager.FillSelectLists(product, dbProviders);
+
+            return View("AddProduct", fullProduct);
+        }
+
         #region Mocks
         public void AddMocks()
         {
-            dbProducts.Database.Delete();
+            dbProviders.Database.Delete();
+            List<Provider> providers = ProvidersStub.GetProviders();
 
-            List<Product> products = ProductsStub.GetProducts();
-
-            foreach(Product p in products)
+            foreach(Provider p in providers)
             {
-                dbProducts.Products.Add(p);
+                dbProviders.Providers.Add(p);
             }
 
-            dbProducts.SaveChanges();
+            dbProviders.SaveChanges();  
         }
         #endregion
     }
