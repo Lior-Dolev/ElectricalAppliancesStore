@@ -1,0 +1,36 @@
+﻿@model IEnumerable<ElectricalAppliancesStore.Models.Provider>
+
+@{
+    ViewBag.Title = "AddProvider";
+}
+
+<h2>AddProvider</h2>
+
+@Html.ActionLink("New Provider", "AddProvider")
+
+@if (Model.Count() > 0)
+{
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.CompanyName)
+            </th>
+            <th>
+                @Html.DisplayName("Actions")
+            </th>
+        </tr>
+        @foreach (ElectricalAppliancesStore.Models.Provider p in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(item => p.CompanyName)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "EditProvider", new { providerID = p.ID })
+                    @Html.ActionLink("Delete", "Delete", new { providerID = p.ID })
+                </td>
+            </tr>
+        }
+    </table>
+}
+

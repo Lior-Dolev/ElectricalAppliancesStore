@@ -13,6 +13,7 @@ namespace ElectricalAppliancesStore.Controllers
     {
         ProductsContext dbProducts = new ProductsContext();
         UsersContext dbUsers = new UsersContext();
+        ProvidersContext dbProviders = new ProvidersContext();
 
         // GET: Order
         public ActionResult Index()
@@ -22,7 +23,7 @@ namespace ElectricalAppliancesStore.Controllers
         // GET: Products for check out view
         public ActionResult CheckOut()
         {
-            Order ord = OrderStub.GetOrder(dbUsers, dbProducts);
+            Order ord = OrderStub.GetOrder(dbUsers, dbProducts, dbProviders);
             return View(ord);
         }
     }

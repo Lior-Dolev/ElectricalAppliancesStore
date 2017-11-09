@@ -10,9 +10,11 @@ namespace ElectricalAppliancesStore.Models.Stubs
     {
         public static List<User> UsersManager { get; private set; }
 
-        public static Order GetOrder(UsersContext uContext, ProductsContext pContext)
+        public static Order GetOrder(UsersContext uContext, 
+                                     ProductsContext pContext,
+                                     ProvidersContext providersContext)
         {
-            List<Provider> providers = ProvidersStub.GetProviders();
+            List<Provider> providers = providersContext.Providers.ToList();
             List<User> user = uContext.Users.ToList();
             List<Product> products = pContext.Products.ToList();
             List<OrderItem> orItms = new List<OrderItem>();

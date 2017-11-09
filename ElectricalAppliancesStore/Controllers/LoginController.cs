@@ -14,7 +14,7 @@ namespace ElectricalAppliancesStore.Controllers
     {
         UsersContext dbUsers = new UsersContext();
         ClientsContext dbClients = new ClientsContext();
-
+        ProvidersContext c = new ProvidersContext();
         // GET: Login
         public ActionResult Index()
         {

@@ -13,6 +13,7 @@ using System.Text.RegularExpressions;
 using System.Web.Script.Services;
 using ElectricalAppliancesStore.DAL;
 using ElectricalAppliancesStore.Managers;
+using ElectricalAppliancesStore.Models.Stubs;
 
 namespace ElectricalAppliancesStore.Controllers
 {
@@ -50,13 +51,12 @@ namespace ElectricalAppliancesStore.Controllers
             decimal rate = System.Convert.ToDecimal(regex.Match(response).Groups[1].Value);
             return rate;
         }
-
-        public JsonResult GetProviders()
+        
+        public JsonResult GetBranches()
         {
-            var data = ProvidersManager.GetProviders(dbProviders);
+            var data = BranchesStub.GetBranches();
             return Json(data, JsonRequestBehavior.AllowGet);
         }
-
 
         public JsonResult GetProducts()
         {

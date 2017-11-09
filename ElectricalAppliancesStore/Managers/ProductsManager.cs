@@ -16,6 +16,11 @@ namespace ElectricalAppliancesStore.Managers
             return pContext.Products.ToList();
         }
 
+        public static void DeleteProduct(int productID, ProductsContext pContext)
+        {
+            pContext.Products.Remove(pContext.Products.Find(productID));
+        }
+
         public static void AddProduct(EditProductView product, 
                                       ProductsContext pContext,
                                       HttpServerUtilityBase server)

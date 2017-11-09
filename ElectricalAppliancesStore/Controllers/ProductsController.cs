@@ -19,8 +19,6 @@ namespace ElectricalAppliancesStore.Controllers
         // GET: Products for inventory view
         public ActionResult Inventory()
         {
-            // TODO: Remove when there'll be an option to add providers
-            AddMocks();
             List<Product> products = ProductsManager.GetProducts(dbProducts);
             return View(products);
         }
@@ -28,6 +26,13 @@ namespace ElectricalAppliancesStore.Controllers
         public ActionResult AddProduct()
         {
             return View(ProductsManager.CreateEditProductView(dbProviders));
+        }
+
+        public ActionResult Delete(int productID)
+        {
+            ProductsManager.DeleteProduct(productID, dbProducts);
+
+            return View("Inventory", "Products");
         }
 
         [HttpPost]
@@ -52,21 +57,6 @@ namespace ElectricalAppliancesStore.Controllers
 
             return View("AddProduct", fullProduct);
         }
-
-        #region Mocks
-        public void AddMocks()
-        {
-            dbProviders.Database.Delete();
-            List<Provider> providers = ProvidersStub.GetProviders();
-
-            foreach(Provider p in providers)
-            {
-                dbProviders.Providers.Add(p);
-            }
-
-            dbProviders.SaveChanges();  
-        }
-        #endregion
 
         #region Dispose
         protected override void Dispose(bool disposing)

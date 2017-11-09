@@ -7,14 +7,14 @@
 
 function initialize() {
     $.ajax({
-        url: "/Manager/GetProviders", success: function (result) {
+        url: "/Manager/GetBranches", success: function (result) {
             initialize2(result);
         }
     });
 }
 
-function initialize2(providers) {
-    console.log(providers);
+function initialize2(Branches) {
+    console.log(Branches);
     var map;
     var bounds = new google.maps.LatLngBounds();
     var mapOptions = {
@@ -27,12 +27,12 @@ function initialize2(providers) {
 
     // Info Window Content
     var infoWindowContent = [];
-    for (i = 0; i < providers.length; i++) {
-        var provider = providers[i]
+    for (i = 0; i < Branches.length; i++) {
+        var branch = Branches[i]
 
         var html = ['<div class="info_content">' +
-            '<h3>' + provider.CompanyName + '</h3>' +
-            '<p>' + provider.LocationDescription + '</p>' + '</div>']
+            '<h3>' + branch.Name + '</h3>' +
+            '<p>' + branch.LocationDescription + '</p>' + '</div>']
 
         infoWindowContent.push(html);
     }
@@ -41,13 +41,13 @@ function initialize2(providers) {
     var infoWindow = new google.maps.InfoWindow(), marker, i;
 
     // Loop through our array of markers & place each one on the map  
-    for (i = 0; i < providers.length; i++) {
-        var position = new google.maps.LatLng(providers[i].LocationCoordinates[0], providers[i].LocationCoordinates[1]);
+    for (i = 0; i < Branches.length; i++) {
+        var position = new google.maps.LatLng(Branches[i].LocationCoordinates[0], Branches[i].LocationCoordinates[1]);
         bounds.extend(position);
         marker = new google.maps.Marker({
             position: position,
             map: map,
-            title: providers[i].LocationDescription
+            title: Branches[i].LocationDescription
         });
 
         // Allow each marker to have an info window    
