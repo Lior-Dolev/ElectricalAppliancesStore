@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ElectricalAppliancesStore.DAL;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -7,11 +8,13 @@ namespace ElectricalAppliancesStore.Models.Stubs
 {
     public static class OrderStub
     {
-        public static Order GetOrder()
+        public static List<User> UsersManager { get; private set; }
+
+        public static Order GetOrder(UsersContext uContext, ProductsContext pContext)
         {
             List<Provider> providers = ProvidersStub.GetProviders();
-            List<User> user = UsersStub.GetUsers();
-            List<Product> products = ProductsStub.GetProducts();
+            List<User> user = uContext.Users.ToList();
+            List<Product> products = pContext.Products.ToList();
             List<OrderItem> orItms = new List<OrderItem>();
             int i = 10;
             foreach (Product pr in products)
