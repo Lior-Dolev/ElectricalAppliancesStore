@@ -19,7 +19,6 @@ namespace ElectricalAppliancesStore.Models.Stubs
                     UserID = users.Single(user => user.Username == "Lior").ID,
                     Address = new Address()
                     {
-                        ID = 1,
                         Country = "Israel",
                         City = "Hod Hasharon",
                         Street = "Zakif",
@@ -36,7 +35,6 @@ namespace ElectricalAppliancesStore.Models.Stubs
                     UserID = users.Single(user => user.Username == "Ravid").ID,
                     Address = new Address()
                     {
-                        ID = 2,
                         Country = "Israel",
                         City = "Holon",
                         Street = "Herzel",
@@ -53,7 +51,6 @@ namespace ElectricalAppliancesStore.Models.Stubs
                     UserID = users.Single(user => user.Username == "Eidan").ID,
                     Address = new Address()
                     {
-                        ID = 3,
                         Country = "Israel",
                         City = "Rishon LeZion",
                         Street = "Karl Neter",

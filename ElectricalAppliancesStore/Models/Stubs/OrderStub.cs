@@ -22,21 +22,6 @@ namespace ElectricalAppliancesStore.Models.Stubs
             Order ord = new Order()
             {
                 ID = 32,
-                /*Client = new Client()
-                {
-                    ID = 12,
-                    UserID = user.Last().ID,
-                    Address = new Address()
-                    {
-                        Street = "HaTamar",
-                        HouseNumber = 6,
-                        City = "Ramat Gan",
-                        Country = "Israel"
-                    },
-                    Email = "junkMail132@walla.co.il",
-                    FullName = "Mr. Spider Pig",
-                    PhoneNumber = "0987655333"
-                },*/
                 ClientID = 2,
                 Items = orItms,
                 PurchaseDate = DateTime.Now,

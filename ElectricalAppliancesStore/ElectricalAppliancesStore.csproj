@@ -758,21 +758,24 @@
     <Compile Include="Controllers\ManagerController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
     <Compile Include="Controllers\ProductViewController.cs" />
+    <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="DAL\ClientsContext.cs" />
     <Compile Include="DAL\OrdersContext.cs" />
     <Compile Include="DAL\ProductsContext.cs" />
     <Compile Include="DAL\ProvidersContext.cs" />
     <Compile Include="DAL\UsersContext.cs" />
+    <Compile Include="DAL\UsersInitializer.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Managers\OrderManager.cs" />
     <Compile Include="Managers\ProductsManager.cs" />
-    <Compile Include="Controllers\ProvidersManager.cs" />
+    <Compile Include="Managers\ProvidersManager.cs" />
     <Compile Include="Models\Address.cs" />
     <Compile Include="Models\Branch.cs" />
     <Compile Include="Models\BrandView.cs" />
     <Compile Include="Models\Client.cs" />
+    <Compile Include="Models\EditClientView.cs" />
     <Compile Include="Models\EditProductView.cs" />
     <Compile Include="Models\Order.cs" />
     <Compile Include="Models\OrderItem.cs" />
@@ -800,12 +803,11 @@
     <Content Include="Views\Order\CheckOut.cshtml" />
     <Content Include="Views\ProductView\Products.cshtml" />
     <Content Include="Views\Manager\Index.cshtml" />
-<<<<<<< HEAD
     <Content Include="Views\Branch\Branchs.cshtml" />
-=======
     <Content Include="Views\Products\AddProduct.cshtml" />
     <Content Include="Views\Products\EditProduct.cshtml" />
->>>>>>> origin/master
+    <Content Include="Views\Users\AddClient.cshtml" />
+    <Content Include="Views\Users\EditClient.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

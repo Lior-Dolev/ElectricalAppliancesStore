@@ -11,11 +11,16 @@ using System.Web.Services;
 using System.Net;
 using System.Text.RegularExpressions;
 using System.Web.Script.Services;
+using ElectricalAppliancesStore.DAL;
+using ElectricalAppliancesStore.Managers;
 
 namespace ElectricalAppliancesStore.Controllers
 {
     public class ManagerController : Controller
     {
+        public ProductsContext dbProducts = new ProductsContext();
+        public ProvidersContext dbProviders = new ProvidersContext();
+
         public static ITwitterCredentials auth = 
             Auth.SetUserCredentials("pQJn6sjNxuivMZMlRz6aGIqSk", 
                                     "hRchrNrU8pv10e5HIu4eag5ZQz1J2jYPZuwv7ME6mMEnns6503", 
@@ -48,15 +53,28 @@ namespace ElectricalAppliancesStore.Controllers
 
         public JsonResult GetProviders()
         {
-            var data = Models.Stubs.ProvidersStub.GetProviders();
+            var data = ProvidersManager.GetProviders(dbProviders);
             return Json(data, JsonRequestBehavior.AllowGet);
         }
 
 
         public JsonResult GetProducts()
         {
-            var data = Models.Stubs.ProductsStub.GetProducts();
+            var data = ProductsManager.GetProducts(dbProducts);
             return Json(data, JsonRequestBehavior.AllowGet);
         }
+
+        #region Dispose
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                dbProducts.Dispose();
+                dbProviders.Dispose();
+            }
+
+            base.Dispose(disposing);
+        }
+        #endregion
     }
 }

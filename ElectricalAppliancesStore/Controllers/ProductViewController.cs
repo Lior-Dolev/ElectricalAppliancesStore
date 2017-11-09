@@ -59,5 +59,18 @@ namespace ElectricalAppliancesStore.Controllers
             }
             return View("Products", view);
         }
+
+        #region Dispose
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                dbProducts.Dispose();
+                dbClients.Dispose();
+            }
+
+            base.Dispose(disposing);
+        }
+        #endregion
     }
 }
