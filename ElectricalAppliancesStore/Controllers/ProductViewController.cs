@@ -30,34 +30,10 @@ namespace ElectricalAppliancesStore.Controllers
 
             return View(view);
         }
-
-        public ActionResult UpdateOrder(ProductView view, int productID, int quantity)
+        
+        public ActionResult CheckOut(ProductView order)
         {
-
-            // check if such item exist
-            if (!view.currOrder.Items.Exists(item => item.ProductID == productID))
-            {
-                // If not - add it to the order with the given qty
-                view.currOrder.Items.Add(new OrderItem()
-                {
-                    ProductID = productID,
-                    Quantity = quantity
-                });
-            }
-            else
-            { // Item exist in current order
-                // check if given amount is 0 - and if so - remove the item from the order
-                if (quantity == 0)
-                {
-                    var found = view.currOrder.Items.Find(item => item.ProductID == productID);
-                    if (found != null) view.currOrder.Items.Remove(found);
-                }
-                else
-                { //Update item's qty 
-                    view.currOrder.Items.Find(item => item.ProductID == productID).Quantity = quantity;
-                }
-            }
-            return View("Products", view);
+            return RedirectToAction("CheckOut", "Order", order.currOrder);
         }
 
         #region Dispose

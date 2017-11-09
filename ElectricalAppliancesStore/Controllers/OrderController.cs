@@ -26,5 +26,10 @@ namespace ElectricalAppliancesStore.Controllers
             Order ord = OrderStub.GetOrder(dbUsers, dbProducts, dbProviders);
             return View(ord);
         }
+
+        public ActionResult CheckOut(Order order)
+        {
+            return View(order);
+        }
     }
 }

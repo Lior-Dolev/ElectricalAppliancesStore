@@ -18,6 +18,7 @@
         <input type="submit" value="Advanced Search >>" class="btn btn-info my-2 my-sm-0" />
     </div>
 </div>
+
 <div class="container">
     <div class="container col-sm-8">
 
@@ -28,9 +29,9 @@
                 <div class="itemContainer">
                     <div class="itembox" style="background-image:url(@currProduct.PicturePath)">
                         <div class="selectionbar">
-                            <input type="button" class="control plus" value="+" onclick="updateItemAmount(@currProduct.ID, 'Add')">
-                            <input type="text" id="@(currProduct.ID)_amount" class="control number" value="0" onchange="updateItemAmount(@currProduct.ID, 'Change')" />
-                            <input type="button" class="control minus" value="-" onclick="updateItemAmount(@currProduct.ID, 'Sub')" />
+                            <input type="button" class="control plus" value="+" onclick="updateItemAmount(@currProduct.ID, 'Add', '@currProduct.Title', @currProduct.SalePrice)">
+                            <input type="text" id="@(currProduct.ID)_amount" class="control number" value="0" onchange="updateItemAmount(@currProduct.ID, 'Change', '@currProduct.Title', @currProduct.SalePrice)" />
+                            <input type="button" class="control minus" value="-" onclick="updateItemAmount(@currProduct.ID, 'Sub', '@currProduct.Title', @currProduct.SalePrice)" />
                         </div>
                     </div>
                     <br />
@@ -51,35 +52,17 @@
             Price
         </div>
         <br /><br />
-        @if (Model.currOrder.Items.Count > 0)
-        {
-            double sum = Model.currOrder.PriceSum();
-            foreach (ElectricalAppliancesStore.Models.OrderItem currItem in Model.currOrder.Items)
-            {
-                if (currItem.Quantity > 0)
-                {
-                    <div class="container col-sm-8">
-                        @currItem.Product.Title
-                    </div>
-                    <div class="container col-sm-2">
-                        @currItem.Quantity
-                    </div>
-                    <div class="container col-sm-2">
-                        @(currItem.Product.SalePrice * currItem.Quantity)
-                    </div>
-                }
-            }
-        }
     </div>
     <div class="container col-sm-3">
         <br />
         <input type="submit" value="Procced To Checkout" class="btn btn-success my-2 my-sm-0" />
     </div>
 </div>
+
 <div class="container col-md-12">
 </div>
 <script type="text/javascript">
-    function updateItemAmount(itemId, action) {
+    function updateItemAmount(itemId, action, title, salePrice) {
         // Get curr item amount
         var currAmount = Number(document.getElementById(itemId + '_amount').value);
 
@@ -105,23 +88,69 @@
             currAmount = 5;
         }
 
-        // Update item amount in the order
-        UpdateItemOrderAmount(itemId, currAmount);
-
+        AddOrUpdate(itemId, currAmount, title, salePrice);
+        
         // Update display
         document.getElementById(itemId + '_amount').value = currAmount;
 
     }
-    function UpdateItemOrderAmount(itemID, Quantity) {
-        debugger;
-        var url = '@Url.Action("UpdateOrder","ProductView")';
-        $.ajax({
-            url: url,
-            data: { itemID: itemID, Quantity: Quantity }
-        }).fail(function (res) {
-            if (!res) {
-                alert("The System is unable to process orders at the moment. Please try again later.");
-            }
-        });
+
+    function Add(itemId, quantity, title, salePrice) {
+
+        $(".shoppingList").append(GetDiv(itemId, quantity, title, salePrice));
     }
+
+    function AddOrUpdate(itemId, quantity, title, salePrice) {
+
+        var isExists = false;
+        id = ".shoppingList #" + itemId;
+
+        if($(id).length != 0)
+        {
+            if(quantity == 0)
+            {
+                Remove(itemId);
+            }
+            else
+            {
+                Update(itemId, quantity, salePrice);
+            }
+        }
+        else
+        {
+            Add(itemId, quantity, title, salePrice);
+        }
+    }
+
+    function Update(itemId, quantity, salePrice) {
+        id = ".shoppingList #" + itemId;
+        
+        ChangeTextByClass(id, ".quantity", quantity);
+        ChangeTextByClass(id, ".fixedPrice", (quantity * salePrice));
+    }
+
+    function ChangeTextByClass(id, classValue, textValue) {
+        var $this = $(id).children(classValue);
+        $this.text(textValue);
+    }
+
+    function Remove(itemId) {
+
+        var id = ".shoppingList #" + itemId;
+        $(id).remove();
+    }
+
+    function GetDiv(itemId, quantity, title, salePrice)
+    {
+        return ("<div id='" + itemId + "'> <div class='container col-sm-8'>" +
+                    title +
+                "</div>" +
+                "<div class='container col-sm-2 quantity'>" +
+                    quantity +
+                "</div>" +
+                "<div class='container col-sm-2 fixedPrice'>" +
+                    (quantity * salePrice) +
+                "</div> </div>");
+    }
+
 </script>
