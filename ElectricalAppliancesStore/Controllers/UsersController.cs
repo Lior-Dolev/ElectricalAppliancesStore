@@ -14,6 +14,11 @@ namespace ElectricalAppliancesStore.Controllers
         public UsersContext usersContext = new UsersContext();
         public ClientsContext clientsContext = new ClientsContext();
 
+        public ActionResult Index()
+        {
+            return View(UserManager.GetClients(clientsContext));
+        }
+
         // GET: Users
         public ActionResult AddClient()
         {
@@ -38,6 +43,12 @@ namespace ElectricalAppliancesStore.Controllers
         {
             EditClientView client = UserManager.GetClientByID(clientID, usersContext, clientsContext);
             return View(client);
+        }
+
+        public ActionResult DeleteClient(int clientID)
+        {
+            UserManager.DeleteClient(clientID, clientsContext, usersContext);
+            return RedirectToAction("Index");
         }
     }
 }

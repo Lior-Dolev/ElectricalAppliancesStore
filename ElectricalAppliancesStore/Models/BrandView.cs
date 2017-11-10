@@ -14,8 +14,6 @@ namespace ElectricalAppliancesStore.Models
 
         public IEnumerable<SelectListItem> BrandItems
         {
-            //get { return new List<SelectListItem>(); Brand.getEnumConstants}
-            
             get { return new SelectList(Enum.GetNames(typeof(Brand)), "Id", "Name"); }
         }
     }
