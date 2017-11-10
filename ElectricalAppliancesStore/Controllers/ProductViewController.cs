@@ -30,7 +30,31 @@ namespace ElectricalAppliancesStore.Controllers
 
             return View(view);
         }
-        
+
+        public List<Product> getProductByCategory(int category)
+        {
+            List<Product> products = ProductsManager.GetProducts(dbProducts);
+            products.RemoveAll(item => category != (int)item.Category);
+
+            return products;
+        }
+
+        // Search By Category
+        public ActionResult ProductsByCategory(int userID, int category)
+        {
+            ProductView view = new ProductView()
+            {
+                currOrder = new Order()
+                {
+                    ClientID = 2, //UserManager.GetClientIdByUserId(userID, dbClients),
+                    Items = new List<OrderItem>()
+                },
+                products = getProductByCategory(category)
+            };
+
+            return View("Products", view);
+        }
+
         public ActionResult CheckOut(ProductView order)
         {
             return RedirectToAction("CheckOut", "Order", order.currOrder);
