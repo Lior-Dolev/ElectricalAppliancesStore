@@ -19,8 +19,11 @@ namespace ElectricalAppliancesStore.Controllers
 {
     public class ManagerController : Controller
     {
-        public ProductsContext dbProducts = new ProductsContext();
-        public ProvidersContext dbProviders = new ProvidersContext();
+        public ProductsContext  dbProducts   = new ProductsContext();
+        public ProvidersContext dbProviders  = new ProvidersContext();
+
+        public OrdersContext  dbOrders       = new OrdersContext();
+        public ClientsContext dbClients      = new ClientsContext();
 
         public static ITwitterCredentials auth =
             Auth.SetUserCredentials("pQJn6sjNxuivMZMlRz6aGIqSk",
@@ -37,6 +40,23 @@ namespace ElectricalAppliancesStore.Controllers
         public void PostTweet(string text)
         {
             Tweet.PublishTweet(text);
+        }
+
+        public JsonResult JoinOrdersByClients()
+        {
+            var query = dbClients.Clients.AsEnumerable().Join(
+                                               dbOrders.Orders.AsEnumerable(),
+                                               client => client.ID,
+                                               order => order.ClientID,
+                                               (client, order) => new
+                                               {
+                                                   PurchaseDate     = order.PurchaseDate,
+                                                   FullName         = client.FullName,
+                                                   PriceSum         = order.PriceSum(),
+                                                   CurrencyPurchase = order.CurrencyPurchase
+                                               }).GroupBy(record => record.PurchaseDate).ToList();
+
+            return Json(query, JsonRequestBehavior.AllowGet);
         }
 
         public JsonResult JoinProductsByProvider()
