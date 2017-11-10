@@ -12,7 +12,5 @@ namespace ElectricalAppliancesStore.Models
         public string ContactPerson { get; set; }
         public string PhoneNumber { get; set; }
         public string Email { get; set; }
-        public double[] LocationCoordinates { get; set; }
-        public string   LocationDescription { get; set; }
     }
 }

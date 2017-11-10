@@ -18,9 +18,6 @@ namespace ElectricalAppliancesStore.Controllers
         // GET: ProductView
         public ActionResult Products(int userID)
         {
-            // TODO: Remove when there'll be an option to add products
-            AddMocks();
-
             ProductView view = new ProductView()
             {
                 currOrder = new Order()
@@ -34,48 +31,45 @@ namespace ElectricalAppliancesStore.Controllers
             return View(view);
         }
 
-        public ActionResult UpdateOrder(ProductView view, int productID, int quantity)
+        public List<Product> getProductByCategory(int category)
         {
+            List<Product> products = ProductsManager.GetProducts(dbProducts);
+            products.RemoveAll(item => category != (int)item.Category);
 
-            // check if such item exist
-            if (!view.currOrder.Items.Exists(item => item.ProductID == productID))
+            return products;
+        }
+
+        // Search By Category
+        public ActionResult ProductsByCategory(int userID, int category)
+        {
+            ProductView view = new ProductView()
             {
-                // If not - add it to the order with the given qty
-                view.currOrder.Items.Add(new OrderItem()
+                currOrder = new Order()
                 {
-                    ProductID = productID,
-                    Quantity = quantity
-                });
-            }
-            else
-            { // Item exist in current order
-                // check if given amount is 0 - and if so - remove the item from the order
-                if (quantity == 0)
-                {
-                    var found = view.currOrder.Items.Find(item => item.ProductID == productID);
-                    if (found != null) view.currOrder.Items.Remove(found);
-                }
-                else
-                { //Update item's qty 
-                    view.currOrder.Items.Find(item => item.ProductID == productID).Quantity = quantity;
-                }
-            }
+                    ClientID = 2, //UserManager.GetClientIdByUserId(userID, dbClients),
+                    Items = new List<OrderItem>()
+                },
+                products = getProductByCategory(category)
+            };
+
             return View("Products", view);
         }
 
-        #region Mocks
-        public void AddMocks()
+        public ActionResult CheckOut(ProductView order)
         {
-            dbProducts.Database.Delete();
+            return RedirectToAction("CheckOut", "Order", order.currOrder);
+        }
 
-            List<Product> products = ProductsStub.GetProducts();
-
-            foreach (Product p in products)
+        #region Dispose
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
             {
-                dbProducts.Products.Add(p);
+                dbProducts.Dispose();
+                dbClients.Dispose();
             }
 
-            dbProducts.SaveChanges();
+            base.Dispose(disposing);
         }
         #endregion
     }

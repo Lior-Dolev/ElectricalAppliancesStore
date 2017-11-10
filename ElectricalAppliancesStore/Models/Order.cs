@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
 
@@ -14,6 +15,7 @@ namespace ElectricalAppliancesStore.Models
         public List<OrderItem> Items { get; set; }
         public string CreditCardNum { get; set; }
         public int CartSafeNum { get; set; }
+        [ForeignKey("ClientID")]
         public Client client { get; set; }
 
         public double PriceSum()

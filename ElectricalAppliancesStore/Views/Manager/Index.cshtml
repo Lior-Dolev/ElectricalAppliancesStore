@@ -13,10 +13,10 @@
 <div style="width:100%">
     @*Statistics*@
     <div class="container" style="width: 63%;float: left;border: 1px solid #dddddd;">
-        <h4 style="color:#0eabab;">Sales By Category</h4>
+        <h4 style="color:#0eabab;">Category Ranking by Products Sold</h4>
         <div id="barChart2"></div>
         <script src="~/Content/Manager/GraphD3-2.js"></script>
-        <h4 style="color:#0eabab;">Sales Throughout The Year</h4>
+        <h4 style="color:#0eabab;">Average Price of Transaction Per Month</h4>
         <svg id="barChart1"></svg>
         <script src="~/Content/Manager/GraphD3-1.js"></script>
     </div>
@@ -34,6 +34,18 @@
             <input type="text" class="form-control" placeholder="Tweet..." id="tweet-input"> <br />
             <button id="tweet-button" class="btn btn-success" type="button">Go!</button>
         </div>
+        <table id="records_table" border='1'>
+            <tr>
+                @*PurchaseDate     = order.PurchaseDate,
+                FullName         = client.FullName,
+                PriceSum         = order.PriceSum(),
+                CurrencyPurchase = order.CurrencyPurchase*@
+                <th>Purchase Date</th>
+                <th>Full Name</th>
+                <th>Total Sum</th>
+                <th>Currency</th>
+            </tr>
+        </table>
     </div>
     <div class="container col-md-12">
     </div>
@@ -51,4 +63,23 @@
             });
         });
     });
+</script>
+
+
+<script>
+$(document).ready(function() {
+    $.ajax({
+             url: "/Manager/JoinOrdersByClients",
+             success: function (data) {
+
+                 $.each(data, function (i, item) {
+                     $('<tr>').append(
+                     $('<td>').text(item.PurchaseDate),
+                     $('<td>').text(item.FullName),
+                     $('<td>').text(item.PriceSum),
+                     $('<td>').text(item.CurrencyPurchase)).appendTo('#records_table');
+                     });
+            }
+   });
+});
 </script>

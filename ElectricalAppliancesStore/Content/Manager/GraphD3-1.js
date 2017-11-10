@@ -1,6 +1,9 @@
 ﻿
 $.ajax({
-    url: "/Manager/GetProducts", success: function (result) {
+    //url: "/Manager/GetProducts", success: function (result) {
+    //    drawGraph(result);
+    //}
+    url: "/Manager/AveragePurchasePerMonth", success: function (result) {
         drawGraph(result);
     }
 });
@@ -47,12 +50,15 @@ function drawGraph(data) {
 
     //The x domain is a map of all the Products names
     x.domain(data.map(function (d) {
-        return d.Title;
+        // return d.Title;
+        return d.Month;
     }));
 
     //The y domain is a range from the maximal (Count) value in the array until 0
     y.domain([d3.max(data, function (d) {
-        return d.SalePrice;
+        //return d.SalePrice;
+        return d.price;
+
     }), 0]);
 
     svg.append("g")
@@ -78,15 +84,20 @@ function drawGraph(data) {
 
       .attr("x", function (d) {
           //the x function, transforms the value, based on the scale
-          return x(d.Title);
+          //return x(d.Title);
+          return x(d.Month);
+
       })
         //The rangeBand() function returns the width of the bars
       .attr("width", x.rangeBand())
       .attr("y", function (d) {
           //the y function does the same
-          return y(d.SalePrice);
+          //return y(d.SalePrice);
+          return y(d.price);
+
       })
       .attr("height", function (d) {
-          return height - y(d.SalePrice);
+          //return height - y(d.SalePrice);
+          return height - y(d.price);
       });
 }

@@ -1,0 +1,33 @@
+﻿@model ElectricalAppliancesStore.Models.EditProductView
+
+@{
+    ViewBag.Title = "AddProduct";
+}
+
+<h2>AddProduct</h2>
+@using (Html.BeginForm("Add", "Products", Model, FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+@Html.LabelFor(model => model.Title)
+@Html.TextBoxFor(model => model.Title)
+@Html.LabelFor(model => model.BuyPrice)
+@Html.TextBoxFor(model => model.BuyPrice)
+@Html.LabelFor(model => model.SalePrice)
+@Html.TextBoxFor(model => model.SalePrice)
+@Html.LabelFor(model => model.ProviderItems)
+@Html.DropDownListFor(model => model.SelectedProviderId, Model.ProviderItems)
+@Html.LabelFor(model => model.BrandItems)
+@Html.DropDownListFor(model => model.SelectedBrandId, Model.BrandItems)
+@Html.LabelFor(model => model.CategoryItems)
+@Html.DropDownListFor(model => model.SelectedCategoryId, Model.CategoryItems)
+
+@Html.LabelFor(model => model.Description)
+@Html.TextBoxFor(model => model.Description)
+@Html.LabelFor(model => model.Quantity)
+@Html.TextBoxFor(model => model.Quantity)
+    
+
+<p>Choose a picture: </p>
+<input type="file" name="uploadImages" class="input-files" />
+
+    <input type="submit" value="submit"/>
+}

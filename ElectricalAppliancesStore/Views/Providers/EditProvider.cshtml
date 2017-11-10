@@ -1,0 +1,22 @@
+﻿@model ElectricalAppliancesStore.Models.Provider
+
+@{
+    ViewBag.Title = "AddProvider";
+}
+
+<h2>AddProvider</h2>
+
+@using (Html.BeginForm("Edit", "Providers", FormMethod.Post))
+{
+    @Html.HiddenFor(model => model.ID)
+    @Html.LabelFor(model => model.CompanyName)
+    @Html.TextBoxFor(model => model.CompanyName)
+    @Html.LabelFor(model => model.PhoneNumber)
+    @Html.TextBoxFor(model => model.PhoneNumber)
+    @Html.LabelFor(model => model.ContactPerson)
+    @Html.TextBoxFor(model => model.ContactPerson)
+    @Html.LabelFor(model => model.Email)
+    @Html.TextBoxFor(model => model.Email)
+
+    <input type="submit" value="submit" />
+}

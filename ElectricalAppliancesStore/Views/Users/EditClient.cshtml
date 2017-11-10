@@ -1,0 +1,34 @@
+﻿@model ElectricalAppliancesStore.Models.EditClientView
+
+@{
+    ViewBag.Title = "Add Client";
+}
+
+<h2>AddClient</h2>
+
+@using (Html.BeginForm("Edit", "Users", FormMethod.Post))
+{
+    @Html.HiddenFor(model => model.ClientID)
+    @Html.LabelFor(model => model.FullName)
+    @Html.TextBoxFor(model => model.FullName)
+    @Html.LabelFor(model => model.Username)
+    @Html.TextBoxFor(model => model.Username)
+    @Html.LabelFor(model => model.Password)
+    @Html.TextBoxFor(model => model.Password)
+    @Html.LabelFor(model => model.Email)
+    @Html.TextBoxFor(model => model.Email)
+    @Html.LabelFor(model => model.Address.Country)
+    @Html.TextBoxFor(model => model.Address.Country)
+    @Html.LabelFor(model => model.Address.City)
+    @Html.TextBoxFor(model => model.Address.City)
+    @Html.LabelFor(model => model.Address.Street)
+    @Html.TextBoxFor(model => model.Address.Street)
+    @Html.LabelFor(model => model.Address.HouseNumber)
+    @Html.TextBoxFor(model => model.Address.HouseNumber)
+    @Html.LabelFor(model => model.Address.ZipCode)
+    @Html.TextBoxFor(model => model.Address.ZipCode)
+    @Html.LabelFor(model => model.Address.AppartmentNumber)
+    @Html.TextBoxFor(model => model.Address.AppartmentNumber)
+
+    <input type="submit" value="submit" />
+}

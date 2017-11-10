@@ -14,5 +14,7 @@ namespace ElectricalAppliancesStore.Models
         public string OpeningHours { get; set; }
         public Address Address { get; set; }
         public string PicturePath { get; set; }
+        public double[] LocationCoordinates { get; set; }
+        public string LocationDescription { get; set; }
     }
 }

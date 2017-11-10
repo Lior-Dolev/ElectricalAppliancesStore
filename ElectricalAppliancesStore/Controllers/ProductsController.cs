@@ -14,30 +14,61 @@ namespace ElectricalAppliancesStore.Controllers
     {
         ClientsContext dbClients = new ClientsContext();
         ProductsContext dbProducts = new ProductsContext();
-        
+        ProvidersContext dbProviders = new ProvidersContext();
 
         // GET: Products for inventory view
         public ActionResult Inventory()
         {
-            // TODO: Remove when there'll be an option to add products
-            AddMocks();
-            
-            return View(ProductsManager.GetProducts(dbProducts));
+            List<Product> products = ProductsManager.GetProducts(dbProducts);
+            return View(products);
         }
-        
-        #region Mocks
-        public void AddMocks()
+
+        public ActionResult AddProduct()
         {
-            dbProducts.Database.Delete();
+            return View(ProductsManager.CreateEditProductView(dbProviders));
+        }
 
-            List<Product> products = ProductsStub.GetProducts();
+        public ActionResult Delete(int productID)
+        {
+            ProductsManager.DeleteProduct(productID, dbProducts);
 
-            foreach(Product p in products)
+            return View("Inventory", "Products");
+        }
+
+        [HttpPost]
+        public ActionResult Add(EditProductView product)
+        {   
+            ProductsManager.AddProduct(product, dbProducts, Server);
+            EditProductView fullProduct = ProductsManager.FillSelectLists(product, dbProviders);
+            
+            return View("AddProduct", fullProduct);
+        }
+
+        public ActionResult EditProduct(int productID)
+        {
+            EditProductView view = ProductsManager.GetProductByID(productID, dbProducts, dbProviders);
+            return View("EditProduct", view);
+        }
+
+        public ActionResult Edit(EditProductView product)
+        {
+            ProductsManager.EditProduct(product, dbProducts, Server);
+            EditProductView fullProduct = ProductsManager.FillSelectLists(product, dbProviders);
+
+            return View("AddProduct", fullProduct);
+        }
+
+        #region Dispose
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
             {
-                dbProducts.Products.Add(p);
+                dbProducts.Dispose();
+                dbClients.Dispose();
+                dbProviders.Dispose();
             }
 
-            dbProducts.SaveChanges();
+            base.Dispose(disposing);
         }
         #endregion
     }

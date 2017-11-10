@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ElectricalAppliancesStore.DAL;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -7,11 +8,15 @@ namespace ElectricalAppliancesStore.Models.Stubs
 {
     public static class OrderStub
     {
-        public static Order GetOrder()
+        public static List<User> UsersManager { get; private set; }
+
+        public static Order GetOrder(UsersContext uContext, 
+                                     ProductsContext pContext,
+                                     ProvidersContext providersContext)
         {
-            List<Provider> providers = ProvidersStub.GetProviders();
-            List<User> user = UsersStub.GetUsers();
-            List<Product> products = ProductsStub.GetProducts();
+            List<Provider> providers = providersContext.Providers.ToList();
+            List<User> user = uContext.Users.ToList();
+            List<Product> products = pContext.Products.ToList();
             List<OrderItem> orItms = new List<OrderItem>();
             int i = 10;
             foreach (Product pr in products)
@@ -22,21 +27,6 @@ namespace ElectricalAppliancesStore.Models.Stubs
             Order ord = new Order()
             {
                 ID = 32,
-                /*Client = new Client()
-                {
-                    ID = 12,
-                    UserID = user.Last().ID,
-                    Address = new Address()
-                    {
-                        Street = "HaTamar",
-                        HouseNumber = 6,
-                        City = "Ramat Gan",
-                        Country = "Israel"
-                    },
-                    Email = "junkMail132@walla.co.il",
-                    FullName = "Mr. Spider Pig",
-                    PhoneNumber = "0987655333"
-                },*/
                 ClientID = 2,
                 Items = orItms,
                 PurchaseDate = DateTime.Now,

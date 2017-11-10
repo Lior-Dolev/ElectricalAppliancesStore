@@ -67,6 +67,7 @@ artifacts/
 *.svclog
 *.scc
 *.csproj
+./ElectricalAppliancesStore/ElectricalAppliancesStore.csproj
 
 # Chutzpah Test files
 _Chutzpah*

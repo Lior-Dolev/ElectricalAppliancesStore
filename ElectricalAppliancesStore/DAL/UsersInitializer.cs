@@ -7,45 +7,19 @@ using System.Web;
 
 namespace ElectricalAppliancesStore.DAL
 {
-    public class UsersInitializer : CreateDatabaseIfNotExists<UserContext>
+    public class UsersInitializer : CreateDatabaseIfNotExists<UsersContext>
     {
-        protected override void Seed(UserContext context)
+        protected override void Seed(UsersContext context)
         {
-            IList<User> defualtUsers = new List<User>() {
-                new User()
-                {
-                    ID = 1,
-                    PermissionType = PermissionType.Manager,
-                    Username = "Super",
-                    Password = "Man"
-                },
-                new User()
-                {
-                    ID = 2,
-                    PermissionType = PermissionType.Client,
-                    Username = "Lior",
-                    Password = "Dolev"
-                },
-                new User()
-                {
-                    ID = 3,
-                    PermissionType = PermissionType.Client,
-                    Username = "Ravid",
-                    Password = "Batat"
-                },
-                new User()
-                {
-                    ID = 4,
-                    PermissionType = PermissionType.Client,
-                    Username = "Idan",
-                    Password = "Sinibar"
-                }
+            User manager = new User()
+            {
+                ID = 1,
+                PermissionType = PermissionType.Manager,
+                Username = "Super",
+                Password = "Man"
             };
 
-            foreach (User currUser in defualtUsers)
-            {
-                context.Users.Add(currUser);
-            }
+            context.Users.Add(manager);
             
             base.Seed(context);
         }
