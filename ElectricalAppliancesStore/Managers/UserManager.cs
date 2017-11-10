@@ -42,6 +42,19 @@ namespace ElectricalAppliancesStore.Managers
             cContext.SaveChanges();
         }
 
+        public static void DeleteClient(int clientID, 
+                                        ClientsContext cContext,
+                                        UsersContext uContext)
+        {
+            Client dbClient = cContext.Clients.Find(clientID);
+            User dbUser = uContext.Users.Find(dbClient.UserID);
+
+            cContext.Clients.Remove(dbClient);
+            uContext.Users.Remove(dbUser);
+            cContext.SaveChanges();
+            uContext.SaveChanges();
+        }
+
         public static int GetClientIdByUserId(int userID, ClientsContext cContext)
         {
             return cContext.Clients.Find(userID).ID;

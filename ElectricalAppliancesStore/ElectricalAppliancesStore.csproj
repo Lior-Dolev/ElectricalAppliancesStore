@@ -808,6 +808,7 @@
     <Content Include="Views\Providers\AddProvider.cshtml" />
     <Content Include="Views\Providers\Index.cshtml" />
     <Content Include="Views\Providers\EditProvider.cshtml" />
+    <Content Include="Views\Users\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
