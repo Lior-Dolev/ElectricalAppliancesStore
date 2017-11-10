@@ -22,10 +22,10 @@ namespace ElectricalAppliancesStore.Controllers
         public ProductsContext dbProducts = new ProductsContext();
         public ProvidersContext dbProviders = new ProvidersContext();
 
-        public static ITwitterCredentials auth = 
-            Auth.SetUserCredentials("pQJn6sjNxuivMZMlRz6aGIqSk", 
-                                    "hRchrNrU8pv10e5HIu4eag5ZQz1J2jYPZuwv7ME6mMEnns6503", 
-                                    "924214133867806720-2LCmCadngZ8HU7FedaBRDF3qPBZKm39", 
+        public static ITwitterCredentials auth =
+            Auth.SetUserCredentials("pQJn6sjNxuivMZMlRz6aGIqSk",
+                                    "hRchrNrU8pv10e5HIu4eag5ZQz1J2jYPZuwv7ME6mMEnns6503",
+                                    "924214133867806720-2LCmCadngZ8HU7FedaBRDF3qPBZKm39",
                                     "vDdph6vAYdW41Xq95G6MR3fuRvC8xLw6MxuZwt49XnGef");
 
         // GET: Manager
@@ -37,6 +37,22 @@ namespace ElectricalAppliancesStore.Controllers
         public void PostTweet(string text)
         {
             Tweet.PublishTweet(text);
+        }
+
+        public JsonResult JoinProductsByProvider()
+        {
+           
+            var query = dbProviders.Providers.AsEnumerable().Join(
+                                                dbProducts.Products.AsEnumerable(),
+                                                provider => provider.ID,
+                                                product => product.ProviderID,
+                                                (provider, product) => new
+                                                {
+                                                    CompanyName = provider.CompanyName,
+                                                    ProductName = product.Title
+                                                }).ToList();// .GroupBy(record => record.ProviderId);
+
+            return Json(query, JsonRequestBehavior.AllowGet);
         }
 
         public decimal CurrencyRate()
