@@ -294,6 +294,7 @@
     <Content Include="Content\Media\site_header.png" />
     <Content Include="Content\ControlsStyle\search.css" />
     <Content Include="Content\Manager\index.css" />
+    <Content Include="Content\Media\toaster for pros.MP4" />
     <Content Include="Content\Site.css" />
     <Content Include="Content\themes\base\accordion.css" />
     <Content Include="Content\themes\base\all.css" />

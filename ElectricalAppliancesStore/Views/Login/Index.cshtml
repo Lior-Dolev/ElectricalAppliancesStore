@@ -7,7 +7,7 @@
 
 @using (Html.BeginForm("Login", "Login", FormMethod.Post))
 {
-    <div style="width:25%; float:left;">
+    <div style="width:20%; float:left;">
         <h2>Login</h2>
         <label for="username">Username:</label>
         @Html.TextBoxFor(model => model.Username, new { @class = "form-control mr-sm-2", placeholder ="user name" })
@@ -17,19 +17,23 @@
         <br/>
         <input type="submit" value="Sign In" class="btn btn-success my-2 my-sm-0"/>
     </div>
-    <div style="width:70%; float:right;">
+    <div style="width:35%; height:40%; float:left; margin-left:20px;">
         <div class="jumbotron text-center">
-            <h1> Wellcome to our store!</h1>
-            <br />
+            <h2> Wellcome to our store!</h2><br/>
             <p class="lead">
                 We are selling everything you need, from food, to stuff!! E-V-E-R-Y-T-H-I-N-G! buy here more, and remember:
                 <br /><br />
 
-                <h3>
+                <h4>
                     <b>The more you buy, The happier you are</b>
-                </h3>
+                </h4>
             </p>
         </div>
+    </div>
+    <div class="container" style="width:40%; float:left;height:60%; margin-left:20px;border: 1px solid #4ed7d2; border-radius:7px;background-color:#000; overflow:hidden">
+        <video width="504" height="336" controls>
+            <source src="../Content/Media/toaster for pros.MP4" type="video/mp4">
+        </video>
     </div>
 }
 
