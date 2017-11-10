@@ -1,5 +1,9 @@
 ﻿$.ajax({
-    url: "/Manager/GetProducts", success: function (result) {
+    //url: "/Manager/GetProducts", success: function (result) {
+    //    drawGraph1(result);
+    //}
+
+    url: "/Manager/GetTotalItemsPerCategory", success: function (result) {
         drawGraph1(result);
     }
 });
@@ -8,7 +12,9 @@
 function drawGraph1(data) {
     //sort bars based on value
     data = data.sort(function (a, b) {
-        return d3.ascending(a.SalePrice, b.SalePrice);
+        //return d3.ascending(a.SalePrice, b.SalePrice);
+        return d3.ascending(a.count, b.count);
+
     })
 
     //set up svg using margin conventions - we'll need plenty of room on the left for labels
@@ -31,13 +37,16 @@ function drawGraph1(data) {
     var x = d3.scale.linear()
         .range([0, width])
         .domain([0, d3.max(data, function (d) {
-            return d.SalePrice;
+            //return d.SalePrice;
+            return d.count;
+
         })]);
 
     var y = d3.scale.ordinal()
         .rangeRoundBands([height, 0], .1)
         .domain(data.map(function (d) {
-            return d.Title;
+            //return d.Title;
+            return d.Category;
         }));
 
     //make y axis to show bar names
@@ -60,12 +69,14 @@ function drawGraph1(data) {
     bars.append("rect")
         .attr("class", "bar")
         .attr("y", function (d) {
-            return y(d.Title);
+            //return y(d.Title);
+            return y(d.Category);
         })
         .attr("height", y.rangeBand())
         .attr("x", 0)
         .attr("width", function (d) {
-            return x(d.SalePrice);
+            //return x(d.SalePrice);
+            return x(d.count);
         });
 
     //add a value label to the right of each bar
@@ -73,14 +84,17 @@ function drawGraph1(data) {
         .attr("class", "label")
         //y position of the label is halfway down the bar
         .attr("y", function (d) {
-            return y(d.Title) + y.rangeBand() / 2 + 4;
+            //return y(d.Title) + y.rangeBand() / 2 + 4;
+            return y(d.Category) + y.rangeBand() / 2 + 4;
         })
         //x position is 3 pixels to the right of the bar
         .attr("x", function (d) {
-            return x(d.SalePrice) + 3;
+            //return x(d.SalePrice) + 3;
+            return x(d.count) + 3;
         })
         .text(function (d) {
-            return d.SalePrice;
+            //return d.SalePrice;
+            return d.count;
         });
 
 }

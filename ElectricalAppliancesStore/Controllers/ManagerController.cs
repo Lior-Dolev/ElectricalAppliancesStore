@@ -98,6 +98,49 @@ namespace ElectricalAppliancesStore.Controllers
             return Json(bestSeller, JsonRequestBehavior.AllowGet);
         }
 
+        public JsonResult GetTotalItemsPerCategory()
+        {
+
+            const int NUM_OF_CATEGORIES = sizeof(Category);
+            int [] categories           = new int[NUM_OF_CATEGORIES];
+
+            foreach (var order in dbOrders.Orders)
+            {
+                foreach(var item in order.Items)
+                {
+                    categories[(int)item.Product.Category] += item.Product.SoldCounter;
+                }
+            }
+
+             var toBeJson = new[]
+             {
+                    new { Category = Enum.GetName(typeof(Category), (int)Category.BakingOvens),
+                          count    = categories[(int)Category.BakingOvens]      },
+
+                    new { Category = Enum.GetName(typeof(Category), (int)Category.Blenders),
+                          count    = categories[(int)Category.Blenders]         },
+
+                    new { Category = Enum.GetName(typeof(Category), (int)Category.CoffeeMachines),
+                          count    = categories[(int)Category.CoffeeMachines]   },
+
+                    new { Category = Enum.GetName(typeof(Category), (int)Category.Dishwashers),
+                          count    = categories[(int)Category.Dishwashers]      },
+
+                    new { Category = Enum.GetName(typeof(Category), (int)Category.Freezers),
+                          count    = categories[(int)Category.Freezers]         },
+
+                    new { Category = Enum.GetName(typeof(Category), (int)Category.Microwaves),
+                          count    = categories[(int)Category.Microwaves]       },
+
+                    new { Category = Enum.GetName(typeof(Category), (int)Category.Mixers),
+                          count    = categories[(int)Category.Mixers]           },
+
+                    new { Category = Enum.GetName(typeof(Category), (int)Category.Refrigerators),
+                          count    = categories[(int)Category.Refrigerators]    },
+            };
+
+            return Json(toBeJson, JsonRequestBehavior.AllowGet);
+        }
 
         public JsonResult AveragePurchasePerMonth()
         {
