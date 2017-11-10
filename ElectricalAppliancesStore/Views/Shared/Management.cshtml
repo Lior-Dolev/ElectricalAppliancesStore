@@ -21,13 +21,13 @@
     <header></header>
     <div class="navbar_r navbar-default">
         <div class="container">
-            <div class="navbar-header">
-                @Html.ActionLink("Home", "Index", "Home", null, new { @class = "navbar-brand navbar-button_r" })
-                @Html.ActionLink("Branches", "Index", "Home", null, new { @class = "navbar-brand navbar-button_r" })
+            <nav class="navbar-header">
+                @Html.ActionLink("Home", "Index", "Manager", null, new { @class = "navbar-brand navbar-button_r" })
+                @Html.ActionLink("Branches", "Branchs", "Branch", new { isMgr = true}, new { @class = "navbar-brand navbar-button_r" })
                 @Html.ActionLink("Suppliers", "Index", "Home", null, new { @class = "navbar-brand navbar-button_r" })
                 @Html.ActionLink("Customers", "Index", "Home", null, new { @class = "navbar-brand navbar-button_r" })
-                @Html.ActionLink("Inventory", "Index", "Home", null, new { @class = "navbar-brand navbar-button_r" })
-            </div>
+                @Html.ActionLink("Inventory", "Inventory", "Products", null, new { @class = "navbar-brand navbar-button_r" })
+            </nav>
         </div>
     </div>
     <br />

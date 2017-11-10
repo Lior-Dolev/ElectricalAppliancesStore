@@ -1,5 +1,6 @@
 ﻿header {
-    background-image: url(/Content/Media/site_header.png);
+    /*background-image: url(/Content/Media/headerV2.png);*/
+        background-image: url(/Content/Media/site_header.png);
     background-repeat: no-repeat;
     height: 200px;
     background-size: 100% 150px;
@@ -7,6 +8,7 @@
     background-size:cover;
     overflow-x:hidden;
     background-position-x:center;
+
 }
 
 .navbar_r {
@@ -37,9 +39,14 @@ body {
 h2 {
     font-family:"Berlin Sans FB";
     font-weight:300;
+    text-shadow: 2px 2px #c4c4c4 !important;
 }
+@font-face {
+      font-family: "Bitstream Vera Serif Bold";
+      src: url("https://mdn.mozillademos.org/files/2468/VeraSeBd.ttf");
+    }
 h4 {
-    font-family:"Berlin Sans FB";
+    font-family:"Bitstream Vera Serif Bold";
     font-weight:300;
 }
 .shoppingList {
@@ -55,4 +62,9 @@ h4 {
 .left-main-content {
     /*width: 80%;*/
     display:inline-block;
+}
+.loginDiv {
+    column-count: 3;
+    column-rule: 1px solid lightblue;
+    column-gap: 40px;
 }
