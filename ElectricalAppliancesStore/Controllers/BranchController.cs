@@ -11,9 +11,12 @@ namespace ElectricalAppliancesStore.Controllers
     public class BranchController : Controller
     {
         // GET: Branch
-        public ActionResult Branchs()
+        public ActionResult Branchs(bool isMgr)
         {
             List<Branch> branches = BranchesStub.GetBranches();
+            if (isMgr){
+                return View("ManageBranches", branches);
+            }
             return View(branches);
         }
     }

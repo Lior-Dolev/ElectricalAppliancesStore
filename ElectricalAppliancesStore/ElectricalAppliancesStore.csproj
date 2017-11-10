@@ -282,6 +282,7 @@
     <Content Include="Content\Manager\GoogleMaps.js" />
     <Content Include="Content\Manager\GraphD3-1.js" />
     <Content Include="Content\Manager\GraphD3-2.js" />
+    <Content Include="Content\Media\headerV2.png" />
     <Content Include="Content\Media\products\eggs.jpg" />
     <Content Include="Content\Media\products\fan.jpg" />
     <Content Include="Content\Media\products\fridge.jpg" />
@@ -804,6 +805,7 @@
     <Content Include="Views\ProductView\Products.cshtml" />
     <Content Include="Views\Manager\Index.cshtml" />
     <Content Include="Views\Branch\Branchs.cshtml" />
+    <Content Include="Views\Branch\ManageBranches.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

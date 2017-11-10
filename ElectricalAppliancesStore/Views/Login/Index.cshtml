@@ -7,33 +7,72 @@
 
 @using (Html.BeginForm("Login", "Login", FormMethod.Post))
 {
-    <div style="width:20%; float:left;">
-        <h2>Login</h2>
-        <label for="username">Username:</label>
-        @Html.TextBoxFor(model => model.Username, new { @class = "form-control mr-sm-2", placeholder ="user name" })
-        <br/>
-        <label for="password">Password:</label>
-        @Html.PasswordFor(model => model.Password, new { @class = "form-control mr-sm-2" , placeholder ="password" })
-        <br/>
-        <input type="submit" value="Sign In" class="btn btn-success my-2 my-sm-0"/>
-    </div>
-    <div style="width:35%; height:40%; float:left; margin-left:20px;">
-        <div class="jumbotron text-center">
-            <h2> Wellcome to our store!</h2><br/>
-            <p class="lead">
+    <div class="loginDiv">
+        <div style="height:400px;">
+            <h2>Login</h2>
+            <label for="username">Username:</label>
+            @Html.TextBoxFor(model => model.Username, new { @class = "form-control mr-sm-2", placeholder = "user name" })
+            <br />
+            <label for="password">Password:</label>
+            @Html.PasswordFor(model => model.Password, new { @class = "form-control mr-sm-2", placeholder = "password" })
+            <br />
+            <input type="submit" value="Sign In" class="btn btn-success my-2 my-sm-0" />
+        </div>
+        <div class="jumbotron text-center" style="height:400px; width: 380px;">
+            <h2> Wellcome to our store!</h2><br />
+            <p class="lead" style="font-size:12pt;">
                 We are selling everything you need, from food, to stuff!! E-V-E-R-Y-T-H-I-N-G! buy here more, and remember:
                 <br /><br />
-
                 <h4>
                     <b>The more you buy, The happier you are</b>
                 </h4>
             </p>
         </div>
-    </div>
-    <div class="container" style="width:40%; float:left;height:60%; margin-left:20px;border: 1px solid #4ed7d2; border-radius:7px;background-color:#000; overflow:hidden">
-        <video width="504" height="336" controls>
-            <source src="../Content/Media/toaster for pros.MP4" type="video/mp4">
-        </video>
+        <div style="height:400px;">
+            <canvas id="myCanvas" width="360" height="48"
+                    style="border-radius:7px;">
+            </canvas>
+            <script type="text/javascript">
+                var c = document.getElementById("myCanvas");
+                var ctx = c.getContext("2d");
+
+                // Set size of canvas gradient 
+                ctx.rect(0, 0, 400, 48)
+
+                // Create gradient
+                var grd = ctx.createLinearGradient(20, 45, 20, 10);
+
+                grd.addColorStop(0, "#fff");
+                grd.addColorStop(1, "#fff49d");
+
+                // Fill with gradient
+                ctx.fillStyle = grd;
+                ctx.fill();
+            </script>
+            <h2 class="text-center">Advertisement</h2>
+            <video width="360" height="240" controls>
+                <source src="../Content/Media/toaster for pros.MP4" type="video/mp4">
+            </video>
+            <canvas id="myCanvas2" width="360" height="40"
+                    style="border-radius:7px;"></canvas>
+            <script type="text/javascript">
+                var c = document.getElementById("myCanvas2");
+                var ctx = c.getContext("2d");
+
+                // Set size of canvas gradient
+                ctx.rect(0, 0, 400, 40)
+
+                // Create gradient
+                var grd = ctx.createLinearGradient(20, 45, 20, 10);
+
+                grd.addColorStop(1, "#fff");
+                grd.addColorStop(0, "#fff49d");
+
+                // Fill with gradient
+                ctx.fillStyle = grd;
+                ctx.fill();
+            </script>
+        </div>
     </div>
 }
 
