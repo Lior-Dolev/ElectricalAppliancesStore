@@ -19,24 +19,31 @@
             <input type="submit" value="Sign In" class="btn btn-success my-2 my-sm-0" />
         </div>
         <div class="jumbotron text-center" style="height:400px; width: 380px;">
-            <h2> Wellcome to our store!</h2><br />
-            <p class="lead" style="font-size:12pt;">
-                We are selling everything you need, from food, to stuff!! E-V-E-R-Y-T-H-I-N-G! buy here more, and remember:
-                <br /><br />
-                <h4>
-                    <b>The more you buy, The happier you are</b>
-                </h4>
-            </p>
+            <h2> Wellcome to our store!</h2>
+            <aside>
+                <p class="lead" style="font-size:9pt;">
+                    <section>
+                        We are selling everything you need, from food, to stuff!!
+                    </section>
+                    <section>
+                        E-V-E-R-Y-T-H-I-N-G! buy here more, and remember:
+                    </section>
+                    <section>
+                        <h4>
+                            <b>The more you buy, The happier you are</b>
+                        </h4>
+                    </section>
+                </p>
+            </aside>
         </div>
         <div style="height:400px;">
             <canvas id="myCanvas" width="360" height="48"
-                    style="border-radius:7px;">
-            </canvas>
+                    style="border-radius:7px;"></canvas>
             <script type="text/javascript">
                 var c = document.getElementById("myCanvas");
                 var ctx = c.getContext("2d");
 
-                // Set size of canvas gradient 
+                // Set size of canvas gradient
                 ctx.rect(0, 0, 400, 48)
 
                 // Create gradient
