@@ -14,6 +14,7 @@ using System.Web.Script.Services;
 using ElectricalAppliancesStore.DAL;
 using ElectricalAppliancesStore.Managers;
 using ElectricalAppliancesStore.Models.Stubs;
+using ElectricalAppliancesStore.Models;
 
 namespace ElectricalAppliancesStore.Controllers
 {
@@ -41,6 +42,62 @@ namespace ElectricalAppliancesStore.Controllers
         {
             Tweet.PublishTweet(text);
         }
+
+        public static Product getBestSellerInOrder(Order order)
+        {
+            List<OrderItem> items   = order.Items;
+            Product bestSeller      = null;
+
+            if ( 0 == items.Count())
+            {
+                // note :: we should always have at least
+                //              one order so we don't have to deal with errors
+                return null;
+            }
+
+            foreach (var orderItem in items)
+            {
+                if (null == bestSeller)
+                {
+                    bestSeller = orderItem.Product;
+                    continue;
+                }
+
+                if ( bestSeller.SalePrice < orderItem.Product.SoldCounter)
+                {
+                    bestSeller = orderItem.Product;
+                }
+            }
+
+            return bestSeller;
+        }
+
+        public JsonResult GetBestSellerItemThisMonth()
+        {
+            Product bestSeller  = null;
+            int month           = DateTime.Now.Month;
+
+            foreach (var order in dbOrders.Orders)
+            {
+                if (month == order.PurchaseDate.Month)
+                {
+                    Product bestSellerInOrder = getBestSellerInOrder(order);
+                    if ( null == bestSeller)
+                    {
+                        bestSeller = bestSellerInOrder;
+                        continue;
+                    }
+
+                    if ( bestSeller.SoldCounter < bestSellerInOrder.SoldCounter)
+                    {
+                        bestSeller = bestSellerInOrder;
+                    }
+                }
+            }
+
+            return Json(bestSeller, JsonRequestBehavior.AllowGet);
+        }
+
 
         public JsonResult AveragePurchasePerMonth()
         {
