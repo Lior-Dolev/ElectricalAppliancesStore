@@ -19,6 +19,15 @@ namespace ElectricalAppliancesStore.Controllers
             return View(ProvidersManager.GetProviders(dbProviders));
         }
 
+        // Search for Provider
+        public ActionResult ProvidersByContactPerson(String contactPerson)
+        {
+            List<Provider> providers = ProvidersManager.GetProviders(dbProviders);
+            providers.RemoveAll(item => item.ContactPerson != contactPerson);
+
+            return View("Index", providers);
+        }
+
         public ActionResult AddProvider()
         {
             return View("AddProvider", new Provider());

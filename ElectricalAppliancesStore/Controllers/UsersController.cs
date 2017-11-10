@@ -19,6 +19,15 @@ namespace ElectricalAppliancesStore.Controllers
             return View(UserManager.GetClients(clientsContext));
         }
 
+        // Search for Users
+        public ActionResult UsersByName(String name)
+        {
+            List<Client> clients = UserManager.GetClients(clientsContext);
+            clients.RemoveAll(item => item.FullName != name);
+
+            return View("Index", clients);
+        }
+
         // GET: Users
         public ActionResult AddClient()
         {
