@@ -31,6 +31,9 @@ namespace ElectricalAppliancesStore.Controllers
         // GET: Users
         public ActionResult AddClient()
         {
+            //clientsContext.Database.Delete();
+            //clientsContext.SaveChanges();
+
             return View(new EditClientView() { Address = new Address() });
         }
 
