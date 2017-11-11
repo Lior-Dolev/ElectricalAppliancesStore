@@ -32,18 +32,38 @@ namespace ElectricalAppliancesStore.Controllers
             return View(view);
         }
         
-        [HttpPost]
+        public List<Product> getProductByCategory(int category)
+        {
+            List<Product> products = ProductsManager.GetProducts(dbProducts);
+            products.RemoveAll(item => category != (int)item.Category);
+
+            return products;
+        }
+
+        // Search By Category
+        public ActionResult ProductsByCategory(int userID, int category)
+        {
+            ProductView view = new ProductView()
+            {
+                currOrder = new Order()
+                {
+                    ClientID = 2, 
+                    Items = new List<OrderItem>()
+                },
+                products = getProductByCategory(category)
+            };
+
+            return View("Products", view);
+        }
+
         public ActionResult CheckOut(string orderItems, int clientID)
         {
             Dictionary<int,int> quantityByProductId = JsonConvert.DeserializeObject<Dictionary<int,int>>(orderItems);
             
             Order order = OrderManager.CreateOrder(clientID,
                                                    quantityByProductId);
-
-            string serializedOrder = JsonConvert.SerializeObject(order);
+            
             string serializedItems = JsonConvert.SerializeObject(order.Items);
-            //return RedirectToAction("CheckOut", "Order", new { clientID = clientID,
-            //                                                    items = serializedItems });
             return Json(Url.Action("CheckOut", "Order", new
             {
                 clientID = clientID,

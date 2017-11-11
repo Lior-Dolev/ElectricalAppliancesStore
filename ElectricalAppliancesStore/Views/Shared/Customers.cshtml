@@ -19,12 +19,10 @@
     <header></header>
     <div class="navbar-default navbar_r">
         <div class="container">
-            <div class="navbar-header">
-                @Html.ActionLink("Home", "Index", "Home", null, new { @class = "navbar-brand navbar-button_r" })
-                @Html.ActionLink("Shopping Cart", "Index", null, "Home", new { @class = "navbar-brand navbar-button_r" })
-                @Html.ActionLink("Branches", "Index", "Home", null, new { @class = "navbar-brand navbar-button_r" })
-                @Html.ActionLink("Products", "Index", "Home", null, new { @class = "navbar-brand navbar-button_r" })
-            </div>
+            <nav class="navbar-header">
+                @Html.ActionLink("Branches", "Branchs", "Branch", new { isMgr = false }, new { @class = "navbar-brand navbar-button_r" })
+                @Html.ActionLink("Products", "Products", "ProductView",new { userID = 2}, new { @class = "navbar-brand navbar-button_r" })
+            </nav>
         </div>
     </div>
     <br />

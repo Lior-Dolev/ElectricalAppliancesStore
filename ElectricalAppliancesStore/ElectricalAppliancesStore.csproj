@@ -274,6 +274,7 @@
     <Content Include="Content\Manager\GoogleMaps.js" />
     <Content Include="Content\Manager\GraphD3-1.js" />
     <Content Include="Content\Manager\GraphD3-2.js" />
+    <Content Include="Content\Media\headerV2.png" />
     <Content Include="Content\Media\products\eggs.jpg" />
     <Content Include="Content\Media\products\fan.jpg" />
     <Content Include="Content\Media\products\flower.jpg" />
@@ -288,6 +289,7 @@
     <Content Include="Content\Master.css" />
     <Content Include="Content\ControlsStyle\search.css" />
     <Content Include="Content\Manager\index.css" />
+    <Content Include="Content\Media\toaster for pros.MP4" />
     <Content Include="Content\Site.css" />
     <Content Include="Content\themes\base\accordion.css" />
     <Content Include="Content\themes\base\all.css" />
@@ -801,6 +803,7 @@
     <Content Include="Views\ProductView\Products.cshtml" />
     <Content Include="Views\Manager\Index.cshtml" />
     <Content Include="Views\Branch\Branchs.cshtml" />
+    <Content Include="Views\Branch\ManageBranches.cshtml" />
     <Content Include="Views\Products\AddProduct.cshtml" />
     <Content Include="Views\Products\EditProduct.cshtml" />
     <Content Include="Views\Users\AddClient.cshtml" />
