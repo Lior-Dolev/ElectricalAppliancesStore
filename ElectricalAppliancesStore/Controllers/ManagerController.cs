@@ -73,6 +73,12 @@ namespace ElectricalAppliancesStore.Controllers
             return Json(toBeJson, JsonRequestBehavior.AllowGet);
         }
 
+        public JsonResult GetSuppliers()
+        {
+            List<Provider> providers = ProvidersManager.GetProviders(dbProviders);
+            return Json(providers, JsonRequestBehavior.AllowGet);
+        }
+
         public JsonResult GetBrands()
         {
             var toBeJson = new[]

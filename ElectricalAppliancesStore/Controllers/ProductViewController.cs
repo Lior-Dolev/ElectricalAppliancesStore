@@ -54,22 +54,34 @@ namespace ElectricalAppliancesStore.Controllers
         {
             List<Product> products = ProductsManager.GetProducts(dbProducts);
 
-            Category ctg_id;
-            if  ( ! Enum.TryParse<Category>(category, out ctg_id))
+            bool filterCategory = "All" != category;
+            bool filterBrand    = "All" != brand;
+
+            Category ctg_id = 0;
+            if  ( filterCategory && ! Enum.TryParse<Category>(category, out ctg_id))
             {
                 products.Clear();
                 return products;
             }
 
-            Brand brd_id;
-            if (! Enum.TryParse<Brand>(brand, out brd_id))
+            Brand brd_id = 0;
+            if ( filterBrand && ! Enum.TryParse<Brand>(brand, out brd_id))
             {
                 products.Clear();
                 return products;
             }
 
-            products.RemoveAll(
-                item => (ctg_id != item.Category || brd_id != item.Brand || maxPrice < item.SalePrice));
+            if (filterCategory)
+            {
+                products.RemoveAll(item => ctg_id != item.Category);
+            }
+
+            if (filterBrand)
+            {
+                products.RemoveAll(item => brd_id != item.Brand);
+            }
+
+            products.RemoveAll(item => maxPrice < item.BuyPrice);
             return products;
         }
 
