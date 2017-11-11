@@ -9,9 +9,19 @@
     </div>
 
     <div class="container col-sm-8" style="margin-top:20px;float:left;">
-        <div class="zoomGlass">
+        @*<div class="zoomGlass">
             <input name="search" id="search" type="search" placeholder="Search">
             <div class="zoomStick">/</div>
+        </div>*@
+        <div class="container">
+            <div class="dropdown">
+                <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
+                    Filter By Category
+                    <span class="caret"></span>
+                </button>
+                <ul id ="drop1" class="dropdown-menu">
+                </ul>
+            </div>
         </div>
     </div>
     <div class="container col-sm-2" style="margin-top:20px;float:left;">
@@ -59,8 +69,9 @@
     </div>
 </div>
 
-<div class="container col-md-12">
-</div>
+<div class="container col-md-12"></div>
+
+
 <script type="text/javascript">
 
     var quantityByProductId = {};
@@ -170,4 +181,23 @@
         });
     }
 
+</script>
+
+
+<script>
+$(document).ready(function()
+{
+    $.ajax({
+    url: "/Manager/GetCategories",
+             success: function(data) {
+                 $.each(data, function(i, item) {
+                     var url = "/ProductView/ProductsByCategory" + "?userID=" + @Model.currOrder.ClientID + "&category=" + item.ID;
+                     var query = "<a href=\"" + url +"\"/>";
+
+                     $('<li>').append(
+                     $(query).text(item.Category)).appendTo('#drop1');
+            });
+        }
+    });
+});
 </script>

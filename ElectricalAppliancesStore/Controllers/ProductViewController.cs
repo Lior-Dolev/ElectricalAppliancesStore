@@ -23,7 +23,7 @@ namespace ElectricalAppliancesStore.Controllers
             {
                 currOrder = new Order()
                 {
-                    ClientID = UserManager.GetClientIdByUserId(userID, dbClients),
+                    ClientID = 2, //UserManager.GetClientIdByUserId(userID, dbClients),
                     Items = new List<OrderItem>()
                 },
                 products = ProductsManager.GetProducts(dbProducts)
@@ -35,8 +35,10 @@ namespace ElectricalAppliancesStore.Controllers
         public List<Product> getProductByCategory(int category)
         {
             List<Product> products = ProductsManager.GetProducts(dbProducts);
-            products.RemoveAll(item => category != (int)item.Category);
-
+            if (-1 != category)
+            {
+                products.RemoveAll(item => category != (int)item.Category);
+            }
             return products;
         }
 
@@ -47,7 +49,7 @@ namespace ElectricalAppliancesStore.Controllers
             {
                 currOrder = new Order()
                 {
-                    ClientID = 2, 
+                    ClientID = 2, //UserManager.GetClientIdByUserId(userID, dbClients),
                     Items = new List<OrderItem>()
                 },
                 products = getProductByCategory(category)
