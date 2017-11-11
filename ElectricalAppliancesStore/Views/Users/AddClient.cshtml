@@ -1,10 +1,11 @@
 ﻿@model ElectricalAppliancesStore.Models.EditClientView
 
 @{
-    ViewBag.Title = "Add Client";
+    Layout = "~/Views/Shared/Management.cshtml";
+    ViewBag.Title = "Add Customer";
 }
 
-<h2>AddClient</h2>
+<h2>Add Customer</h2>
 
 @using (Html.BeginForm("Add", "Users", FormMethod.Post))
 {
