@@ -10,16 +10,38 @@
 
     <div class="container col-sm-6" style="margin-top:20px;float:left;">
         <div class="zoomGlass">
-            <input name="search" id="search" type="search" placeholder="Search">
+            <input name="search" id="search" type="search" placeholder="Search" onkeyup="OnIndexCall()">
             <div class="zoomStick">/</div>
         </div>
     </div>
     <div class="container col-sm-2" style="margin-top:20px;float:left;">
-        <input type="submit" value="Advanced Search >>" class="btn btn-info my-2 my-sm-0" />
+        @Html.ActionLink("Advanced Search >>", "ProvidersByContactPerson", "Providers", new { contactPerson = ViewBag.Title }, new { @class = "btn btn-info my-2 my-sm-0", @id = "advSearchLink" })
+        @*<input type="submit" value="Advanced Search >>" class="btn btn-info my-2 my-sm-0" />*@
     </div>
     <div class="container col-sm-2" style="margin-top:20px;float:left;">
        @Html.ActionLink("+ Add", "AddProduct", "Products", null, new { @class = "btn btn-success my-2 my-sm-0" })
     </div>
+</div>
+<div>
+    <table>
+        <tr>
+            <td>
+                <label class="th-manger-page">Max Price </label>
+                <br />
+                <input type="text" id="max_price" onkeyup="advOnIndexCall()" />
+            </td>
+            <td>
+                <label class="th-manger-page">Category </label>
+                <br />
+                <select id="categories" class="dropdown-menu" onselect="advOnIndexCall()" style="display: inline-block;position: inherit;"></select>
+            </td>
+            <td>
+                <label class="th-manger-page">Brand </label>
+                <br />
+                <select id="brands" class="dropdown-menu"  onselect="advOnIndexCall()"  style="display: inline-block;position: inherit;"></select>
+            </td>
+        </tr>
+    </table>
 </div>
 <div class="container">
     <div class="container col-sm-8">
@@ -46,8 +68,44 @@
 </div>
 
 <script type="text/javascript">
+    $(document).ready(function () {
+        $.ajax({
+            url: '@Url.Action("GetCategories", "Manager")',
+            success: function (data) {
+                $.each(data, function (i, item) {
+                    var opt = document.createElement("option");
+                    opt.value = item.Category;
+                    opt.innerHTML = item.Category;
+
+                    // then append it to the select element
+                    document.getElementById('categories').appendChild(opt);
+
+                });
+            }
+        });
+        $.ajax({
+            url: '@Url.Action("GetBrands", "Manager")',
+            success: function (data) {
+                $.each(data, function (i, item) {
+                    var opt = document.createElement("option");
+                    opt.value = item.Brand;
+                    opt.innerHTML = item.Brand;
+
+                    // then append it to the select element
+                    document.getElementById('brands').appendChild(opt);
+                });
+            }
+        });
+    });
     function editProduct(location) {
         window.location.href = location;
-
+    }
+    function advOnIndexCall() {
+        var maxPrice = document.getElementById('max_price').value;
+        var categories = document.getElementById("categories");
+        var category = categories.options[categories.selectedIndex].value;
+        var brands = document.getElementById("brands");
+        var brand = brands.options[brands.selectedIndex].value;
+        $('#searchLink').attr('href', '@Url.Action("ProvidersByContactPerson", "Providers")' + '?contactPerson=' + contact);
     }
 </script>
