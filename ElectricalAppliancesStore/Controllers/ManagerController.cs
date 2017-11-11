@@ -43,6 +43,65 @@ namespace ElectricalAppliancesStore.Controllers
             Tweet.PublishTweet(text);
         }
         
+        public JsonResult GetPriceLimit()
+        {
+            var toBeJson = new[]
+            {
+                    new { Max    = "Any",
+                          ID     = -1      },
+
+                    new { Max    = "500 NIS",
+                          ID     = 500    },
+
+                    new { Max    = "1000 NIS",
+                          ID     = 1000        },
+
+                    new { Max    = "5000 NIS",
+                          ID     = 5000   },
+
+                    new { Max    = "10000 NIS",
+                          ID     = 10000   },
+
+                    new { Max    = "20000 NIS",
+                          ID     = 20000   },
+
+                    new { Max    = "30000 NIS",
+                          ID     = 30000   }
+
+            };
+
+            return Json(toBeJson, JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult GetBrands()
+        {
+            var toBeJson = new[]
+            {
+                    new { Brand = "All",
+                          ID       = -1      },
+                    new { Brand    = Enum.GetName(typeof(Brand), (int)Brand.Electra),
+                          ID       = (int)Brand.Electra    },
+
+                    new { Brand    = Enum.GetName(typeof(Brand), (int)Brand.LG),
+                          ID       = (int)Brand.LG         },
+
+                    new { Brand    = Enum.GetName(typeof(Brand), (int)Brand.Panasonic),
+                          ID       = (int)Brand.Panasonic   },
+
+                    new { Brand    = Enum.GetName(typeof(Brand), (int)Brand.Samsung),
+                          ID       = (int)Brand.Samsung     },
+
+                    new { Brand    = Enum.GetName(typeof(Brand), (int)Brand.Sony),
+                          ID       = (int)Brand.Sony         },
+
+                    new { Brand    = Enum.GetName(typeof(Brand), (int)Brand.Toshiba),
+                          ID       = (int)Brand.Toshiba      },
+            };
+
+            return Json(toBeJson, JsonRequestBehavior.AllowGet);
+        }
+    
+
         public JsonResult GetCategories()
         {
             var toBeJson = new[]
