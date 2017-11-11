@@ -40,7 +40,7 @@
             foreach (ElectricalAppliancesStore.Models.Product currProduct in Model.products)
             {
                 <div class="itemContainer">
-                    <div class="itembox" style="background-image:url(@currProduct.PicturePath)">
+                    <div id="Item_@(currProduct.ID)" class="itembox" style="background-image:url(@currProduct.PicturePath)">
                         <div class="selectionbar">
                             <input type="button" class="control plus" value="+" onclick="updateItemAmount(@currProduct.ID, 'Add', '@currProduct.Title', @currProduct.SalePrice)">
                             <input type="text" id="@(currProduct.ID)_amount" class="control number" value="0" onchange="updateItemAmount(@currProduct.ID, 'Change', '@currProduct.Title', @currProduct.SalePrice)" />
@@ -201,6 +201,15 @@ $(document).ready(function()
                      $('<li>').append(
                      $(query).text(item.Category)).appendTo('#drop1');
             });
+        }
+    });
+
+    $.ajax({
+        url: "/Manager/GetBestSellerItemThisMonth",
+        success: function(data) {
+            var item = "#Item_" + data.ID;
+            $('<div>').append(
+               $('<h2>').text("Prodcut Of The Month")).appendTo(item);
         }
     });
 });

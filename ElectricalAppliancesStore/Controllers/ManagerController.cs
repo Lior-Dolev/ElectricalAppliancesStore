@@ -166,28 +166,33 @@ namespace ElectricalAppliancesStore.Controllers
 
         public JsonResult GetBestSellerItemThisMonth()
         {
-            Product bestSeller  = null;
-            int month           = DateTime.Now.Month;
+            // TODO:: when we have orders
+            //          Don't forget to enable this logic !
+            
+            //Product bestSeller  = null;
+            //int month           = DateTime.Now.Month;
 
-            foreach (var order in dbOrders.Orders)
-            {
-                if (month == order.PurchaseDate.Month)
-                {
-                    Product bestSellerInOrder = getBestSellerInOrder(order);
-                    if ( null == bestSeller)
-                    {
-                        bestSeller = bestSellerInOrder;
-                        continue;
-                    }
+            //foreach (var order in dbOrders.Orders)
+            //{
+            //    if (month == order.PurchaseDate.Month)
+            //    {
+            //        Product bestSellerInOrder = getBestSellerInOrder(order);
+            //        if ( null == bestSeller)
+            //        {
+            //            bestSeller = bestSellerInOrder;
+            //            continue;
+            //        }
 
-                    if ( bestSeller.SoldCounter < bestSellerInOrder.SoldCounter)
-                    {
-                        bestSeller = bestSellerInOrder;
-                    }
-                }
-            }
+            //        if ( bestSeller.SoldCounter < bestSellerInOrder.SoldCounter)
+            //        {
+            //            bestSeller = bestSellerInOrder;
+            //        }
+            //    }
+            //}
+            List<Product> products = ProductsManager.GetProducts(dbProducts);
+            Product chosen = products.ElementAt(0);
 
-            return Json(bestSeller, JsonRequestBehavior.AllowGet);
+            return Json(chosen, JsonRequestBehavior.AllowGet);
         }
 
         public JsonResult GetTotalItemsPerCategory()
