@@ -57,13 +57,15 @@ namespace ElectricalAppliancesStore.Controllers
             Category ctg_id;
             if  ( ! Enum.TryParse<Category>(category, out ctg_id))
             {
-                return null;
+                products.Clear();
+                return products;
             }
 
             Brand brd_id;
             if (! Enum.TryParse<Brand>(brand, out brd_id))
             {
-                return null;
+                products.Clear();
+                return products;
             }
 
             products.RemoveAll(

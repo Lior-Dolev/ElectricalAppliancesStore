@@ -28,6 +28,54 @@ namespace ElectricalAppliancesStore.Controllers
             return View(ProductsManager.CreateEditProductView(dbProviders));
         }
 
+        public bool getSupplierID(string supplier, out int id)
+        {
+            List<Provider> providers = ProvidersManager.GetProviders(dbProviders);
+            foreach (var provider in providers)
+            {
+                if ( provider.CompanyName == supplier)
+                {
+                    id = provider.ID;
+                    return true;
+                }
+            }
+
+            id = 0;
+            return false;
+        }
+
+        public List<Product> getSpecificProducts(string category, string supplier, int maxBuyPrice)
+        {
+            List<Product> products = ProductsManager.GetProducts(dbProducts);
+
+            Category ctg_id;
+            if (!Enum.TryParse<Category>(category, out ctg_id))
+            {
+                products.Clear();
+                return products;
+            }
+
+            int splr_id = 0;
+            if (! getSupplierID(supplier, out splr_id))
+            {
+                products.Clear();
+                return products;
+            }
+
+            products.RemoveAll(
+                item => (ctg_id != item.Category || splr_id != item.ProviderID || maxBuyPrice < item.BuyPrice));
+            return products;
+        }
+
+        public ActionResult ProductsByCategoryBrandAndMaxPrice(string category,
+                                                               string supplier,
+                                                               int maxBuyPrice)
+        {
+
+            List<Product> products = getSpecificProducts(category, supplier, maxBuyPrice);
+            return View("Inventory", products);
+        }
+
         public ActionResult Delete(int productID)
         {
             ProductsManager.DeleteProduct(productID, dbProducts);
