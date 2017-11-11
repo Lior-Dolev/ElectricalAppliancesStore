@@ -3,13 +3,12 @@
 @{
     Layout = "~/Views/Shared/Management.cshtml";
     ViewBag.Title = "AddProvider";
-    Layout = "~/Views/Shared/Management.cshtml";
 }
 
-<h2>Add Provider</h2>
-
-@Html.ActionLink("New Provider", "AddProvider")
-
+<h2>Manage Suppliers</h2>
+<div class="" style="float:right;">
+    @Html.ActionLink("New Supplier +", "AddProvider", null, new { @class = "text-success" })
+</div>
 @if (Model.Count() > 0)
 {
     <table class="table">
@@ -17,9 +16,17 @@
             <th>
                 @Html.DisplayNameFor(model => model.CompanyName)
             </th>
+            <th></th>
+            <th>
+                @Html.DisplayName("Details")
+            </th>
+            <th></th>
+            <th></th>
             <th>
                 @Html.DisplayName("Actions")
             </th>
+            <th></th>
+
         </tr>
         @foreach (ElectricalAppliancesStore.Models.Provider p in Model)
         {
@@ -27,52 +34,82 @@
                 <td>
                     @Html.DisplayFor(item => p.CompanyName)
                 </td>
+                <td valign="middle">
+                    <p>
+                        <div class="container"><div class="text-warning col-sm-5">Contact Name:</div>@(p.ContactPerson)</div><br />
+                        <div class="container">
+                            <div class="text-warning col-sm-5">Email:</div>@(p.Email)
+                        </div><br />
+                        <div class="container"><div class="text-warning col-sm-5">Phone Number:</div> @(p.PhoneNumber)</div><br />
+                    </p>
+                </td>
+                <td class="join-table-container">
+                    <table class="table-bordered join-table" id="products_table_@(p.ID)" border='1'>
+                        <tr>
+                            <th class="text-center text-warning" style="font-family:Bitstream Vera Serif Bold">Products</th>
+                        </tr>
+                    </table>
+                </td>
+                <td class="join-table-container">
+                    <table class="table-bordered join-table" id="categories_table_@(p.ID)" border='1'>
+                        <tr>
+                            <th class="text-center text-warning" style="font-family:Bitstream Vera Serif Bold">Categories</th>
+                        </tr>
+                    </table>
+                </td>
+                <td class="join-table-container">
+                    <table class="table-bordered join-table" id="brands_table_@(p.ID)" border='1'>
+                        <tr>
+                            <th class="text-center text-warning" style="font-family:Bitstream Vera Serif Bold">Brands</th>
+                        </tr>
+                    </table>
+                </td>
                 <td>
                     @Html.ActionLink("Edit", "EditProvider", new { providerID = p.ID })
-                    @Html.ActionLink("Delete", "Delete", new { providerID = p.ID })
+                </td>
+                <td>
+                    @Html.ActionLink("Delete", "Delete", new { providerID = p.ID }, new { @class = "text-center text-danger" })
                 </td>
             </tr>
         }
     </table>
 }
-    @*<div class="container">
-        <table table id="table">
-            <thead>
-                <tr>
-                    <th data-field="fname">First Name</th>
-                    <th data-field="lname">Last Name</th>
-                    <th data-field="startDate">Start Date</th>
-                    <th data-field="street">Street</th>
-                    <th data-field="city">City</th>
-                    <th data-field="state">State</th>
-                    <th data-field="zip">Zip Code</th>
-                    <th data-field="phone">Phone</th>
-                    <th data-field="year">Year</th>
-                </tr>
-            </thead>
-        </table>
-    </div>*@
+    <script>
+        $(document).ready(function () {
+            // For each provider - get and appand products list
+            $.ajax({
+                url: "/Manager/JoinProductsByProvider",
+                success: function (data) {
 
+                    $.each(data, function (i, item) {
+                        $('<tr>').append(
+                        $('<td>').text(item.ProductName)).appendTo('#products_table_' + item.CompanyID);
+                    });
+                }
+            });
+            // For each provider - get and appand categories list
+            $.ajax({
+                url: "/Manager/JoinCategoriesByProvider",
+                success: function (data) {
 
-<table id="records_table" border='1'>
-    <tr>
-        <th>Company Name</th>
-        <th>Product Name</th>
-    </tr>
-</table>
+                    $.each(data, function (i, item) {
+                        item = item[0];
+                        $('<tr>').append(
+                        $('<td>').text(item.ProductCategory)).appendTo('#categories_table_' + item.CompanyID);
+                    });
+                }
+            });
+            // For each provider - get and appand brands list
+            $.ajax({
+                url: "/Manager/JoinBrandsByProvider",
+                success: function (data) {
 
-<script>
-$(document).ready(function() {
-    $.ajax({
-             url: "/Manager/JoinProductsByProvider",
-             success: function (data) {
-
-                 $.each(data, function (i, item) {
-                     $('<tr>').append(
-                     $('<td>').text(item.CompanyName),
-                     $('<td>').text(item.ProductName)).appendTo('#records_table');
-                     });
-            }
-   });
-});
-</script>
+                    $.each(data, function (i, item) {
+                        item = item[0];
+                        $('<tr>').append(
+                        $('<td>').text(item.ProductBrand)).appendTo('#brands_table_' + item.CompanyID);
+                    });
+                }
+            });
+        });
+    </script>

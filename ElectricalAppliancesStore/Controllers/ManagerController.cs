@@ -220,8 +220,48 @@ namespace ElectricalAppliancesStore.Controllers
                                                 (provider, product) => new
                                                 {
                                                     CompanyName = provider.CompanyName,
-                                                    ProductName = product.Title
+                                                    ProductName = product.Title,
+                                                    CompanyID = provider.ID
                                                 }).ToList();// .GroupBy(record => record.ProviderId);
+
+            return Json(query, JsonRequestBehavior.AllowGet);
+        }
+        public JsonResult JoinCategoriesByProvider()
+        {
+
+            var query = dbProviders.Providers.AsEnumerable().Join(
+                                                dbProducts.Products.AsEnumerable(),
+                                                provider => provider.ID,
+                                                product => product.ProviderID,
+                                                (provider, product) => new
+                                                {
+                                                    ProductCategory = ((Category)product.Category).ToString(),
+                                                    CompanyID = provider.ID
+                                                }).GroupBy(
+                                                    item => new {
+                                                        ProductCategory = item.ProductCategory,
+                                                        CompanyID = item.CompanyID
+                                                    }
+                                                ).ToList();
+
+            return Json(query, JsonRequestBehavior.AllowGet);
+        }
+        public JsonResult JoinBrandsByProvider()
+        {
+
+            var query = dbProviders.Providers.AsEnumerable().Join(
+                                                dbProducts.Products.AsEnumerable(),
+                                                provider => provider.ID,
+                                                product => product.ProviderID,
+                                                (provider, product) => new
+                                                {
+                                                    ProductBrand = ((Brand)product.Brand).ToString(),
+                                                    CompanyID = provider.ID
+                                                }).GroupBy(
+                                                    item => new {
+                                                        ProductBrand = item.ProductBrand,
+                                                        CompanyID = item.CompanyID}
+                                                ).ToList();
 
             return Json(query, JsonRequestBehavior.AllowGet);
         }

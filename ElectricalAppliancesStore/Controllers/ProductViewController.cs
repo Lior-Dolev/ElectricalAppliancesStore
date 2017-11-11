@@ -19,6 +19,7 @@ namespace ElectricalAppliancesStore.Controllers
         // GET: ProductView
         public ActionResult Products(int userID)
         {
+            //int userID = ((int)Session["UserID"]) ;
             ProductView view = new ProductView()
             {
                 currOrder = new Order()
