@@ -89,10 +89,10 @@ namespace ElectricalAppliancesStore.Controllers
             return products;
         }
 
-        public ActionResult ProductsByCategoryBrandAndMaxPrice(int userID, 
-                                                               string category, 
+        public ActionResult ProductsByCategoryBrandAndMaxPrice(string category, 
                                                                string brand, 
-                                                               int maxPrice = -1)
+                                                               int maxPrice = -1,
+                                                               int userID = -1)
         {
 
             ProductView view = new ProductView()

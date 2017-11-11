@@ -268,6 +268,6 @@
         var category = categories.options[categories.selectedIndex].value;
         var brands = document.getElementById("brands");
         var brand = brands.options[brands.selectedIndex].value;
-        $('#advSearchLink').attr('href', '@Url.Action("ProductsByCategoryBrandAndMaxPrice", "ProductView")' + '?userID=' + @Model.currOrder.ClientID + '&category=' + category + '&brand=' + brand + '&maxPrice=' + maxPrice);
+        $('#advSearchLink').attr('href', '@Url.Action("ProductsByCategoryBrandAndMaxPrice", "ProductView")' + '?category=' + category + '&brand=' + brand + '&maxPrice=' + maxPrice + '&userID=' + @Model.currOrder.ClientID);
     }
 </script>
