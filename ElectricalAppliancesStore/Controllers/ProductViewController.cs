@@ -56,6 +56,7 @@ namespace ElectricalAppliancesStore.Controllers
 
             bool filterCategory = "All" != category;
             bool filterBrand    = "All" != brand;
+            bool filterPrice    = 0 < maxPrice;
 
             Category ctg_id = 0;
             if  ( filterCategory && ! Enum.TryParse<Category>(category, out ctg_id))
@@ -81,14 +82,17 @@ namespace ElectricalAppliancesStore.Controllers
                 products.RemoveAll(item => brd_id != item.Brand);
             }
 
-            products.RemoveAll(item => maxPrice < item.BuyPrice);
+            if ( filterPrice)
+            {
+                products.RemoveAll(item => maxPrice < item.BuyPrice);
+            }
             return products;
         }
 
         public ActionResult ProductsByCategoryBrandAndMaxPrice(int userID, 
                                                                string category, 
                                                                string brand, 
-                                                               int maxPrice)
+                                                               int maxPrice = -1)
         {
 
             ProductView view = new ProductView()
