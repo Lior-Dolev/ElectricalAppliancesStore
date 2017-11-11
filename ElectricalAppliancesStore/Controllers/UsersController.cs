@@ -38,14 +38,14 @@ namespace ElectricalAppliancesStore.Controllers
         {
             UserManager.AddClient(client, usersContext, clientsContext);
 
-            return RedirectToAction("Index", "Login");
+            return RedirectToAction("Index");
         }
 
         public ActionResult Edit(EditClientView client)
         {
             UserManager.EditClient(client, usersContext, clientsContext);
 
-            return RedirectToAction("Index", "Login");
+            return RedirectToAction("Index");
         }
 
         public ActionResult EditClient(int clientID)

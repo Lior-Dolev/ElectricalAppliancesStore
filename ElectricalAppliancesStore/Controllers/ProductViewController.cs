@@ -19,6 +19,7 @@ namespace ElectricalAppliancesStore.Controllers
         // GET: ProductView
         public ActionResult Products(int userID)
         {
+            //int userID = ((int)Session["UserID"]) ;
             ProductView view = new ProductView()
             {
                 currOrder = new OrderView()
@@ -35,8 +36,10 @@ namespace ElectricalAppliancesStore.Controllers
         public List<Product> getProductByCategory(int category)
         {
             List<Product> products = ProductsManager.GetProducts(dbProducts);
-            products.RemoveAll(item => category != (int)item.Category);
-
+            if (-1 != category)
+            {
+                products.RemoveAll(item => category != (int)item.Category);
+            }
             return products;
         }
 
@@ -47,7 +50,7 @@ namespace ElectricalAppliancesStore.Controllers
             {
                 currOrder = new OrderView()
                 {
-                    ClientID = 2, 
+                    ClientID = UserManager.GetClientIdByUserId(userID, dbClients),
                     Items = new List<OrderItem>()
                 },
                 products = getProductByCategory(category)

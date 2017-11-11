@@ -2,21 +2,21 @@
 
 @{
     Layout = "~/Views/Shared/Management.cshtml";
-    ViewBag.Title = "AddProvider";
+    ViewBag.Title = "Add Supplier";
 }
 
-<h2>AddProvider</h2>
+<h2>Add Supplier</h2>
 
 @using (Html.BeginForm("Add", "Providers", FormMethod.Post))
 {
-    @Html.LabelFor(model => model.CompanyName)
-    @Html.TextBoxFor(model => model.CompanyName)
-    @Html.LabelFor(model => model.PhoneNumber)
-    @Html.TextBoxFor(model => model.PhoneNumber)
-    @Html.LabelFor(model => model.ContactPerson)
-    @Html.TextBoxFor(model => model.ContactPerson)
-    @Html.LabelFor(model => model.Email)
-    @Html.TextBoxFor(model => model.Email)
+    @Html.LabelFor(model => model.CompanyName, new { @class = "th-manger-page" })
+    @Html.TextBoxFor(model => model.CompanyName)<br />
+    @Html.LabelFor(model => model.PhoneNumber, new { @class = "th-manger-page" })
+    @Html.TextBoxFor(model => model.PhoneNumber)<br />
+    @Html.LabelFor(model => model.ContactPerson, new { @class = "th-manger-page" })
+    @Html.TextBoxFor(model => model.ContactPerson)<br />
+    @Html.LabelFor(model => model.Email, new { @class = "th-manger-page" })
+    @Html.TextBoxFor(model => model.Email)<br />
 
-    <input type="submit" value="submit" />
+    <input type="submit" value="submit" class="btn-success"/>
 }

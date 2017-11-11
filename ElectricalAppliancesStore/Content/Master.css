@@ -68,3 +68,18 @@ h4 {
     column-rule: 1px solid lightblue;
     column-gap: 40px;
 }
+.join-table {
+    width: 150px;
+    border-radius:2px;
+}
+.join-table-container {
+     width: 170px;
+}
+th {
+    text-align:left;
+}
+.th-manger-page {
+    padding: 10px 10px 10px 10px;
+    text-align: center;
+    font-weight: 400;
+}

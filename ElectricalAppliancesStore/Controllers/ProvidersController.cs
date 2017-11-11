@@ -24,7 +24,7 @@ namespace ElectricalAppliancesStore.Controllers
         {
             List<Provider> providers = ProvidersManager.GetProviders(dbProviders);
             providers.RemoveAll(item => item.ContactPerson != contactPerson);
-
+            
             return View("Index", providers);
         }
 
