@@ -22,15 +22,5 @@ namespace ElectricalAppliancesStore.Models
         {
             return Items.Sum(item => item.Product.SalePrice* item.Quantity);
         }
-
-        public Order()
-        {
-            this.Items = new List<OrderItem>();
-        }
-
-        public Order(List<OrderItem> items)
-        {
-            this.Items = items;
-        }
     }
 }

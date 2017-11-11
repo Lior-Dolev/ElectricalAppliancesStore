@@ -16,6 +16,12 @@ namespace ElectricalAppliancesStore.Managers
             return pContext.Products.ToList();
         }
 
+        public static IDictionary<int, Product> GetProductsById(ProductsContext pContext)
+        {
+            return pContext.Products.Select(t => new { t.ID, t })
+                    .ToDictionary(t => t.ID, t => t.t);
+        }
+
         public static void DeleteProduct(int productID, ProductsContext pContext)
         {
             pContext.Products.Remove(pContext.Products.Find(productID));
