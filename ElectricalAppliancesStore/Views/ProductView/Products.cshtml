@@ -13,25 +13,44 @@
 
     <div class="container col-sm-8" style="margin-top:20px;float:left;">
         @*<div class="zoomGlass">
-            <input name="search" id="search" type="search" placeholder="Search">
-            <div class="zoomStick">/</div>
-        </div>*@
+                <input name="search" id="search" type="search" placeholder="Search">
+                <div class="zoomStick">/</div>
+            </div>*@
         <div class="container">
             <div class="dropdown">
                 <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
                     Filter By Category
                     <span class="caret"></span>
                 </button>
-                <ul id ="drop1" class="dropdown-menu">
-                </ul>
+                <ul id="drop1" class="dropdown-menu"></ul>
             </div>
         </div>
     </div>
     <div class="container col-sm-2" style="margin-top:20px;float:left;">
-        <input type="submit" value="Advanced Search >>" class="btn btn-info my-2 my-sm-0" />
+        @Html.ActionLink("Advanced Search >>", "ProductsByCategoryBrandAndMaxPrice", "Products", new { @class = "btn btn-info my-2 my-sm-0", @id = "advSearchLink" })
     </div>
 </div>
-
+<div>
+    <table>
+        <tr>
+            <td>
+                <label class="th-manger-page">Max Price </label>
+                <br />
+                <input type="text" id="max_price" onkeyup="advOnIndexCall()" />
+            </td>
+            <td>
+                <label class="th-manger-page">Category </label>
+                <br />
+                <select id="categories" class="dropdown-menu" onchange="advOnIndexCall()" style="display: inline-block;position: inherit;"></select>
+            </td>
+            <td>
+                <label class="th-manger-page">Brand </label>
+                <br />
+                <select id="brands" class="dropdown-menu" onchange="advOnIndexCall()" style="display: inline-block;position: inherit;"></select>
+            </td>
+        </tr>
+    </table>
+</div>
 <div class="container">
     <div class="container col-sm-8">
 
@@ -107,7 +126,7 @@
         }
 
         AddOrUpdate(itemId, currAmount, title, salePrice);
-        
+
         // Update display
         document.getElementById(itemId + '_amount').value = currAmount;
 
@@ -145,7 +164,7 @@
 
     function Update(itemId, quantity, salePrice) {
         id = ".shoppingList #" + itemId;
-        
+
         ChangeTextByClass(id, ".quantity", quantity);
         ChangeTextByClass(id, ".fixedPrice", (quantity * salePrice));
     }
@@ -178,10 +197,10 @@
     {
         $.post({
             url: '@Url.Action("CheckOut","ProductView")',
-            data: { orderItems: JSON.stringify(quantityByProductId) , 
+            data: { orderItems: JSON.stringify(quantityByProductId) ,
                 clientID: @Model.currOrder.ClientID }
         }).done(function(result){
-            window.location.href = result;        
+            window.location.href = result;
         });
     }
 
@@ -189,28 +208,66 @@
 
 
 <script>
-$(document).ready(function()
-{
-    $.ajax({
-    url: "/Manager/GetCategories",
-             success: function(data) {
-                 $.each(data, function(i, item) {
-                     var url = "/ProductView/ProductsByCategory" + "?userID=" + @Model.currOrder.ClientID + "&category=" + item.ID;
-                     var query = "<a href=\"" + url +"\"/>";
+    $(document).ready(function()
+    {
+        $.ajax({
+            url: "/Manager/GetCategories",
+            success: function(data) {
+                $.each(data, function(i, item) {
+                    var url = "/ProductView/ProductsByCategory" + "?userID=" + @Model.currOrder.ClientID + "&category=" + item.ID;
+                    var query = "<a href=\"" + url +"\"/>";
 
-                     $('<li>').append(
-                     $(query).text(item.Category)).appendTo('#drop1');
-            });
-        }
+                    $('<li>').append(
+                    $(query).text(item.Category)).appendTo('#drop1');
+                });
+            }
+        });
+
+        $.ajax({
+            url: "/Manager/GetBestSellerItemThisMonth",
+            success: function(data) {
+                var item = "#Item_" + data.ID;
+                $('<div>').append(
+                   $('<h2>').text("Prodcut Of The Month")).appendTo(item);
+            }
+        });
+
+        $.ajax({
+            url: '@Url.Action("GetCategories", "Manager")',
+            success: function (data) {
+                $.each(data, function (i, item) {
+                    var opt = document.createElement("option");
+                    opt.value = item.Category;
+                    opt.innerHTML = item.Category;
+
+                    // then append it to the select element
+                    document.getElementById('categories').appendChild(opt);
+
+                });
+            }
+        });
+        $.ajax({
+            url: '@Url.Action("GetBrands", "Manager")',
+            success: function (data) {
+                $.each(data, function (i, item) {
+                    var opt = document.createElement("option");
+                    opt.value = item.Brand;
+                    opt.innerHTML = item.Brand;
+
+                    // then append it to the select element
+                    document.getElementById('brands').appendChild(opt);
+                });
+            }
+        });
     });
 
-    $.ajax({
-        url: "/Manager/GetBestSellerItemThisMonth",
-        success: function(data) {
-            var item = "#Item_" + data.ID;
-            $('<div>').append(
-               $('<h2>').text("Prodcut Of The Month")).appendTo(item);
-        }
-    });
-});
+    function advOnIndexCall() {
+        debugger;
+        var maxPrice = document.getElementById('max_price').value;
+        var categories = document.getElementById("categories");
+        var category = categories.options[categories.selectedIndex].value;
+        var brands = document.getElementById("brands");
+        var brand = brands.options[brands.selectedIndex].value;
+        $('#advSearchLink').attr('href', '@Url.Action("ProductsByCategoryBrandAndMaxPrice", "Products")' + '?category=' + category + '&supplier=' + brand + '&maxBuyPrice=' + maxPrice);
+    }
 </script>

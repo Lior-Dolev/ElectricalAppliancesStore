@@ -15,7 +15,7 @@
         </div>
     </div>
     <div class="container col-sm-2" style="margin-top:20px;float:left;">
-        @Html.ActionLink("Advanced Search >>", "ProvidersByContactPerson", "Providers", new { contactPerson = ViewBag.Title }, new { @class = "btn btn-info my-2 my-sm-0", @id = "advSearchLink" })
+        @Html.ActionLink("Advanced Search >>", "ProductsByCategoryBrandAndMaxPrice", "Products", new { @class = "btn btn-info my-2 my-sm-0", @id = "advSearchLink" })
         @*<input type="submit" value="Advanced Search >>" class="btn btn-info my-2 my-sm-0" />*@
     </div>
     <div class="container col-sm-2" style="margin-top:20px;float:left;">
@@ -33,12 +33,12 @@
             <td>
                 <label class="th-manger-page">Category </label>
                 <br />
-                <select id="categories" class="dropdown-menu" onselect="advOnIndexCall()" style="display: inline-block;position: inherit;"></select>
+                <select id="categories" class="dropdown-menu" onchange="advOnIndexCall()" style="display: inline-block;position: inherit;"></select>
             </td>
             <td>
-                <label class="th-manger-page">Brand </label>
+                <label class="th-manger-page">Suppliers </label>
                 <br />
-                <select id="brands" class="dropdown-menu"  onselect="advOnIndexCall()"  style="display: inline-block;position: inherit;"></select>
+                <select id="suppliers" class="dropdown-menu"  onchange="advOnIndexCall()"  style="display: inline-block;position: inherit;"></select>
             </td>
         </tr>
     </table>
@@ -84,7 +84,7 @@
             }
         });
         $.ajax({
-            url: '@Url.Action("GetBrands", "Manager")',
+            url: '@Url.Action("GetSuppliers", "Manager")',
             success: function (data) {
                 $.each(data, function (i, item) {
                     var opt = document.createElement("option");
@@ -92,7 +92,7 @@
                     opt.innerHTML = item.Brand;
 
                     // then append it to the select element
-                    document.getElementById('brands').appendChild(opt);
+                    document.getElementById('suppliers').appendChild(opt);
                 });
             }
         });
@@ -101,11 +101,12 @@
         window.location.href = location;
     }
     function advOnIndexCall() {
+        debugger;
         var maxPrice = document.getElementById('max_price').value;
         var categories = document.getElementById("categories");
         var category = categories.options[categories.selectedIndex].value;
-        var brands = document.getElementById("brands");
-        var brand = brands.options[brands.selectedIndex].value;
-        $('#searchLink').attr('href', '@Url.Action("ProvidersByContactPerson", "Providers")' + '?contactPerson=' + contact);
+        var suppliers = document.getElementById("suppliers");
+        var supplier = suppliers.options[suppliers.selectedIndex].value;
+        $('#advSearchLink').attr('href', '@Url.Action("ProductsByCategoryBrandAndMaxPrice", "Products")' + '?category=' + category + '&supplier=' + suppliers + '&maxBuyPrice=' + maxPrice);
     }
 </script>
