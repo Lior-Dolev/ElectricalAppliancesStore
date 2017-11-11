@@ -42,7 +42,40 @@ namespace ElectricalAppliancesStore.Controllers
         {
             Tweet.PublishTweet(text);
         }
+        
+        public JsonResult GetCategories()
+        {
+            var toBeJson = new[]
+               {
+                    new { Category = "All",
+                          ID       = -1      },
+                    new { Category = Enum.GetName(typeof(Category), (int)Category.BakingOvens),
+                          ID       = (int)Category.BakingOvens      },
 
+                    new { Category = Enum.GetName(typeof(Category), (int)Category.Blenders),
+                          ID       = (int)Category.Blenders         },
+
+                    new { Category = Enum.GetName(typeof(Category), (int)Category.CoffeeMachines),
+                          ID       = (int)Category.CoffeeMachines   },
+
+                    new { Category = Enum.GetName(typeof(Category), (int)Category.Dishwashers),
+                          ID       = (int)Category.Dishwashers     },
+
+                    new { Category = Enum.GetName(typeof(Category), (int)Category.Freezers),
+                          ID       = (int)Category.Freezers         },
+
+                    new { Category = Enum.GetName(typeof(Category), (int)Category.Microwaves),
+                          ID       = (int)Category.Microwaves       },
+
+                    new { Category = Enum.GetName(typeof(Category), (int)Category.Mixers),
+                          ID       = (int)Category.Mixers          },
+
+                    new { Category = Enum.GetName(typeof(Category), (int)Category.Refrigerators),
+                          ID       = (int)Category.Refrigerators    },
+            };
+
+            return Json(toBeJson, JsonRequestBehavior.AllowGet);
+        }
         public static Product getBestSellerInOrder(Order order)
         {
             List<OrderItem> items   = order.Items;
