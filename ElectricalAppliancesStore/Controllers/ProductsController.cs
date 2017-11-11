@@ -32,7 +32,7 @@ namespace ElectricalAppliancesStore.Controllers
         {
             ProductsManager.DeleteProduct(productID, dbProducts);
 
-            return View("Inventory", "Products");
+            return RedirectToAction("Inventory");
         }
 
         [HttpPost]
@@ -40,8 +40,8 @@ namespace ElectricalAppliancesStore.Controllers
         {   
             ProductsManager.AddProduct(product, dbProducts, Server);
             EditProductView fullProduct = ProductsManager.FillSelectLists(product, dbProviders);
-            
-            return View("AddProduct", fullProduct);
+
+            return RedirectToAction("Inventory");
         }
 
         public ActionResult EditProduct(int productID)
@@ -55,7 +55,7 @@ namespace ElectricalAppliancesStore.Controllers
             ProductsManager.EditProduct(product, dbProducts, Server);
             EditProductView fullProduct = ProductsManager.FillSelectLists(product, dbProviders);
 
-            return View("AddProduct", fullProduct);
+            return RedirectToAction("Inventory");
         }
 
         #region Dispose
