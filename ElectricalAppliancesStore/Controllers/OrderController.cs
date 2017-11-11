@@ -42,13 +42,13 @@ namespace ElectricalAppliancesStore.Controllers
         }
 
         public ActionResult Payment(int clientID, 
-                                    int priceSum,
+                                    decimal priceSum,
                                     string currency,
                                     string cardNum,
                                     int safeCardNum)
         {
             OrderManager.AddPaymentDetails(clientID,
-                                    priceSum,
+                                    (int)priceSum,
                                     currency,
                                     cardNum,
                                     safeCardNum, 
