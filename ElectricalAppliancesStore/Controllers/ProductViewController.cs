@@ -18,13 +18,20 @@ namespace ElectricalAppliancesStore.Controllers
 
         // GET: ProductView
         public ActionResult Products(int userID)
-        {
+        { 
+
+            int clientID = UserManager.GetClientIdByUserId(userID, dbClients);
+            if ( -1 == clientID)
+            {
+                return RedirectToAction("Login", "Login");
+            }
+
             //int userID = ((int)Session["UserID"]) ;
             ProductView view = new ProductView()
             {
                 currOrder = new OrderView()
                 {
-                    ClientID = UserManager.GetClientIdByUserId(userID, dbClients),
+                    ClientID = clientID,
                     Items = new List<OrderItem>()
                 },
                 products = ProductsManager.GetProducts(dbProducts)
@@ -42,6 +49,49 @@ namespace ElectricalAppliancesStore.Controllers
             }
             return products;
         }
+
+        public List<Product> getSpecificProducts(string category, string brand, int maxPrice)
+        {
+            List<Product> products = ProductsManager.GetProducts(dbProducts);
+
+            Category ctg_id;
+            if  ( ! Enum.TryParse<Category>(category, out ctg_id))
+            {
+                products.Clear();
+                return products;
+            }
+
+            Brand brd_id;
+            if (! Enum.TryParse<Brand>(brand, out brd_id))
+            {
+                products.Clear();
+                return products;
+            }
+
+            products.RemoveAll(
+                item => (ctg_id != item.Category || brd_id != item.Brand || maxPrice < item.SalePrice));
+            return products;
+        }
+
+        public ActionResult ProductsByCategoryBrandAndMaxPrice(int userID, 
+                                                               string category, 
+                                                               string brand, 
+                                                               int maxPrice)
+        {
+
+            ProductView view = new ProductView()
+            {
+                currOrder = new OrderView()
+                {
+                    ClientID = UserManager.GetClientIdByUserId(userID, dbClients),
+                    Items = new List<OrderItem>()
+                },
+                products = getSpecificProducts(category, brand, maxPrice)
+            };
+
+            return View("Products", view);
+        }
+
 
         // Search By Category
         public ActionResult ProductsByCategory(int userID, int category)
