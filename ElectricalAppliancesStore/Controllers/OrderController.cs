@@ -8,6 +8,7 @@ using ElectricalAppliancesStore.Models.Stubs;
 using ElectricalAppliancesStore.DAL;
 using Newtonsoft.Json;
 using ElectricalAppliancesStore.Managers;
+using System.Net;
 
 namespace ElectricalAppliancesStore.Controllers
 {
@@ -16,6 +17,8 @@ namespace ElectricalAppliancesStore.Controllers
         ProductsContext dbProducts = new ProductsContext();
         UsersContext dbUsers = new UsersContext();
         ProvidersContext dbProviders = new ProvidersContext();
+        ClientsContext dbClients = new ClientsContext();
+        OrdersContext dbOrders = new OrdersContext();
 
         // GET: Order
         public ActionResult Index()
@@ -25,14 +28,38 @@ namespace ElectricalAppliancesStore.Controllers
         
         public ActionResult CheckOut(int clientID, string items)
         {
-            Order order = new Order()
+            OrderView order = new OrderView()
             {
-                ClientID = clientID
+                ClientID = clientID,
+                client = UserManager.GetClientByClientID(clientID, dbClients),
+                Items = new List<OrderItem>()
             };
 
             order.Items = OrderManager.GetOrderItems(items, dbProducts);
+            OrderManager.AddOrder(order, dbOrders, dbProducts);
 
             return View(order);
         }
+
+        public ActionResult Payment(int clientID, 
+                                    int priceSum,
+                                    string currency,
+                                    string cardNum,
+                                    int safeCardNum)
+        {
+            OrderManager.AddPaymentDetails(clientID,
+                                    priceSum,
+                                    currency,
+                                    cardNum,
+                                    safeCardNum, 
+                                    dbOrders);
+
+            return new HttpStatusCodeResult(HttpStatusCode.OK); ;
+        }
+
+        //public ActionResult Pay()
+        //{
+        //    return View();
+        //}
     }
 }

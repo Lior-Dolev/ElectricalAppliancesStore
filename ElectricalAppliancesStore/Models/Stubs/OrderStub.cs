@@ -10,7 +10,7 @@ namespace ElectricalAppliancesStore.Models.Stubs
     {
         public static List<User> UsersManager { get; private set; }
 
-        public static Order GetOrder(UsersContext uContext, 
+        public static OrderView GetOrder(UsersContext uContext, 
                                      ProductsContext pContext,
                                      ProvidersContext providersContext)
         {
@@ -24,7 +24,7 @@ namespace ElectricalAppliancesStore.Models.Stubs
                 orItms.Add(new OrderItem { ID = i, Product = pr, Quantity = i % 3 });
                 i++;
             }
-            Order ord = new Order()
+            OrderView ord = new OrderView()
             {
                 ID = 32,
                 ClientID = 2,

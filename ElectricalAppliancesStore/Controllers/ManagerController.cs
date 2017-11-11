@@ -43,33 +43,10 @@ namespace ElectricalAppliancesStore.Controllers
             Tweet.PublishTweet(text);
         }
 
-        public static Product getBestSellerInOrder(Order order)
+        public static Product getBestSellerInOrder(ProductsContext pContext)
         {
-            List<OrderItem> items   = order.Items;
-            Product bestSeller      = null;
-
-            if ( 0 == items.Count())
-            {
-                // note :: we should always have at least
-                //              one order so we don't have to deal with errors
-                return null;
-            }
-
-            foreach (var orderItem in items)
-            {
-                if (null == bestSeller)
-                {
-                    bestSeller = orderItem.Product;
-                    continue;
-                }
-
-                if ( bestSeller.SalePrice < orderItem.Product.SoldCounter)
-                {
-                    bestSeller = orderItem.Product;
-                }
-            }
-
-            return bestSeller;
+            int maxSold = pContext.Products.Max(p => p.SoldCounter);
+            return pContext.Products.Single(pr => pr.SoldCounter == maxSold);
         }
 
         public JsonResult GetBestSellerItemThisMonth()
@@ -81,7 +58,7 @@ namespace ElectricalAppliancesStore.Controllers
             {
                 if (month == order.PurchaseDate.Month)
                 {
-                    Product bestSellerInOrder = getBestSellerInOrder(order);
+                    Product bestSellerInOrder = getBestSellerInOrder(dbProducts);
                     if ( null == bestSeller)
                     {
                         bestSeller = bestSellerInOrder;
@@ -97,19 +74,16 @@ namespace ElectricalAppliancesStore.Controllers
 
             return Json(bestSeller, JsonRequestBehavior.AllowGet);
         }
-
+        
         public JsonResult GetTotalItemsPerCategory()
         {
 
             int NUM_OF_CATEGORIES       = Enum.GetNames(typeof(Category)).Length;
             int [] categories           = new int[NUM_OF_CATEGORIES];
-
-            foreach (var order in dbOrders.Orders)
+            
+            foreach(Product product in dbProducts.Products)
             {
-                foreach(var item in order.Items)
-                {
-                    categories[(int)item.Product.Category] += item.Product.SoldCounter;
-                }
+                categories[(int)product.Category] += product.SoldCounter;
             }
 
              var toBeJson = new[]
@@ -151,7 +125,7 @@ namespace ElectricalAppliancesStore.Controllers
             foreach(var order in dbOrders.Orders)
             { 
                 CountPerMount[order.PurchaseDate.Month] += 1;
-                double totalSum = order.PriceSum();
+                double totalSum = order.PriceSum;
 
                 if (order.CurrencyPurchase == "USD")
                 {

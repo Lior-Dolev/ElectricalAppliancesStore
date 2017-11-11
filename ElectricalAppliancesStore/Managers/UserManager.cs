@@ -10,6 +10,11 @@ namespace ElectricalAppliancesStore.Managers
 {
     public static class UserManager
     {
+        public static Client GetClientByClientID(int id, ClientsContext cContext)
+        {
+            return cContext.Clients.Find(id);
+        }
+
         public static void AddManager(User user, UsersContext uContext)
         {
             user.PermissionType = PermissionType.Manager;

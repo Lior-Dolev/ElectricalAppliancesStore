@@ -7,7 +7,7 @@ namespace ElectricalAppliancesStore.Models
 {
     public class ProductView
     {
-        public Order currOrder { get; set; }
+        public OrderView currOrder { get; set; }
         public List<Product> products { get; set; }
     }
 }

@@ -21,7 +21,7 @@ namespace ElectricalAppliancesStore.Controllers
         {
             ProductView view = new ProductView()
             {
-                currOrder = new Order()
+                currOrder = new OrderView()
                 {
                     ClientID = UserManager.GetClientIdByUserId(userID, dbClients),
                     Items = new List<OrderItem>()
@@ -45,7 +45,7 @@ namespace ElectricalAppliancesStore.Controllers
         {
             ProductView view = new ProductView()
             {
-                currOrder = new Order()
+                currOrder = new OrderView()
                 {
                     ClientID = 2, 
                     Items = new List<OrderItem>()
@@ -60,7 +60,7 @@ namespace ElectricalAppliancesStore.Controllers
         {
             Dictionary<int,int> quantityByProductId = JsonConvert.DeserializeObject<Dictionary<int,int>>(orderItems);
             
-            Order order = OrderManager.CreateOrder(clientID,
+            OrderView order = OrderManager.CreateOrder(clientID,
                                                    quantityByProductId);
             
             string serializedItems = JsonConvert.SerializeObject(order.Items);
