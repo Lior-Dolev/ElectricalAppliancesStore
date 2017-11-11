@@ -52,7 +52,6 @@
             </div>
             <br /><br />
             @{
-                double sum = Model.PriceSum();
                 foreach (ElectricalAppliancesStore.Models.OrderItem currItem in Model.Items)
                 {
                     if (currItem.Quantity > 0)
@@ -76,7 +75,7 @@
                 </div>
                 <div class="container col-sm-5">
                     <div id="total-sum">
-                        @sum NIS
+                        0 NIS
                     </div>
                 </div>
             </div>

@@ -6,6 +6,8 @@ using System.Web.Mvc;
 using ElectricalAppliancesStore.Models;
 using ElectricalAppliancesStore.Models.Stubs;
 using ElectricalAppliancesStore.DAL;
+using Newtonsoft.Json;
+using ElectricalAppliancesStore.Managers;
 
 namespace ElectricalAppliancesStore.Controllers
 {
@@ -20,15 +22,16 @@ namespace ElectricalAppliancesStore.Controllers
         {
             return View();
         }
-        // GET: Products for check out view
-        public ActionResult CheckOut()
+        
+        public ActionResult CheckOut(int clientID, string items)
         {
-            Order ord = OrderStub.GetOrder(dbUsers, dbProducts, dbProviders);
-            return View(ord);
-        }
+            Order order = new Order()
+            {
+                ClientID = clientID
+            };
 
-        public ActionResult CheckOut(Order order)
-        {
+            order.Items = OrderManager.GetOrderItems(items, dbProducts);
+
             return View(order);
         }
     }

@@ -7,6 +7,7 @@ using ElectricalAppliancesStore.Models;
 using ElectricalAppliancesStore.Models.Stubs;
 using ElectricalAppliancesStore.DAL;
 using ElectricalAppliancesStore.Managers;
+using Newtonsoft.Json;
 
 namespace ElectricalAppliancesStore.Controllers
 {
@@ -30,7 +31,7 @@ namespace ElectricalAppliancesStore.Controllers
 
             return View(view);
         }
-
+        
         public List<Product> getProductByCategory(int category)
         {
             List<Product> products = ProductsManager.GetProducts(dbProducts);
@@ -46,7 +47,7 @@ namespace ElectricalAppliancesStore.Controllers
             {
                 currOrder = new Order()
                 {
-                    ClientID = 2, //UserManager.GetClientIdByUserId(userID, dbClients),
+                    ClientID = 2, 
                     Items = new List<OrderItem>()
                 },
                 products = getProductByCategory(category)
@@ -55,9 +56,19 @@ namespace ElectricalAppliancesStore.Controllers
             return View("Products", view);
         }
 
-        public ActionResult CheckOut(ProductView order)
+        public ActionResult CheckOut(string orderItems, int clientID)
         {
-            return RedirectToAction("CheckOut", "Order", order.currOrder);
+            Dictionary<int,int> quantityByProductId = JsonConvert.DeserializeObject<Dictionary<int,int>>(orderItems);
+            
+            Order order = OrderManager.CreateOrder(clientID,
+                                                   quantityByProductId);
+            
+            string serializedItems = JsonConvert.SerializeObject(order.Items);
+            return Json(Url.Action("CheckOut", "Order", new
+            {
+                clientID = clientID,
+                items = serializedItems
+            }));
         }
 
         #region Dispose

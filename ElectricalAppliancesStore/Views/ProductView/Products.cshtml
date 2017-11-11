@@ -55,13 +55,16 @@
     </div>
     <div class="container col-sm-3">
         <br />
-        <input type="submit" value="Procced To Checkout" class="btn btn-success my-2 my-sm-0" />
+        <input type="submit" value="Procced To Checkout" onclick="checkout()" class="btn btn-success my-2 my-sm-0" />
     </div>
 </div>
 
 <div class="container col-md-12">
 </div>
 <script type="text/javascript">
+
+    var quantityByProductId = {};
+
     function updateItemAmount(itemId, action, title, salePrice) {
         // Get curr item amount
         var currAmount = Number(document.getElementById(itemId + '_amount').value);
@@ -100,25 +103,28 @@
         $(".shoppingList").append(GetDiv(itemId, quantity, title, salePrice));
     }
 
-    function AddOrUpdate(itemId, quantity, title, salePrice) {
+    function AddOrUpdate(itemId, itemQuantity, title, salePrice) {
 
         var isExists = false;
         id = ".shoppingList #" + itemId;
 
         if($(id).length != 0)
         {
-            if(quantity == 0)
+            if(itemQuantity == 0)
             {
                 Remove(itemId);
+                quantityByProductId[itemId] = undefined;
             }
             else
             {
-                Update(itemId, quantity, salePrice);
+                Update(itemId, itemQuantity, salePrice);
+                quantityByProductId[itemId] = itemQuantity;
             }
         }
         else
         {
-            Add(itemId, quantity, title, salePrice);
+            Add(itemId, itemQuantity, title, salePrice);
+            quantityByProductId[itemId] = itemQuantity;
         }
     }
 
@@ -151,6 +157,17 @@
                 "<div class='container col-sm-2 fixedPrice'>" +
                     (quantity * salePrice) +
                 "</div> </div>");
+    }
+
+    function checkout()
+    {
+        $.post({
+            url: '@Url.Action("CheckOut","ProductView")',
+            data: { orderItems: JSON.stringify(quantityByProductId) , 
+                clientID: @Model.currOrder.ClientID }
+        }).done(function(result){
+            window.location.href = result;        
+        });
     }
 
 </script>
