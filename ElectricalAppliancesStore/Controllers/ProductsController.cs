@@ -93,6 +93,15 @@ namespace ElectricalAppliancesStore.Controllers
             return View("Inventory", products);
         }
 
+       
+        public ActionResult ProductsByName(string name)
+        {
+            List<Product> products = ProductsManager.GetProducts(dbProducts);
+            products.RemoveAll(item => item.Title != name);
+
+            return View("Inventory", products);
+        }
+
         public ActionResult Delete(int productID)
         {
             ProductsManager.DeleteProduct(productID, dbProducts);
