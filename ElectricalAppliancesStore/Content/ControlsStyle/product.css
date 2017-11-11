@@ -46,29 +46,8 @@
     white-space: nowrap;
 }
 
-.plus .edit {
+.plus .delete {
     float: right;
-    text-align: center;
-    background-color: #5bcfd6  !important;
-    height:98%;
-    width:30%;
-    border-radius:8px;
-    /*margin: 0px 0px 0px 0px;*/
-    border:none;
-    font-size:24px;
-    font-family: 'Berlin Sans FB';
-}
-
-.edit {
-    font-size:12px;
-}
-
-.edit:hover, .delete:hover, .plus:hover, .minus:hover {
-    background: #10a3ad !important;
-}
-
-.minus, .delete{
-    float: left;
     text-align: center;
     background-color: #5bcfd6  !important;
     height:98%;
@@ -82,6 +61,29 @@
 
 .delete {
     font-size:12px;
+    text-align:left;
+}
+
+.edit:hover, .delete:hover, .plus:hover, .minus:hover {
+    background: #10a3ad !important;
+}
+
+.minus .edit{
+    float: left;
+    text-align: center;
+    background-color: #5bcfd6  !important;
+    height:98%;
+    width:30%;
+    border-radius:8px;
+    /*margin: 0px 0px 0px 0px;*/
+    border:none;
+    font-size:24px;
+    font-family: 'Berlin Sans FB';
+}
+
+.edit {
+    font-size:12px;
+    text-align:left;
 }
 
 .number {
