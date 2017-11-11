@@ -268,18 +268,18 @@ namespace ElectricalAppliancesStore.Controllers
 
             var toBeJson = new[]
             {
-                new { Month = "January"    ,   price = (totalPerMonth[1] / CountPerMount[1]) },
-                new { Month = "February"   ,   price = (totalPerMonth[2] / CountPerMount[2]) },
-                new { Month = "March"      ,   price = (totalPerMonth[3] / CountPerMount[3]) },
-                new { Month = "April"      ,   price = (totalPerMonth[4] / CountPerMount[4]) },
-                new { Month = "May"        ,   price = (totalPerMonth[5] / CountPerMount[5]) },
-                new { Month = "June"       ,   price = (totalPerMonth[6] / CountPerMount[6]) },
-                new { Month = "July"       ,   price = (totalPerMonth[7] / CountPerMount[7]) },
-                new { Month = "August"     ,   price = (totalPerMonth[8] / CountPerMount[8]) },
-                new { Month = "September"  ,   price = (totalPerMonth[9] / CountPerMount[9]) },
-                new { Month = "October"    ,   price = (totalPerMonth[10] / CountPerMount[10]) },
-                new { Month = "November"   ,   price = (totalPerMonth[11] / CountPerMount[11]) },
                 new { Month = "December"   ,   price = (totalPerMonth[12] / CountPerMount[12]) },
+                new { Month = "November"   ,   price = (totalPerMonth[11] / CountPerMount[11]) },
+                new { Month = "October"    ,   price = (totalPerMonth[10] / CountPerMount[10]) },
+                new { Month = "September"  ,   price = (totalPerMonth[9] / CountPerMount[9]) },
+                new { Month = "August"     ,   price = (totalPerMonth[8] / CountPerMount[8]) },
+                new { Month = "July"       ,   price = (totalPerMonth[7] / CountPerMount[7]) },
+                new { Month = "June"       ,   price = (totalPerMonth[6] / CountPerMount[6]) },
+                new { Month = "May"        ,   price = (totalPerMonth[5] / CountPerMount[5]) },
+                new { Month = "April"      ,   price = (totalPerMonth[4] / CountPerMount[4]) },
+                new { Month = "March"      ,   price = (totalPerMonth[3] / CountPerMount[3]) },
+                new { Month = "February"   ,   price = (totalPerMonth[2] / CountPerMount[2]) },
+                new { Month = "January"    ,   price = (totalPerMonth[1] / CountPerMount[1]) },
             };
 
             return Json(toBeJson, JsonRequestBehavior.AllowGet);
