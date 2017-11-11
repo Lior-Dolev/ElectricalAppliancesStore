@@ -78,3 +78,8 @@ h4 {
 th {
     text-align:left;
 }
+.th-manger-page {
+    padding: 10px 10px 10px 10px;
+    text-align: center;
+    font-weight: 400;
+}

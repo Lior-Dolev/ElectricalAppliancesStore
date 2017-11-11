@@ -10,26 +10,43 @@
 @using (Html.BeginForm("Edit", "Users", FormMethod.Post))
 {
     @Html.HiddenFor(model => model.ClientID)
-    @Html.LabelFor(model => model.FullName)
-    @Html.TextBoxFor(model => model.FullName)
-    @Html.LabelFor(model => model.Username)
-    @Html.TextBoxFor(model => model.Username)
-    @Html.LabelFor(model => model.Password)
-    @Html.TextBoxFor(model => model.Password)
-    @Html.LabelFor(model => model.Email)
-    @Html.TextBoxFor(model => model.Email)
-    @Html.LabelFor(model => model.Address.Country)
-    @Html.TextBoxFor(model => model.Address.Country)
-    @Html.LabelFor(model => model.Address.City)
-    @Html.TextBoxFor(model => model.Address.City)
-    @Html.LabelFor(model => model.Address.Street)
-    @Html.TextBoxFor(model => model.Address.Street)
-    @Html.LabelFor(model => model.Address.HouseNumber)
-    @Html.TextBoxFor(model => model.Address.HouseNumber)
-    @Html.LabelFor(model => model.Address.ZipCode)
-    @Html.TextBoxFor(model => model.Address.ZipCode)
-    @Html.LabelFor(model => model.Address.AppartmentNumber)
-    @Html.TextBoxFor(model => model.Address.AppartmentNumber)
-
-    <input type="submit" value="submit" />
+    <table>
+        <tr>
+            <td>
+                @Html.LabelFor((model => model.FullName), new { @class = "th-manger-page" })
+                @Html.TextBoxFor(model => model.FullName)
+                <br />
+                @Html.LabelFor(model => model.Username, new { @class = "th-manger-page" })
+                @Html.TextBoxFor(model => model.Username)
+                <br />
+                @Html.LabelFor(model => model.Password, new { @class = "th-manger-page" })
+                @Html.PasswordFor(model => model.Password)
+                <br />
+                @Html.LabelFor(model => model.Email, new { @class = "th-manger-page" })
+                @Html.TextBoxFor(model => model.Email)
+                <br />
+                @Html.LabelFor(model => model.Address.Country, new { @class = "th-manger-page" })
+                @Html.TextBoxFor(model => model.Address.Country) 
+                <br />
+            </td>
+            <td>
+                @Html.LabelFor(model => model.Address.City, new { @class = "th-manger-page" })
+                @Html.TextBoxFor(model => model.Address.City)
+                <br />
+                @Html.LabelFor(model => model.Address.Street, new { @class = "th-manger-page" })
+                @Html.TextBoxFor(model => model.Address.Street)
+                <br />
+                @Html.LabelFor(model => model.Address.HouseNumber, new { @class = "th-manger-page" })
+                @Html.TextBoxFor(model => model.Address.HouseNumber)
+                <br />
+                @Html.LabelFor(model => model.Address.ZipCode, new { @class = "th-manger-page" })
+                @Html.TextBoxFor(model => model.Address.ZipCode)
+                <br />
+                @Html.LabelFor(model => model.Address.AppartmentNumber, new { @class = "th-manger-page" })
+                @Html.TextBoxFor(model => model.Address.AppartmentNumber)
+                <br />
+            </td>
+        </tr>
+    </table>
+    <input type="submit" value="submit" class="btn-success" />
 }
