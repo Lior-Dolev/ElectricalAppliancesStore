@@ -46,7 +46,7 @@
     white-space: nowrap;
 }
 
-.plus{
+.plus .edit {
     float: right;
     text-align: center;
     background-color: #5bcfd6  !important;
@@ -58,11 +58,16 @@
     font-size:24px;
     font-family: 'Berlin Sans FB';
 }
-.plus:hover, .minus:hover {
+
+.edit {
+    font-size:12px;
+}
+
+.edit:hover, .delete:hover, .plus:hover, .minus:hover {
     background: #10a3ad !important;
 }
 
-.minus{
+.minus, .delete{
     float: left;
     text-align: center;
     background-color: #5bcfd6  !important;
@@ -75,7 +80,11 @@
     font-family: 'Berlin Sans FB';
 }
 
-.number{
+.delete {
+    font-size:12px;
+}
+
+.number {
     text-align: center;
     background:white !important;
     height:98%;
