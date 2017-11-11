@@ -73,11 +73,12 @@ $(document).ready(function() {
              success: function (data) {
 
                  $.each(data, function (i, item) {
+                     item = item[0];
                      $('<tr>').append(
-                     $('<td>').text(item.PurchaseDate),
-                     $('<td>').text(item.FullName),
-                     $('<td>').text(item.PriceSum),
-                     $('<td>').text(item.CurrencyPurchase)).appendTo('#records_table');
+                     $('<th class="text-warning th-manger-page">').text(item.PurchaseDateStr),
+                     $('<th class="text-warning th-manger-page">').text(item.FullName),
+                     $('<th class="text-warning th-manger-page">').text(item.PriceSum),
+                     $('<th class="text-warning th-manger-page">').text(item.CurrencyPurchase)).appendTo('#records_table');
                      });
             }
    });

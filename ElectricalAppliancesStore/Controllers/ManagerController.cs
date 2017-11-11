@@ -149,6 +149,7 @@ namespace ElectricalAppliancesStore.Controllers
 
             foreach (var order in dbOrders.Orders)
             {
+
                 if (month == order.PurchaseDate.Month)
                 {
                     Product bestSellerInOrder = getBestSellerInOrder(dbProducts);
@@ -166,33 +167,6 @@ namespace ElectricalAppliancesStore.Controllers
             }
 
             return Json(bestSeller, JsonRequestBehavior.AllowGet);
-            // TODO:: when we have orders
-            //          Don't forget to enable this logic !
-            
-            //Product bestSeller  = null;
-            //int month           = DateTime.Now.Month;
-
-            //foreach (var order in dbOrders.Orders)
-            //{
-            //    if (month == order.PurchaseDate.Month)
-            //    {
-            //        Product bestSellerInOrder = getBestSellerInOrder(order);
-            //        if ( null == bestSeller)
-            //        {
-            //            bestSeller = bestSellerInOrder;
-            //            continue;
-            //        }
-
-            //        if ( bestSeller.SoldCounter < bestSellerInOrder.SoldCounter)
-            //        {
-            //            bestSeller = bestSellerInOrder;
-            //        }
-            //    }
-            //}
-            List<Product> products = ProductsManager.GetProducts(dbProducts);
-            Product chosen = products.ElementAt(0);
-
-            return Json(chosen, JsonRequestBehavior.AllowGet);
         }
         
         public JsonResult GetTotalItemsPerCategory()
@@ -285,23 +259,20 @@ namespace ElectricalAppliancesStore.Controllers
    
         public JsonResult JoinOrdersByClients()
         {
-            // TODO:: should be uncommented when we have 
-            //          clients and orders
-            //var query = dbClients.Clients.AsEnumerable().Join(
-            //                                   dbOrders.Orders.AsEnumerable(),
-            //                                   client => client.ID,
-            //                                   order => order.ClientID,
-            //                                   (client, order) => new
-            //                                   {
-            //                                       PurchaseDate     = order.PurchaseDate,
-            //                                       FullName         = client.FullName,
-            //                                       PriceSum         = order.PriceSum(),
-            //                                       CurrencyPurchase = order.CurrencyPurchase
-            //                                   }).GroupBy(record => record.PurchaseDate).ToList();
+            var query = dbClients.Clients.AsEnumerable().Join(
+                                               dbOrders.Orders.AsEnumerable(),
+                                               client => client.ID,
+                                               order => order.ClientID,
+                                               (client, order) => new
+                                               {
+                                                   PurchaseDateStr = order.PurchaseDate.ToShortDateString(),
+                                                   PurchaseDate    = order.PurchaseDate,
+                                                   FullName = client.FullName,
+                                                   PriceSum = order.PriceSum,
+                                                   CurrencyPurchase = order.CurrencyPurchase
+                                               }).GroupBy(record => record.PurchaseDate).ToList();
 
-            //return Json(query, JsonRequestBehavior.AllowGet);
-
-            return null;
+            return Json(query, JsonRequestBehavior.AllowGet);
         }
 
         public JsonResult JoinProductsByProvider()
