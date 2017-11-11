@@ -8,17 +8,22 @@
         <h2 style="margin-left: 15px;">Inventory</h2>
     </div>
 
-    <div class="container col-sm-6" style="margin-top:20px;float:left;">
+    <div class="container col-sm-4" style="margin-top:20px;float:left;">
         <div class="zoomGlass">
             <input name="search" id="search" type="search" placeholder="Search" onkeyup="OnIndexCall()">
             <div class="zoomStick">/</div>
         </div>
     </div>
-    <div class="container col-sm-2" style="margin-top:20px;float:left;">
-        @Html.ActionLink("Advanced Search >>", "ProductsByCategoryBrandAndMaxPrice", "Products", new { @class = "btn btn-info my-2 my-sm-0", @id = "advSearchLink" })
-        @*<input type="submit" value="Advanced Search >>" class="btn btn-info my-2 my-sm-0" />*@
+    <div class="container col-sm-1" style="margin-top:20px;float:left;">
+        @Html.ActionLink("Search >>", "ProductsByCategoryBrandAndMaxPrice", "Products", new { @class = "btn btn-info my-2 my-sm-0", @id = "searchLink" })
     </div>
     <div class="container col-sm-2" style="margin-top:20px;float:left;">
+        @Html.ActionLink("Advanced Search >>", "ProductsByCategoryBrandAndMaxPrice", "Products", new { @class = "btn btn-info my-2 my-sm-0", @id = "advSearchLink" })
+    </div>
+    <div class="container col-sm-1" style="margin-top:20px;float:left;">
+        @Html.ActionLink("Get All", "Inventory", "Products", null, new { @class = "btn btn-info my-2 my-sm-0", @id = "searchLink" })
+    </div>
+    <div class="container col-sm-1" style="margin-top:20px;float:left;">
        @Html.ActionLink("+ Add", "AddProduct", "Products", null, new { @class = "btn btn-success my-2 my-sm-0" })
     </div>
 </div>
@@ -28,7 +33,7 @@
             <td>
                 <label class="th-manger-page">Max Price </label>
                 <br />
-                <input type="text" id="max_price" onkeyup="advOnIndexCall()" />
+                <input type="text" id="max_price" onkeyup="advOnIndexCall()" class="input-sm" />
             </td>
             <td>
                 <label class="th-manger-page">Category </label>
@@ -44,7 +49,7 @@
     </table>
 </div>
 <div class="container">
-    <div class="container col-sm-8">
+    <div class="container col-sm-12">
         @if (Model.Count > 0)
         {
             foreach (ElectricalAppliancesStore.Models.Product currProduct in Model)
@@ -76,8 +81,6 @@
                     var opt = document.createElement("option");
                     opt.value = item.Category;
                     opt.innerHTML = item.Category;
-
-                    // then append it to the select element
                     document.getElementById('categories').appendChild(opt);
 
                 });
@@ -88,10 +91,8 @@
             success: function (data) {
                 $.each(data, function (i, item) {
                     var opt = document.createElement("option");
-                    opt.value = item.Brand;
-                    opt.innerHTML = item.Brand;
-
-                    // then append it to the select element
+                    opt.value = item.CompanyName;
+                    opt.innerHTML = item.CompanyName;
                     document.getElementById('suppliers').appendChild(opt);
                 });
             }
@@ -101,12 +102,16 @@
         window.location.href = location;
     }
     function advOnIndexCall() {
-        debugger;
         var maxPrice = document.getElementById('max_price').value;
         var categories = document.getElementById("categories");
         var category = categories.options[categories.selectedIndex].value;
         var suppliers = document.getElementById("suppliers");
         var supplier = suppliers.options[suppliers.selectedIndex].value;
-        $('#advSearchLink').attr('href', '@Url.Action("ProductsByCategoryBrandAndMaxPrice", "Products")' + '?category=' + category + '&supplier=' + suppliers + '&maxBuyPrice=' + maxPrice);
+        $('#advSearchLink').attr('href', '@Url.Action("ProductsByCategoryBrandAndMaxPrice", "Products")' + '?category=' + category + '&supplier=' + supplier + '&maxBuyPrice=' + maxPrice);
+    }
+    function OnIndexCall() {
+        debugger;
+        var name = document.getElementById('search').value;
+        $('#searchLink').attr('href', '@Url.Action("ProductsByName", "Products")' + '?name=' + name);
     }
 </script>
