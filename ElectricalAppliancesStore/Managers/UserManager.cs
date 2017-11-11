@@ -57,7 +57,14 @@ namespace ElectricalAppliancesStore.Managers
 
         public static int GetClientIdByUserId(int userID, ClientsContext cContext)
         {
-            return cContext.Clients.Find(userID).ID;
+            try
+            {
+                return cContext.Clients.Find(userID).ID;
+            }
+            catch (Exception )
+            {
+                return -1;
+            }
         }
 
         public static List<User> GetUsers(UsersContext uContext)

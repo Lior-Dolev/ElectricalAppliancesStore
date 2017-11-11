@@ -18,13 +18,20 @@ namespace ElectricalAppliancesStore.Controllers
 
         // GET: ProductView
         public ActionResult Products(int userID)
-        {
+        { 
+
+            int clientID = UserManager.GetClientIdByUserId(userID, dbClients);
+            if ( -1 == clientID)
+            {
+                return RedirectToAction("Login", "Login");
+            }
+
             //int userID = ((int)Session["UserID"]) ;
             ProductView view = new ProductView()
             {
                 currOrder = new Order()
                 {
-                    ClientID = UserManager.GetClientIdByUserId(userID, dbClients),
+                    ClientID = clientID,
                     Items = new List<OrderItem>()
                 },
                 products = ProductsManager.GetProducts(dbProducts)
