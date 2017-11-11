@@ -24,7 +24,7 @@ namespace ElectricalAppliancesStore.Controllers
             {
                 currOrder = new Order()
                 {
-                    ClientID = 2, //UserManager.GetClientIdByUserId(userID, dbClients),
+                    ClientID = UserManager.GetClientIdByUserId(userID, dbClients),
                     Items = new List<OrderItem>()
                 },
                 products = ProductsManager.GetProducts(dbProducts)
@@ -50,7 +50,7 @@ namespace ElectricalAppliancesStore.Controllers
             {
                 currOrder = new Order()
                 {
-                    ClientID = 2, //UserManager.GetClientIdByUserId(userID, dbClients),
+                    ClientID = UserManager.GetClientIdByUserId(userID, dbClients),
                     Items = new List<OrderItem>()
                 },
                 products = getProductByCategory(category)
