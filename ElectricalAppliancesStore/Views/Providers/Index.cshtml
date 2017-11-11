@@ -2,7 +2,7 @@
 
 @{
     Layout = "~/Views/Shared/Management.cshtml";
-    ViewBag.Title = "AddProvider";
+    ViewBag.Title = "";
 }
 <script type="text/javascript">
 
@@ -15,13 +15,15 @@
 
     <div class="container col-sm-5" style="margin-top:20px;float:left;">
         <div class="zoomGlass">
-            <input name="search" id="search" type="search" placeholder="Search">
+            <input name="search" id="search" type="search" placeholder="Search"  value="@ViewBag.Title" onkeyup="OnIndexCall()">
             <div class="zoomStick">/</div>
         </div>
     </div>
-    <div class="container col-sm-2" style="margin-top:20px;float:left;">
-        @Html.ActionLink("Search >>", "ProvidersByContactPerson", "Providers", new { contactPerson = "Amil" }, new { @class = "btn btn-info my-2 my-sm-0" })
-        @*<input type="submit" value="Search >>" id="searchContact" class="btn btn-info my-2 my-sm-0" onclick="Search()" />*@
+    <div class="container col-sm-1" style="margin-top:20px;float:left;">
+        @Html.ActionLink("Search >>", "ProvidersByContactPerson", "Providers", new { contactPerson = ViewBag.Title }, new { @class = "btn btn-info my-2 my-sm-0" , @id="searchLink"} )
+    </div>
+    <div class="container col-sm-1" style="margin-top:20px;float:left;">
+        @Html.ActionLink("Get All", "Index", "Providers", null, new { @class = "btn btn-success my-2 my-sm-0", @id = "searchLink" })
     </div>
     <div class="container col-sm-2" style="margin-top:20px;float:right;text-align: right;">
         @Html.ActionLink("New Supplier +", "AddProvider", null, new { @class = "text-success" })
@@ -132,35 +134,8 @@
         });
     });
 
-    function Search() {
+    function OnIndexCall(){
         var contact = document.getElementById('search').value;
-
-        $.ajax({
-            url: '@Url.Action("ProvidersByContactPerson", "Providers")',
-            data: { contactPerson: contact },
-            success: function (data) {
-                debugger;
-                //$.each(data, function (i, sup) {
-                    @foreach (ElectricalAppliancesStore.Models.Provider p in Model)
-                    {
-                        @:checkRemove(@(p.ID), data[0].ID);
-                    }
-               // });
-            }
-            
-        });
+        $('#searchLink').attr('href', '@Url.Action("ProvidersByContactPerson", "Providers")' + '?contactPerson=' + contact);
     }
-    function checkRemove(currSup, foundSup){
-        //debugger;
-        if(currSup != foundSup){
-            $('#supplier_'+currSup).remove()
-        }
-    }
- 
-
-    //function OnIndexCall(elem){
-    //    debugger;
-    //    var contact = document.getElementById('search').value;
-    //    $(elem).attr('href', $(elem).attr('href') + '?contactPerson=' + contact);
-    //}
 </script>
