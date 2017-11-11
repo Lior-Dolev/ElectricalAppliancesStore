@@ -101,7 +101,7 @@ namespace ElectricalAppliancesStore.Controllers
         public JsonResult GetTotalItemsPerCategory()
         {
 
-            const int NUM_OF_CATEGORIES = sizeof(Category);
+            int NUM_OF_CATEGORIES       = Enum.GetNames(typeof(Category)).Length;
             int [] categories           = new int[NUM_OF_CATEGORIES];
 
             foreach (var order in dbOrders.Orders)

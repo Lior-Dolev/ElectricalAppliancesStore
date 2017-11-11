@@ -24,9 +24,10 @@
             <nav class="navbar-header">
                 @Html.ActionLink("Home", "Index", "Manager", null, new { @class = "navbar-brand navbar-button_r" })
                 @Html.ActionLink("Branches", "Branchs", "Branch", new { isMgr = true}, new { @class = "navbar-brand navbar-button_r" })
-                @Html.ActionLink("Suppliers", "Index", "Home", null, new { @class = "navbar-brand navbar-button_r" })
-                @Html.ActionLink("Customers", "Index", "Home", null, new { @class = "navbar-brand navbar-button_r" })
+                @Html.ActionLink("Suppliers", "Index", "Providers", null, new { @class = "navbar-brand navbar-button_r" })
+                @Html.ActionLink("Customers", "Index", "Users", null, new { @class = "navbar-brand navbar-button_r" })
                 @Html.ActionLink("Inventory", "Inventory", "Products", null, new { @class = "navbar-brand navbar-button_r" })
+                @Html.ActionLink("Log-Out", "Index", "Login", null, new { @class = "navbar-brand navbar-button_r" })
             </nav>
         </div>
     </div>

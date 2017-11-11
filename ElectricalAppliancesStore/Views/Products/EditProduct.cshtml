@@ -1,10 +1,11 @@
 ﻿@model ElectricalAppliancesStore.Models.EditProductView
 
 @{
+    Layout = "~/Views/Shared/Management.cshtml";
     ViewBag.Title = "Edit Product";
 }
 
-<h2>AddProduct</h2>
+<h2>Edit Product</h2>
 @using (Html.BeginForm("Edit", "Products", Model, FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
 @Html.LabelFor(model => model.Title)
