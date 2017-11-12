@@ -30,11 +30,7 @@ namespace ElectricalAppliancesStore.Controllers
 
                 if (dbUser.PermissionType == PermissionType.Client)
                 {
-                    //Session["UserID"] = dbUser.ID;
-                    // Client view
-                    //return RedirectToAction("Products", "ProductView");
-                    return RedirectToAction("Products", "ProductView", new { userID = dbUser.ID });
-                    
+                    return RedirectToAction("Products", "ProductView", new { userID = dbUser.ID });   
                 }
                 else
                 {

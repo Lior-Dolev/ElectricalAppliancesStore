@@ -25,6 +25,7 @@ namespace ElectricalAppliancesStore.Managers
         public static void DeleteProduct(int productID, ProductsContext pContext)
         {
             pContext.Products.Remove(pContext.Products.Find(productID));
+            pContext.SaveChanges();
         }
 
         public static void AddProduct(EditProductView product, 
